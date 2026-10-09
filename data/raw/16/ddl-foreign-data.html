@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>PostgreSQL: Documentation: 16: 5.12. Foreign Data</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+   
+  <meta name="theme-color" content="#336791"/>
+  <meta name="copyright" content="The PostgreSQL Global Development Group" />
+  <meta property="og:url" content="https://www.postgresql.org/docs/16/ddl-foreign-data.html" />
+  <meta property="og:type" content="article" />
+
+  <meta property="article:published_time" content="2026-08-13T12:52:44.176831" />
+  <meta property="og:image" content="https://www.postgresql.org/media/img/about/press/elephant.png" />
+  <meta property="og:title" content="5.12. Foreign Data" />
+  <meta property="og:description" content="5.12.&amp;nbsp;Foreign Data # PostgreSQL implements portions of the SQL/MED specification, allowing you to access data that resides outside PostgreSQL using …" />
+  <meta property="og:site_name" content="PostgreSQL Documentation" />
+  <link href="/media/css/fontawesome.css?8eb38fb2" rel="stylesheet">
+  <link rel="stylesheet" href="/media/css/bootstrap-4.4.1.min.css">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" type="text/css" href="/dyncss/base.css?8eb38fb2">
+
+  <script src="/media/js/theme.js?8eb38fb2"></script>
+
+  
+
+
+  <link rel="canonical" href="https://www.postgresql.org/docs/current/ddl-foreign-data.html" />
+
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <!-- Header -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/">
+              <img class="logo" src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo">
+            </a>
+            <input type="checkbox" id="navbar-toggler" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <label for="navbar-toggler" id="navbar-toggler-label" class="navbar-toggler" tabindex="0"><span class="navbar-toggler-icon"></span></label>
+            <div class="navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+                <li class="nav-item p-2"><a href="/download/" title="Download">Download</a></li>
+                <li class="nav-item p-2"><a href="/docs/" title="Documentation">Documentation</a></li>
+                <li class="nav-item p-2"><a href="/community/" title="Community">Community</a></li>
+                <li class="nav-item p-2"><a href="/developer/" title="Developers">Developers</a></li>
+                <li class="nav-item p-2"><a href="/support/" title="Support">Support</a></li>
+                <li class="nav-item p-2"><a href="/about/donate/" title="Donate">Donate</a></li>
+                <li class="nav-item p-2"><a href="/account/" title="Your account">Your account</a></li>
+              </ul>
+              <form role="search" method="get" action="/search/">
+                <div class="input-group">
+                  <input id="q" name="q" type="text" size="20" maxlength="255" accesskey="s"  class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+              <form id="form-theme" class="form-inline d-none">
+                <button id="btn-theme" class="btn btn-default ml-1" type="button"></button>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row justify-content-center pg-shout-box">
+        <div class="col text-white text-center">September 24, 2026: <a href="/about/news/postgresql-19-beta-4-released-3386/">PostgreSQL 19 Beta 4 Released!</a>
+
+</div>
+      </div>
+    </div>
+    
+    <div class="container-fluid margin">
+      <div class="row">
+        <div id="pgContentWrap" class="col-11">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/16/index.html">PostgreSQL 16</a>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="row">
+                  <div class="col">
+                    Supported Versions:
+                      
+                        
+                        
+                          <a href="/docs/current/ddl-foreign-data.html" title="PostgreSQL 18 - 5.12. Foreign Data" >Current</a>
+                          (<a href="/docs/18/ddl-foreign-data.html" title="PostgreSQL 18 - 5.12. Foreign Data" >18</a>)
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/17/ddl-foreign-data.html" title="PostgreSQL 17 - 5.12. Foreign Data" >17</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/16/ddl-foreign-data.html" title="PostgreSQL 16 - 5.12. Foreign Data" class="docs-version-selected">16</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/15/ddl-foreign-data.html" title="PostgreSQL 15 - 5.12. Foreign Data" >15</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/14/ddl-foreign-data.html" title="PostgreSQL 14 - 5.12. Foreign Data" >14</a>
+                        
+                      
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col">
+                    Development Versions:
+                    
+                      
+                      <a href="/docs/19/ddl-foreign-data.html" title="PostgreSQL 19 - 5.12. Foreign Data"  rel="nofollow">19</a>
+                    
+                       / 
+                      <a href="/docs/devel/ddl-foreign-data.html" title="PostgreSQL devel - 5.12. Foreign Data"  rel="nofollow">devel</a>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col-12">
+                    Unsupported versions:
+                    
+                      
+                      <a href="/docs/13/ddl-foreign-data.html" title="PostgreSQL 13 - 5.12. Foreign Data"  rel="nofollow">13</a>
+                    
+                       / 
+                      <a href="/docs/12/ddl-foreign-data.html" title="PostgreSQL 12 - 5.12. Foreign Data"  rel="nofollow">12</a>
+                    
+                       / 
+                      <a href="/docs/11/ddl-foreign-data.html" title="PostgreSQL 11 - 5.12. Foreign Data"  rel="nofollow">11</a>
+                    
+                       / 
+                      <a href="/docs/10/ddl-foreign-data.html" title="PostgreSQL 10 - 5.12. Foreign Data"  rel="nofollow">10</a>
+                    
+                       / 
+                      <a href="/docs/9.6/ddl-foreign-data.html" title="PostgreSQL 9.6 - 5.12. Foreign Data"  rel="nofollow">9.6</a>
+                    
+                       / 
+                      <a href="/docs/9.5/ddl-foreign-data.html" title="PostgreSQL 9.5 - 5.12. Foreign Data"  rel="nofollow">9.5</a>
+                    
+                       / 
+                      <a href="/docs/9.4/ddl-foreign-data.html" title="PostgreSQL 9.4 - 5.12. Foreign Data"  rel="nofollow">9.4</a>
+                    
+                       / 
+                      <a href="/docs/9.3/ddl-foreign-data.html" title="PostgreSQL 9.3 - 5.12. Foreign Data"  rel="nofollow">9.3</a>
+                    
+                       / 
+                      <a href="/docs/9.2/ddl-foreign-data.html" title="PostgreSQL 9.2 - 5.12. Foreign Data"  rel="nofollow">9.2</a>
+                    
+                       / 
+                      <a href="/docs/9.1/ddl-foreign-data.html" title="PostgreSQL 9.1 - 5.12. Foreign Data"  rel="nofollow">9.1</a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+            <div class="col-md-6 col-lg-5 offset-lg-1">
+              <form id="docSearchForm" role="search" method="get" action="/search/">
+                <input type="hidden" name="u" value="/docs/16/" />
+                <div class="input-group">
+                  <input type="text" id="q" name="q" class="form-control" placeholder="Search the documentation for..."/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+            </div>
+          </div>
+
+          <div id="docContent">
+            <div class="navheader">
+  <table width="100%" summary="Navigation header">
+    <tr>
+      <th colspan="5" align="center">5.12.&nbsp;Foreign Data</th>
+    </tr>
+    <tr>
+      <td width="10%" align="left"><a accesskey="p" href="ddl-partitioning.html" title="5.11.&nbsp;Table Partitioning">Prev</a>&nbsp;</td>
+      <td width="10%" align="left"><a accesskey="u" href="ddl.html" title="Chapter&nbsp;5.&nbsp;Data Definition">Up</a></td>
+      <th width="60%" align="center">Chapter&nbsp;5.&nbsp;Data Definition</th>
+      <td width="10%" align="right"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="10%" align="right">&nbsp;<a accesskey="n" href="ddl-others.html" title="5.13.&nbsp;Other Database Objects">Next</a></td>
+    </tr>
+  </table>
+  <hr />
+</div>
+<div class="sect1" id="DDL-FOREIGN-DATA">
+  <div class="titlepage">
+    <div>
+      <div>
+        <h2 class="title" style="clear: both">5.12.&nbsp;Foreign Data <a href="#DDL-FOREIGN-DATA" class="id_link">#</a></h2>
+      </div>
+    </div>
+  </div><a id="id-1.5.4.14.2" class="indexterm" name="id-1.5.4.14.2"></a><a id="id-1.5.4.14.3" class="indexterm" name="id-1.5.4.14.3"></a><a id="id-1.5.4.14.4" class="indexterm" name="id-1.5.4.14.4"></a>
+  <p><span class="productname">PostgreSQL</span> implements portions of the SQL/MED specification, allowing you to access data that resides outside PostgreSQL using regular SQL queries. Such data is referred to as <em class="firstterm">foreign data</em>. (Note that this usage is not to be confused with foreign keys, which are a type of constraint within the database.)</p>
+  <p>Foreign data is accessed with help from a <em class="firstterm">foreign data wrapper</em>. A foreign data wrapper is a library that can communicate with an external data source, hiding the details of connecting to the data source and obtaining data from it. There are some foreign data wrappers available as <code class="filename">contrib</code> modules; see <a class="xref" href="contrib.html" title="Appendix&nbsp;F.&nbsp;Additional Supplied Modules and Extensions">Appendix&nbsp;F</a>. Other kinds of foreign data wrappers might be found as third party products. If none of the existing foreign data wrappers suit your needs, you can write your own; see <a class="xref" href="fdwhandler.html" title="Chapter&nbsp;59.&nbsp;Writing a Foreign Data Wrapper">Chapter&nbsp;59</a>.</p>
+  <p>To access foreign data, you need to create a <em class="firstterm">foreign server</em> object, which defines how to connect to a particular external data source according to the set of options used by its supporting foreign data wrapper. Then you need to create one or more <em class="firstterm">foreign tables</em>, which define the structure of the remote data. A foreign table can be used in queries just like a normal table, but a foreign table has no storage in the PostgreSQL server. Whenever it is used, <span class="productname">PostgreSQL</span> asks the foreign data wrapper to fetch data from the external source, or transmit data to the external source in the case of update commands.</p>
+  <p>Accessing remote data may require authenticating to the external data source. This information can be provided by a <em class="firstterm">user mapping</em>, which can provide additional data such as user names and passwords based on the current <span class="productname">PostgreSQL</span> role.</p>
+  <p>For additional information, see <a class="xref" href="sql-createforeigndatawrapper.html" title="CREATE FOREIGN DATA WRAPPER"><span class="refentrytitle">CREATE FOREIGN DATA WRAPPER</span></a>, <a class="xref" href="sql-createserver.html" title="CREATE SERVER"><span class="refentrytitle">CREATE SERVER</span></a>, <a class="xref" href="sql-createusermapping.html" title="CREATE USER MAPPING"><span class="refentrytitle">CREATE USER MAPPING</span></a>, <a class="xref" href="sql-createforeigntable.html" title="CREATE FOREIGN TABLE"><span class="refentrytitle">CREATE FOREIGN TABLE</span></a>, and <a class="xref" href="sql-importforeignschema.html" title="IMPORT FOREIGN SCHEMA"><span class="refentrytitle">IMPORT FOREIGN SCHEMA</span></a>.</p>
+</div>
+<div class="navfooter">
+  <hr />
+  <table width="100%" summary="Navigation footer">
+    <tr>
+      <td width="40%" align="left"><a accesskey="p" href="ddl-partitioning.html" title="5.11.&nbsp;Table Partitioning">Prev</a>&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="u" href="ddl.html" title="Chapter&nbsp;5.&nbsp;Data Definition">Up</a></td>
+      <td width="40%" align="right">&nbsp;<a accesskey="n" href="ddl-others.html" title="5.13.&nbsp;Other Database Objects">Next</a></td>
+    </tr>
+    <tr>
+      <td width="40%" align="left" valign="top">5.11.&nbsp;Table Partitioning&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="40%" align="right" valign="top">&nbsp;5.13.&nbsp;Other Database Objects</td>
+    </tr>
+  </table>
+</div>
+
+          </div>
+          
+            <div id="docComments">
+              <h2>Submit correction</h2>
+              <p>
+              If you see anything in the documentation that is not correct, does not match
+              your experience with the particular feature or requires further clarification,
+              please use
+              <a href="/account/comments/new/16/ddl-foreign-data.html/" rel="nofollow">this form</a>
+              to report a documentation issue.
+              </p>
+            </div>
+          
+        </div> <!-- pgContentWrap -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <!-- Copyright -->
+      <div class="container">
+        <a href="/about/policies/">Policies</a> |
+        <a href="/about/policies/coc/">Code of Conduct</a> |
+        <a href="/about/">About PostgreSQL</a> |
+        <a href="/about/contact/">Contact</a><br/>
+        <p>Copyright &copy; 1996-2026 The PostgreSQL Global Development Group</p>
+      </div>
+    </footer>
+    <script src="/media/js/main.js?8eb38fb2"></script>
+
+  </body>
+</html>

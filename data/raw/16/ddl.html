@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>PostgreSQL: Documentation: 16: Chapter 5. Data Definition</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+   
+  <meta name="theme-color" content="#336791"/>
+  <meta name="copyright" content="The PostgreSQL Global Development Group" />
+  <meta property="og:url" content="https://www.postgresql.org/docs/16/ddl.html" />
+  <meta property="og:type" content="article" />
+
+  <meta property="article:published_time" content="2026-08-13T12:52:44.176831" />
+  <meta property="og:image" content="https://www.postgresql.org/media/img/about/press/elephant.png" />
+  <meta property="og:title" content="Chapter 5. Data Definition" />
+  <meta property="og:description" content="Chapter&amp;nbsp;5.&amp;nbsp;Data Definition Table of Contents 5.1. Table Basics 5.2. Default Values 5.3. Generated Columns 5.4. Constraints 5.4.1. Check Constraints 5.4.2. …" />
+  <meta property="og:site_name" content="PostgreSQL Documentation" />
+  <link href="/media/css/fontawesome.css?8eb38fb2" rel="stylesheet">
+  <link rel="stylesheet" href="/media/css/bootstrap-4.4.1.min.css">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" type="text/css" href="/dyncss/base.css?8eb38fb2">
+
+  <script src="/media/js/theme.js?8eb38fb2"></script>
+
+  
+
+
+  <link rel="canonical" href="https://www.postgresql.org/docs/current/ddl.html" />
+
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <!-- Header -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/">
+              <img class="logo" src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo">
+            </a>
+            <input type="checkbox" id="navbar-toggler" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <label for="navbar-toggler" id="navbar-toggler-label" class="navbar-toggler" tabindex="0"><span class="navbar-toggler-icon"></span></label>
+            <div class="navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+                <li class="nav-item p-2"><a href="/download/" title="Download">Download</a></li>
+                <li class="nav-item p-2"><a href="/docs/" title="Documentation">Documentation</a></li>
+                <li class="nav-item p-2"><a href="/community/" title="Community">Community</a></li>
+                <li class="nav-item p-2"><a href="/developer/" title="Developers">Developers</a></li>
+                <li class="nav-item p-2"><a href="/support/" title="Support">Support</a></li>
+                <li class="nav-item p-2"><a href="/about/donate/" title="Donate">Donate</a></li>
+                <li class="nav-item p-2"><a href="/account/" title="Your account">Your account</a></li>
+              </ul>
+              <form role="search" method="get" action="/search/">
+                <div class="input-group">
+                  <input id="q" name="q" type="text" size="20" maxlength="255" accesskey="s"  class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+              <form id="form-theme" class="form-inline d-none">
+                <button id="btn-theme" class="btn btn-default ml-1" type="button"></button>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row justify-content-center pg-shout-box">
+        <div class="col text-white text-center">September 24, 2026: <a href="/about/news/postgresql-19-beta-4-released-3386/">PostgreSQL 19 Beta 4 Released!</a>
+
+</div>
+      </div>
+    </div>
+    
+    <div class="container-fluid margin">
+      <div class="row">
+        <div id="pgContentWrap" class="col-11">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/16/index.html">PostgreSQL 16</a>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="row">
+                  <div class="col">
+                    Supported Versions:
+                      
+                        
+                        
+                          <a href="/docs/current/ddl.html" title="PostgreSQL 18 - Chapter 5. Data Definition" >Current</a>
+                          (<a href="/docs/18/ddl.html" title="PostgreSQL 18 - Chapter 5. Data Definition" >18</a>)
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/17/ddl.html" title="PostgreSQL 17 - Chapter 5. Data Definition" >17</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/16/ddl.html" title="PostgreSQL 16 - Chapter 5. Data Definition" class="docs-version-selected">16</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/15/ddl.html" title="PostgreSQL 15 - Chapter 5. Data Definition" >15</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/14/ddl.html" title="PostgreSQL 14 - Chapter 5. Data Definition" >14</a>
+                        
+                      
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col">
+                    Development Versions:
+                    
+                      
+                      <a href="/docs/19/ddl.html" title="PostgreSQL 19 - Chapter 5. Data Definition"  rel="nofollow">19</a>
+                    
+                       / 
+                      <a href="/docs/devel/ddl.html" title="PostgreSQL devel - Chapter 5. Data Definition"  rel="nofollow">devel</a>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col-12">
+                    Unsupported versions:
+                    
+                      
+                      <a href="/docs/13/ddl.html" title="PostgreSQL 13 - Chapter 5. Data Definition"  rel="nofollow">13</a>
+                    
+                       / 
+                      <a href="/docs/12/ddl.html" title="PostgreSQL 12 - Chapter 5. Data Definition"  rel="nofollow">12</a>
+                    
+                       / 
+                      <a href="/docs/11/ddl.html" title="PostgreSQL 11 - Chapter 5. Data Definition"  rel="nofollow">11</a>
+                    
+                       / 
+                      <a href="/docs/10/ddl.html" title="PostgreSQL 10 - Chapter 5. Data Definition"  rel="nofollow">10</a>
+                    
+                       / 
+                      <a href="/docs/9.6/ddl.html" title="PostgreSQL 9.6 - Chapter 5. Data Definition"  rel="nofollow">9.6</a>
+                    
+                       / 
+                      <a href="/docs/9.5/ddl.html" title="PostgreSQL 9.5 - Chapter 5. Data Definition"  rel="nofollow">9.5</a>
+                    
+                       / 
+                      <a href="/docs/9.4/ddl.html" title="PostgreSQL 9.4 - Chapter 5. Data Definition"  rel="nofollow">9.4</a>
+                    
+                       / 
+                      <a href="/docs/9.3/ddl.html" title="PostgreSQL 9.3 - Chapter 5. Data Definition"  rel="nofollow">9.3</a>
+                    
+                       / 
+                      <a href="/docs/9.2/ddl.html" title="PostgreSQL 9.2 - Chapter 5. Data Definition"  rel="nofollow">9.2</a>
+                    
+                       / 
+                      <a href="/docs/9.1/ddl.html" title="PostgreSQL 9.1 - Chapter 5. Data Definition"  rel="nofollow">9.1</a>
+                    
+                       / 
+                      <a href="/docs/9.0/ddl.html" title="PostgreSQL 9.0 - Chapter 5. Data Definition"  rel="nofollow">9.0</a>
+                    
+                       / 
+                      <a href="/docs/8.4/ddl.html" title="PostgreSQL 8.4 - Chapter 5. Data Definition"  rel="nofollow">8.4</a>
+                    
+                       / 
+                      <a href="/docs/8.3/ddl.html" title="PostgreSQL 8.3 - Chapter 5. Data Definition"  rel="nofollow">8.3</a>
+                    
+                       / 
+                      <a href="/docs/8.2/ddl.html" title="PostgreSQL 8.2 - Chapter 5. Data Definition"  rel="nofollow">8.2</a>
+                    
+                       / 
+                      <a href="/docs/8.1/ddl.html" title="PostgreSQL 8.1 - Chapter 5. Data Definition"  rel="nofollow">8.1</a>
+                    
+                       / 
+                      <a href="/docs/8.0/ddl.html" title="PostgreSQL 8.0 - Chapter 5. Data Definition"  rel="nofollow">8.0</a>
+                    
+                       / 
+                      <a href="/docs/7.4/ddl.html" title="PostgreSQL 7.4 - Chapter 5. Data Definition"  rel="nofollow">7.4</a>
+                    
+                       / 
+                      <a href="/docs/7.3/ddl.html" title="PostgreSQL 7.3 - Chapter 5. Data Definition"  rel="nofollow">7.3</a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+            <div class="col-md-6 col-lg-5 offset-lg-1">
+              <form id="docSearchForm" role="search" method="get" action="/search/">
+                <input type="hidden" name="u" value="/docs/16/" />
+                <div class="input-group">
+                  <input type="text" id="q" name="q" class="form-control" placeholder="Search the documentation for..."/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+            </div>
+          </div>
+
+          <div id="docContent">
+            <div class="navheader">
+  <table width="100%" summary="Navigation header">
+    <tr>
+      <th colspan="5" align="center">Chapter&nbsp;5.&nbsp;Data Definition</th>
+    </tr>
+    <tr>
+      <td width="10%" align="left"><a accesskey="p" href="sql-syntax-calling-funcs.html" title="4.3.&nbsp;Calling Functions">Prev</a>&nbsp;</td>
+      <td width="10%" align="left"><a accesskey="u" href="sql.html" title="Part&nbsp;II.&nbsp;The SQL Language">Up</a></td>
+      <th width="60%" align="center">Part&nbsp;II.&nbsp;The SQL Language</th>
+      <td width="10%" align="right"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="10%" align="right">&nbsp;<a accesskey="n" href="ddl-basics.html" title="5.1.&nbsp;Table Basics">Next</a></td>
+    </tr>
+  </table>
+  <hr />
+</div>
+<div class="chapter" id="DDL">
+  <div class="titlepage">
+    <div>
+      <div>
+        <h2 class="title">Chapter&nbsp;5.&nbsp;Data Definition</h2>
+      </div>
+    </div>
+  </div>
+  <div class="toc">
+    <p><strong>Table of Contents</strong></p>
+    <dl class="toc">
+      <dt><span class="sect1"><a href="ddl-basics.html">5.1. Table Basics</a></span></dt>
+      <dt><span class="sect1"><a href="ddl-default.html">5.2. Default Values</a></span></dt>
+      <dt><span class="sect1"><a href="ddl-generated-columns.html">5.3. Generated Columns</a></span></dt>
+      <dt><span class="sect1"><a href="ddl-constraints.html">5.4. Constraints</a></span></dt>
+      <dd>
+        <dl>
+          <dt><span class="sect2"><a href="ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS">5.4.1. Check Constraints</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-constraints.html#DDL-CONSTRAINTS-NOT-NULL">5.4.2. Not-Null Constraints</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-constraints.html#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS">5.4.3. Unique Constraints</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-constraints.html#DDL-CONSTRAINTS-PRIMARY-KEYS">5.4.4. Primary Keys</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-constraints.html#DDL-CONSTRAINTS-FK">5.4.5. Foreign Keys</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-constraints.html#DDL-CONSTRAINTS-EXCLUSION">5.4.6. Exclusion Constraints</a></span></dt>
+        </dl>
+      </dd>
+      <dt><span class="sect1"><a href="ddl-system-columns.html">5.5. System Columns</a></span></dt>
+      <dt><span class="sect1"><a href="ddl-alter.html">5.6. Modifying Tables</a></span></dt>
+      <dd>
+        <dl>
+          <dt><span class="sect2"><a href="ddl-alter.html#DDL-ALTER-ADDING-A-COLUMN">5.6.1. Adding a Column</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-alter.html#DDL-ALTER-REMOVING-A-COLUMN">5.6.2. Removing a Column</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-alter.html#DDL-ALTER-ADDING-A-CONSTRAINT">5.6.3. Adding a Constraint</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-alter.html#DDL-ALTER-REMOVING-A-CONSTRAINT">5.6.4. Removing a Constraint</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-alter.html#DDL-ALTER-COLUMN-DEFAULT">5.6.5. Changing a Column's Default Value</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-alter.html#DDL-ALTER-COLUMN-TYPE">5.6.6. Changing a Column's Data Type</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-alter.html#DDL-ALTER-RENAMING-COLUMN">5.6.7. Renaming a Column</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-alter.html#DDL-ALTER-RENAMING-TABLE">5.6.8. Renaming a Table</a></span></dt>
+        </dl>
+      </dd>
+      <dt><span class="sect1"><a href="ddl-priv.html">5.7. Privileges</a></span></dt>
+      <dt><span class="sect1"><a href="ddl-rowsecurity.html">5.8. Row Security Policies</a></span></dt>
+      <dt><span class="sect1"><a href="ddl-schemas.html">5.9. Schemas</a></span></dt>
+      <dd>
+        <dl>
+          <dt><span class="sect2"><a href="ddl-schemas.html#DDL-SCHEMAS-CREATE">5.9.1. Creating a Schema</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-schemas.html#DDL-SCHEMAS-PUBLIC">5.9.2. The Public Schema</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-schemas.html#DDL-SCHEMAS-PATH">5.9.3. The Schema Search Path</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-schemas.html#DDL-SCHEMAS-PRIV">5.9.4. Schemas and Privileges</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-schemas.html#DDL-SCHEMAS-CATALOG">5.9.5. The System Catalog Schema</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-schemas.html#DDL-SCHEMAS-PATTERNS">5.9.6. Usage Patterns</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-schemas.html#DDL-SCHEMAS-PORTABILITY">5.9.7. Portability</a></span></dt>
+        </dl>
+      </dd>
+      <dt><span class="sect1"><a href="ddl-inherit.html">5.10. Inheritance</a></span></dt>
+      <dd>
+        <dl>
+          <dt><span class="sect2"><a href="ddl-inherit.html#DDL-INHERIT-CAVEATS">5.10.1. Caveats</a></span></dt>
+        </dl>
+      </dd>
+      <dt><span class="sect1"><a href="ddl-partitioning.html">5.11. Table Partitioning</a></span></dt>
+      <dd>
+        <dl>
+          <dt><span class="sect2"><a href="ddl-partitioning.html#DDL-PARTITIONING-OVERVIEW">5.11.1. Overview</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-partitioning.html#DDL-PARTITIONING-DECLARATIVE">5.11.2. Declarative Partitioning</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-partitioning.html#DDL-PARTITIONING-USING-INHERITANCE">5.11.3. Partitioning Using Inheritance</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-partitioning.html#DDL-PARTITION-PRUNING">5.11.4. Partition Pruning</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-partitioning.html#DDL-PARTITIONING-CONSTRAINT-EXCLUSION">5.11.5. Partitioning and Constraint Exclusion</a></span></dt>
+          <dt><span class="sect2"><a href="ddl-partitioning.html#DDL-PARTITIONING-DECLARATIVE-BEST-PRACTICES">5.11.6. Best Practices for Declarative Partitioning</a></span></dt>
+        </dl>
+      </dd>
+      <dt><span class="sect1"><a href="ddl-foreign-data.html">5.12. Foreign Data</a></span></dt>
+      <dt><span class="sect1"><a href="ddl-others.html">5.13. Other Database Objects</a></span></dt>
+      <dt><span class="sect1"><a href="ddl-depend.html">5.14. Dependency Tracking</a></span></dt>
+    </dl>
+  </div>
+  <p>This chapter covers how one creates the database structures that will hold one's data. In a relational database, the raw data is stored in tables, so the majority of this chapter is devoted to explaining how tables are created and modified and what features are available to control what data is stored in the tables. Subsequently, we discuss how tables can be organized into schemas, and how privileges can be assigned to tables. Finally, we will briefly look at other features that affect the data storage, such as inheritance, table partitioning, views, functions, and triggers.</p>
+</div>
+<div class="navfooter">
+  <hr />
+  <table width="100%" summary="Navigation footer">
+    <tr>
+      <td width="40%" align="left"><a accesskey="p" href="sql-syntax-calling-funcs.html" title="4.3.&nbsp;Calling Functions">Prev</a>&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="u" href="sql.html" title="Part&nbsp;II.&nbsp;The SQL Language">Up</a></td>
+      <td width="40%" align="right">&nbsp;<a accesskey="n" href="ddl-basics.html" title="5.1.&nbsp;Table Basics">Next</a></td>
+    </tr>
+    <tr>
+      <td width="40%" align="left" valign="top">4.3.&nbsp;Calling Functions&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="40%" align="right" valign="top">&nbsp;5.1.&nbsp;Table Basics</td>
+    </tr>
+  </table>
+</div>
+
+          </div>
+          
+            <div id="docComments">
+              <h2>Submit correction</h2>
+              <p>
+              If you see anything in the documentation that is not correct, does not match
+              your experience with the particular feature or requires further clarification,
+              please use
+              <a href="/account/comments/new/16/ddl.html/" rel="nofollow">this form</a>
+              to report a documentation issue.
+              </p>
+            </div>
+          
+        </div> <!-- pgContentWrap -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <!-- Copyright -->
+      <div class="container">
+        <a href="/about/policies/">Policies</a> |
+        <a href="/about/policies/coc/">Code of Conduct</a> |
+        <a href="/about/">About PostgreSQL</a> |
+        <a href="/about/contact/">Contact</a><br/>
+        <p>Copyright &copy; 1996-2026 The PostgreSQL Global Development Group</p>
+      </div>
+    </footer>
+    <script src="/media/js/main.js?8eb38fb2"></script>
+
+  </body>
+</html>

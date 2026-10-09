@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>PostgreSQL: Documentation: 16: Chapter 41. The Rule System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+   
+  <meta name="theme-color" content="#336791"/>
+  <meta name="copyright" content="The PostgreSQL Global Development Group" />
+  <meta property="og:url" content="https://www.postgresql.org/docs/16/rules.html" />
+  <meta property="og:type" content="article" />
+
+  <meta property="article:published_time" content="2026-08-13T12:52:44.176831" />
+  <meta property="og:image" content="https://www.postgresql.org/media/img/about/press/elephant.png" />
+  <meta property="og:title" content="Chapter 41. The Rule System" />
+  <meta property="og:description" content="Chapter&amp;nbsp;41.&amp;nbsp;The Rule System Table of Contents 41.1. The Query Tree 41.2. Views and the Rule System 41.2.1. How SELECT Rules …" />
+  <meta property="og:site_name" content="PostgreSQL Documentation" />
+  <link href="/media/css/fontawesome.css?8eb38fb2" rel="stylesheet">
+  <link rel="stylesheet" href="/media/css/bootstrap-4.4.1.min.css">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" type="text/css" href="/dyncss/base.css?8eb38fb2">
+
+  <script src="/media/js/theme.js?8eb38fb2"></script>
+
+  
+
+
+  <link rel="canonical" href="https://www.postgresql.org/docs/current/rules.html" />
+
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <!-- Header -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/">
+              <img class="logo" src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo">
+            </a>
+            <input type="checkbox" id="navbar-toggler" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <label for="navbar-toggler" id="navbar-toggler-label" class="navbar-toggler" tabindex="0"><span class="navbar-toggler-icon"></span></label>
+            <div class="navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+                <li class="nav-item p-2"><a href="/download/" title="Download">Download</a></li>
+                <li class="nav-item p-2"><a href="/docs/" title="Documentation">Documentation</a></li>
+                <li class="nav-item p-2"><a href="/community/" title="Community">Community</a></li>
+                <li class="nav-item p-2"><a href="/developer/" title="Developers">Developers</a></li>
+                <li class="nav-item p-2"><a href="/support/" title="Support">Support</a></li>
+                <li class="nav-item p-2"><a href="/about/donate/" title="Donate">Donate</a></li>
+                <li class="nav-item p-2"><a href="/account/" title="Your account">Your account</a></li>
+              </ul>
+              <form role="search" method="get" action="/search/">
+                <div class="input-group">
+                  <input id="q" name="q" type="text" size="20" maxlength="255" accesskey="s"  class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+              <form id="form-theme" class="form-inline d-none">
+                <button id="btn-theme" class="btn btn-default ml-1" type="button"></button>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row justify-content-center pg-shout-box">
+        <div class="col text-white text-center">September 24, 2026: <a href="/about/news/postgresql-19-beta-4-released-3386/">PostgreSQL 19 Beta 4 Released!</a>
+
+</div>
+      </div>
+    </div>
+    
+    <div class="container-fluid margin">
+      <div class="row">
+        <div id="pgContentWrap" class="col-11">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/16/index.html">PostgreSQL 16</a>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="row">
+                  <div class="col">
+                    Supported Versions:
+                      
+                        
+                        
+                          <a href="/docs/current/rules.html" title="PostgreSQL 18 - Chapter 41. The Rule System" >Current</a>
+                          (<a href="/docs/18/rules.html" title="PostgreSQL 18 - Chapter 41. The Rule System" >18</a>)
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/17/rules.html" title="PostgreSQL 17 - Chapter 41. The Rule System" >17</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/16/rules.html" title="PostgreSQL 16 - Chapter 41. The Rule System" class="docs-version-selected">16</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/15/rules.html" title="PostgreSQL 15 - Chapter 41. The Rule System" >15</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/14/rules.html" title="PostgreSQL 14 - Chapter 41. The Rule System" >14</a>
+                        
+                      
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col">
+                    Development Versions:
+                    
+                      
+                      <a href="/docs/19/rules.html" title="PostgreSQL 19 - Chapter 41. The Rule System"  rel="nofollow">19</a>
+                    
+                       / 
+                      <a href="/docs/devel/rules.html" title="PostgreSQL devel - Chapter 41. The Rule System"  rel="nofollow">devel</a>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col-12">
+                    Unsupported versions:
+                    
+                      
+                      <a href="/docs/13/rules.html" title="PostgreSQL 13 - Chapter 41. The Rule System"  rel="nofollow">13</a>
+                    
+                       / 
+                      <a href="/docs/12/rules.html" title="PostgreSQL 12 - Chapter 41. The Rule System"  rel="nofollow">12</a>
+                    
+                       / 
+                      <a href="/docs/11/rules.html" title="PostgreSQL 11 - Chapter 41. The Rule System"  rel="nofollow">11</a>
+                    
+                       / 
+                      <a href="/docs/10/rules.html" title="PostgreSQL 10 - Chapter 41. The Rule System"  rel="nofollow">10</a>
+                    
+                       / 
+                      <a href="/docs/9.6/rules.html" title="PostgreSQL 9.6 - Chapter 41. The Rule System"  rel="nofollow">9.6</a>
+                    
+                       / 
+                      <a href="/docs/9.5/rules.html" title="PostgreSQL 9.5 - Chapter 41. The Rule System"  rel="nofollow">9.5</a>
+                    
+                       / 
+                      <a href="/docs/9.4/rules.html" title="PostgreSQL 9.4 - Chapter 41. The Rule System"  rel="nofollow">9.4</a>
+                    
+                       / 
+                      <a href="/docs/9.3/rules.html" title="PostgreSQL 9.3 - Chapter 41. The Rule System"  rel="nofollow">9.3</a>
+                    
+                       / 
+                      <a href="/docs/9.2/rules.html" title="PostgreSQL 9.2 - Chapter 41. The Rule System"  rel="nofollow">9.2</a>
+                    
+                       / 
+                      <a href="/docs/9.1/rules.html" title="PostgreSQL 9.1 - Chapter 41. The Rule System"  rel="nofollow">9.1</a>
+                    
+                       / 
+                      <a href="/docs/9.0/rules.html" title="PostgreSQL 9.0 - Chapter 41. The Rule System"  rel="nofollow">9.0</a>
+                    
+                       / 
+                      <a href="/docs/8.4/rules.html" title="PostgreSQL 8.4 - Chapter 41. The Rule System"  rel="nofollow">8.4</a>
+                    
+                       / 
+                      <a href="/docs/8.3/rules.html" title="PostgreSQL 8.3 - Chapter 41. The Rule System"  rel="nofollow">8.3</a>
+                    
+                       / 
+                      <a href="/docs/8.2/rules.html" title="PostgreSQL 8.2 - Chapter 41. The Rule System"  rel="nofollow">8.2</a>
+                    
+                       / 
+                      <a href="/docs/8.1/rules.html" title="PostgreSQL 8.1 - Chapter 41. The Rule System"  rel="nofollow">8.1</a>
+                    
+                       / 
+                      <a href="/docs/8.0/rules.html" title="PostgreSQL 8.0 - Chapter 41. The Rule System"  rel="nofollow">8.0</a>
+                    
+                       / 
+                      <a href="/docs/7.4/rules.html" title="PostgreSQL 7.4 - Chapter 41. The Rule System"  rel="nofollow">7.4</a>
+                    
+                       / 
+                      <a href="/docs/7.3/rules.html" title="PostgreSQL 7.3 - Chapter 41. The Rule System"  rel="nofollow">7.3</a>
+                    
+                       / 
+                      <a href="/docs/7.2/rules.html" title="PostgreSQL 7.2 - Chapter 41. The Rule System"  rel="nofollow">7.2</a>
+                    
+                       / 
+                      <a href="/docs/7.1/rules.html" title="PostgreSQL 7.1 - Chapter 41. The Rule System"  rel="nofollow">7.1</a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+            <div class="col-md-6 col-lg-5 offset-lg-1">
+              <form id="docSearchForm" role="search" method="get" action="/search/">
+                <input type="hidden" name="u" value="/docs/16/" />
+                <div class="input-group">
+                  <input type="text" id="q" name="q" class="form-control" placeholder="Search the documentation for..."/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+            </div>
+          </div>
+
+          <div id="docContent">
+            <div class="navheader">
+  <table width="100%" summary="Navigation header">
+    <tr>
+      <th colspan="5" align="center">Chapter&nbsp;41.&nbsp;The Rule System</th>
+    </tr>
+    <tr>
+      <td width="10%" align="left"><a accesskey="p" href="event-trigger-table-rewrite-example.html" title="40.5.&nbsp;A Table Rewrite Event Trigger Example">Prev</a>&nbsp;</td>
+      <td width="10%" align="left"><a accesskey="u" href="server-programming.html" title="Part&nbsp;V.&nbsp;Server Programming">Up</a></td>
+      <th width="60%" align="center">Part&nbsp;V.&nbsp;Server Programming</th>
+      <td width="10%" align="right"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="10%" align="right">&nbsp;<a accesskey="n" href="querytree.html" title="41.1.&nbsp;The Query Tree">Next</a></td>
+    </tr>
+  </table>
+  <hr />
+</div>
+<div class="chapter" id="RULES">
+  <div class="titlepage">
+    <div>
+      <div>
+        <h2 class="title">Chapter&nbsp;41.&nbsp;The Rule System</h2>
+      </div>
+    </div>
+  </div>
+  <div class="toc">
+    <p><strong>Table of Contents</strong></p>
+    <dl class="toc">
+      <dt><span class="sect1"><a href="querytree.html">41.1. The Query Tree</a></span></dt>
+      <dt><span class="sect1"><a href="rules-views.html">41.2. Views and the Rule System</a></span></dt>
+      <dd>
+        <dl>
+          <dt><span class="sect2"><a href="rules-views.html#RULES-SELECT">41.2.1. How <code class="command">SELECT</code> Rules Work</a></span></dt>
+          <dt><span class="sect2"><a href="rules-views.html#RULES-VIEWS-NON-SELECT">41.2.2. View Rules in Non-<code class="command">SELECT</code> Statements</a></span></dt>
+          <dt><span class="sect2"><a href="rules-views.html#RULES-VIEWS-POWER">41.2.3. The Power of Views in <span class="productname">PostgreSQL</span></a></span></dt>
+          <dt><span class="sect2"><a href="rules-views.html#RULES-VIEWS-UPDATE">41.2.4. Updating a View</a></span></dt>
+        </dl>
+      </dd>
+      <dt><span class="sect1"><a href="rules-materializedviews.html">41.3. Materialized Views</a></span></dt>
+      <dt><span class="sect1"><a href="rules-update.html">41.4. Rules on <code class="command">INSERT</code>, <code class="command">UPDATE</code>, and <code class="command">DELETE</code></a></span></dt>
+      <dd>
+        <dl>
+          <dt><span class="sect2"><a href="rules-update.html#RULES-UPDATE-HOW">41.4.1. How Update Rules Work</a></span></dt>
+          <dt><span class="sect2"><a href="rules-update.html#RULES-UPDATE-VIEWS">41.4.2. Cooperation with Views</a></span></dt>
+        </dl>
+      </dd>
+      <dt><span class="sect1"><a href="rules-privileges.html">41.5. Rules and Privileges</a></span></dt>
+      <dt><span class="sect1"><a href="rules-status.html">41.6. Rules and Command Status</a></span></dt>
+      <dt><span class="sect1"><a href="rules-triggers.html">41.7. Rules Versus Triggers</a></span></dt>
+    </dl>
+  </div><a id="id-1.8.6.2" class="indexterm" name="id-1.8.6.2"></a>
+  <p>This chapter discusses the rule system in <span class="productname">PostgreSQL</span>. Production rule systems are conceptually simple, but there are many subtle points involved in actually using them.</p>
+  <p>Some other database systems define active database rules, which are usually stored procedures and triggers. In <span class="productname">PostgreSQL</span>, these can be implemented using functions and triggers as well.</p>
+  <p>The rule system (more precisely speaking, the query rewrite rule system) is totally different from stored procedures and triggers. It modifies queries to take rules into consideration, and then passes the modified query to the query planner for planning and execution. It is very powerful, and can be used for many things such as query language procedures, views, and versions. The theoretical foundations and the power of this rule system are also discussed in <a class="xref" href="biblio.html#STON90B">[ston90b]</a> and <a class="xref" href="biblio.html#ONG90">[ong90]</a>.</p>
+</div>
+<div class="navfooter">
+  <hr />
+  <table width="100%" summary="Navigation footer">
+    <tr>
+      <td width="40%" align="left"><a accesskey="p" href="event-trigger-table-rewrite-example.html" title="40.5.&nbsp;A Table Rewrite Event Trigger Example">Prev</a>&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="u" href="server-programming.html" title="Part&nbsp;V.&nbsp;Server Programming">Up</a></td>
+      <td width="40%" align="right">&nbsp;<a accesskey="n" href="querytree.html" title="41.1.&nbsp;The Query Tree">Next</a></td>
+    </tr>
+    <tr>
+      <td width="40%" align="left" valign="top">40.5.&nbsp;A Table Rewrite Event Trigger Example&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="40%" align="right" valign="top">&nbsp;41.1.&nbsp;The Query Tree</td>
+    </tr>
+  </table>
+</div>
+
+          </div>
+          
+            <div id="docComments">
+              <h2>Submit correction</h2>
+              <p>
+              If you see anything in the documentation that is not correct, does not match
+              your experience with the particular feature or requires further clarification,
+              please use
+              <a href="/account/comments/new/16/rules.html/" rel="nofollow">this form</a>
+              to report a documentation issue.
+              </p>
+            </div>
+          
+        </div> <!-- pgContentWrap -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <!-- Copyright -->
+      <div class="container">
+        <a href="/about/policies/">Policies</a> |
+        <a href="/about/policies/coc/">Code of Conduct</a> |
+        <a href="/about/">About PostgreSQL</a> |
+        <a href="/about/contact/">Contact</a><br/>
+        <p>Copyright &copy; 1996-2026 The PostgreSQL Global Development Group</p>
+      </div>
+    </footer>
+    <script src="/media/js/main.js?8eb38fb2"></script>
+
+  </body>
+</html>

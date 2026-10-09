@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>PostgreSQL: Documentation: 16: 3.6. Inheritance</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+   
+  <meta name="theme-color" content="#336791"/>
+  <meta name="copyright" content="The PostgreSQL Global Development Group" />
+  <meta property="og:url" content="https://www.postgresql.org/docs/16/tutorial-inheritance.html" />
+  <meta property="og:type" content="article" />
+
+  <meta property="article:published_time" content="2026-08-13T12:52:44.176831" />
+  <meta property="og:image" content="https://www.postgresql.org/media/img/about/press/elephant.png" />
+  <meta property="og:title" content="3.6. Inheritance" />
+  <meta property="og:description" content="3.6.&amp;nbsp;Inheritance # Inheritance is a concept from object-oriented databases. It opens up interesting new possibilities of database design. Let&#x27;s create …" />
+  <meta property="og:site_name" content="PostgreSQL Documentation" />
+  <link href="/media/css/fontawesome.css?8eb38fb2" rel="stylesheet">
+  <link rel="stylesheet" href="/media/css/bootstrap-4.4.1.min.css">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" type="text/css" href="/dyncss/base.css?8eb38fb2">
+
+  <script src="/media/js/theme.js?8eb38fb2"></script>
+
+  
+
+
+  <link rel="canonical" href="https://www.postgresql.org/docs/current/tutorial-inheritance.html" />
+
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <!-- Header -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/">
+              <img class="logo" src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo">
+            </a>
+            <input type="checkbox" id="navbar-toggler" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <label for="navbar-toggler" id="navbar-toggler-label" class="navbar-toggler" tabindex="0"><span class="navbar-toggler-icon"></span></label>
+            <div class="navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+                <li class="nav-item p-2"><a href="/download/" title="Download">Download</a></li>
+                <li class="nav-item p-2"><a href="/docs/" title="Documentation">Documentation</a></li>
+                <li class="nav-item p-2"><a href="/community/" title="Community">Community</a></li>
+                <li class="nav-item p-2"><a href="/developer/" title="Developers">Developers</a></li>
+                <li class="nav-item p-2"><a href="/support/" title="Support">Support</a></li>
+                <li class="nav-item p-2"><a href="/about/donate/" title="Donate">Donate</a></li>
+                <li class="nav-item p-2"><a href="/account/" title="Your account">Your account</a></li>
+              </ul>
+              <form role="search" method="get" action="/search/">
+                <div class="input-group">
+                  <input id="q" name="q" type="text" size="20" maxlength="255" accesskey="s"  class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+              <form id="form-theme" class="form-inline d-none">
+                <button id="btn-theme" class="btn btn-default ml-1" type="button"></button>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row justify-content-center pg-shout-box">
+        <div class="col text-white text-center">September 24, 2026: <a href="/about/news/postgresql-19-beta-4-released-3386/">PostgreSQL 19 Beta 4 Released!</a>
+
+</div>
+      </div>
+    </div>
+    
+    <div class="container-fluid margin">
+      <div class="row">
+        <div id="pgContentWrap" class="col-11">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/16/index.html">PostgreSQL 16</a>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="row">
+                  <div class="col">
+                    Supported Versions:
+                      
+                        
+                        
+                          <a href="/docs/current/tutorial-inheritance.html" title="PostgreSQL 18 - 3.6. Inheritance" >Current</a>
+                          (<a href="/docs/18/tutorial-inheritance.html" title="PostgreSQL 18 - 3.6. Inheritance" >18</a>)
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/17/tutorial-inheritance.html" title="PostgreSQL 17 - 3.6. Inheritance" >17</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/16/tutorial-inheritance.html" title="PostgreSQL 16 - 3.6. Inheritance" class="docs-version-selected">16</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/15/tutorial-inheritance.html" title="PostgreSQL 15 - 3.6. Inheritance" >15</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/14/tutorial-inheritance.html" title="PostgreSQL 14 - 3.6. Inheritance" >14</a>
+                        
+                      
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col">
+                    Development Versions:
+                    
+                      
+                      <a href="/docs/19/tutorial-inheritance.html" title="PostgreSQL 19 - 3.6. Inheritance"  rel="nofollow">19</a>
+                    
+                       / 
+                      <a href="/docs/devel/tutorial-inheritance.html" title="PostgreSQL devel - 3.6. Inheritance"  rel="nofollow">devel</a>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col-12">
+                    Unsupported versions:
+                    
+                      
+                      <a href="/docs/13/tutorial-inheritance.html" title="PostgreSQL 13 - 3.6. Inheritance"  rel="nofollow">13</a>
+                    
+                       / 
+                      <a href="/docs/12/tutorial-inheritance.html" title="PostgreSQL 12 - 3.6. Inheritance"  rel="nofollow">12</a>
+                    
+                       / 
+                      <a href="/docs/11/tutorial-inheritance.html" title="PostgreSQL 11 - 3.6. Inheritance"  rel="nofollow">11</a>
+                    
+                       / 
+                      <a href="/docs/10/tutorial-inheritance.html" title="PostgreSQL 10 - 3.6. Inheritance"  rel="nofollow">10</a>
+                    
+                       / 
+                      <a href="/docs/9.6/tutorial-inheritance.html" title="PostgreSQL 9.6 - 3.6. Inheritance"  rel="nofollow">9.6</a>
+                    
+                       / 
+                      <a href="/docs/9.5/tutorial-inheritance.html" title="PostgreSQL 9.5 - 3.6. Inheritance"  rel="nofollow">9.5</a>
+                    
+                       / 
+                      <a href="/docs/9.4/tutorial-inheritance.html" title="PostgreSQL 9.4 - 3.6. Inheritance"  rel="nofollow">9.4</a>
+                    
+                       / 
+                      <a href="/docs/9.3/tutorial-inheritance.html" title="PostgreSQL 9.3 - 3.6. Inheritance"  rel="nofollow">9.3</a>
+                    
+                       / 
+                      <a href="/docs/9.2/tutorial-inheritance.html" title="PostgreSQL 9.2 - 3.6. Inheritance"  rel="nofollow">9.2</a>
+                    
+                       / 
+                      <a href="/docs/9.1/tutorial-inheritance.html" title="PostgreSQL 9.1 - 3.6. Inheritance"  rel="nofollow">9.1</a>
+                    
+                       / 
+                      <a href="/docs/9.0/tutorial-inheritance.html" title="PostgreSQL 9.0 - 3.6. Inheritance"  rel="nofollow">9.0</a>
+                    
+                       / 
+                      <a href="/docs/8.4/tutorial-inheritance.html" title="PostgreSQL 8.4 - 3.6. Inheritance"  rel="nofollow">8.4</a>
+                    
+                       / 
+                      <a href="/docs/8.3/tutorial-inheritance.html" title="PostgreSQL 8.3 - 3.6. Inheritance"  rel="nofollow">8.3</a>
+                    
+                       / 
+                      <a href="/docs/8.2/tutorial-inheritance.html" title="PostgreSQL 8.2 - 3.6. Inheritance"  rel="nofollow">8.2</a>
+                    
+                       / 
+                      <a href="/docs/8.1/tutorial-inheritance.html" title="PostgreSQL 8.1 - 3.6. Inheritance"  rel="nofollow">8.1</a>
+                    
+                       / 
+                      <a href="/docs/8.0/tutorial-inheritance.html" title="PostgreSQL 8.0 - 3.6. Inheritance"  rel="nofollow">8.0</a>
+                    
+                       / 
+                      <a href="/docs/7.4/tutorial-inheritance.html" title="PostgreSQL 7.4 - 3.6. Inheritance"  rel="nofollow">7.4</a>
+                    
+                       / 
+                      <a href="/docs/7.3/tutorial-inheritance.html" title="PostgreSQL 7.3 - 3.6. Inheritance"  rel="nofollow">7.3</a>
+                    
+                       / 
+                      <a href="/docs/7.2/tutorial-inheritance.html" title="PostgreSQL 7.2 - 3.6. Inheritance"  rel="nofollow">7.2</a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+            <div class="col-md-6 col-lg-5 offset-lg-1">
+              <form id="docSearchForm" role="search" method="get" action="/search/">
+                <input type="hidden" name="u" value="/docs/16/" />
+                <div class="input-group">
+                  <input type="text" id="q" name="q" class="form-control" placeholder="Search the documentation for..."/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+            </div>
+          </div>
+
+          <div id="docContent">
+            <div class="navheader">
+  <table width="100%" summary="Navigation header">
+    <tr>
+      <th colspan="5" align="center">3.6.&nbsp;Inheritance</th>
+    </tr>
+    <tr>
+      <td width="10%" align="left"><a accesskey="p" href="tutorial-window.html" title="3.5.&nbsp;Window Functions">Prev</a>&nbsp;</td>
+      <td width="10%" align="left"><a accesskey="u" href="tutorial-advanced.html" title="Chapter&nbsp;3.&nbsp;Advanced Features">Up</a></td>
+      <th width="60%" align="center">Chapter&nbsp;3.&nbsp;Advanced Features</th>
+      <td width="10%" align="right"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="10%" align="right">&nbsp;<a accesskey="n" href="tutorial-conclusion.html" title="3.7.&nbsp;Conclusion">Next</a></td>
+    </tr>
+  </table>
+  <hr />
+</div>
+<div class="sect1" id="TUTORIAL-INHERITANCE">
+  <div class="titlepage">
+    <div>
+      <div>
+        <h2 class="title" style="clear: both">3.6.&nbsp;Inheritance <a href="#TUTORIAL-INHERITANCE" class="id_link">#</a></h2>
+      </div>
+    </div>
+  </div><a id="id-1.4.5.7.2" class="indexterm" name="id-1.4.5.7.2"></a>
+  <p>Inheritance is a concept from object-oriented databases. It opens up interesting new possibilities of database design.</p>
+  <p>Let's create two tables: A table <code class="classname">cities</code> and a table <code class="classname">capitals</code>. Naturally, capitals are also cities, so you want some way to show the capitals implicitly when you list all cities. If you're really clever you might invent some scheme like this:</p>
+  <pre class="programlisting">
+CREATE TABLE capitals (
+  name       text,
+  population real,
+  elevation  int,    -- (in ft)
+  state      char(2)
+);
+
+CREATE TABLE non_capitals (
+  name       text,
+  population real,
+  elevation  int     -- (in ft)
+);
+
+CREATE VIEW cities AS
+  SELECT name, population, elevation FROM capitals
+    UNION
+  SELECT name, population, elevation FROM non_capitals;
+</pre>
+  <p>This works OK as far as querying goes, but it gets ugly when you need to update several rows, for one thing.</p>
+  <p>A better solution is this:</p>
+  <pre class="programlisting">
+CREATE TABLE cities (
+  name       text,
+  population real,
+  elevation  int     -- (in ft)
+);
+
+CREATE TABLE capitals (
+  state      char(2) UNIQUE NOT NULL
+) INHERITS (cities);
+</pre>
+  <p>In this case, a row of <code class="classname">capitals</code> <em class="firstterm">inherits</em> all columns (<code class="structfield">name</code>, <code class="structfield">population</code>, and <code class="structfield">elevation</code>) from its <em class="firstterm">parent</em>, <code class="classname">cities</code>. The type of the column <code class="structfield">name</code> is <code class="type">text</code>, a native <span class="productname">PostgreSQL</span> type for variable length character strings. The <code class="classname">capitals</code> table has an additional column, <code class="structfield">state</code>, which shows its state abbreviation. In <span class="productname">PostgreSQL</span>, a table can inherit from zero or more other tables.</p>
+  <p>For example, the following query finds the names of all cities, including state capitals, that are located at an elevation over 500 feet:</p>
+  <pre class="programlisting">
+SELECT name, elevation
+  FROM cities
+  WHERE elevation &gt; 500;
+</pre>
+  <p>which returns:</p>
+  <pre class="screen">
+   name    | elevation
+-----------+-----------
+ Las Vegas |      2174
+ Mariposa  |      1953
+ Madison   |       845
+(3 rows)
+</pre>
+  <p>On the other hand, the following query finds all the cities that are not state capitals and are situated at an elevation over 500 feet:</p>
+  <pre class="programlisting">
+SELECT name, elevation
+    FROM ONLY cities
+    WHERE elevation &gt; 500;
+</pre>
+  <pre class="screen">
+   name    | elevation
+-----------+-----------
+ Las Vegas |      2174
+ Mariposa  |      1953
+(2 rows)
+</pre>
+  <p>Here the <code class="literal">ONLY</code> before <code class="literal">cities</code> indicates that the query should be run over only the <code class="classname">cities</code> table, and not tables below <code class="classname">cities</code> in the inheritance hierarchy. Many of the commands that we have already discussed — <code class="command">SELECT</code>, <code class="command">UPDATE</code>, and <code class="command">DELETE</code> — support this <code class="literal">ONLY</code> notation.</p>
+  <div class="note">
+    <h3 class="title">Note</h3>
+    <p>Although inheritance is frequently useful, it has not been integrated with unique constraints or foreign keys, which limits its usefulness. See <a class="xref" href="ddl-inherit.html" title="5.10.&nbsp;Inheritance">Section&nbsp;5.10</a> for more detail.</p>
+  </div>
+</div>
+<div class="navfooter">
+  <hr />
+  <table width="100%" summary="Navigation footer">
+    <tr>
+      <td width="40%" align="left"><a accesskey="p" href="tutorial-window.html" title="3.5.&nbsp;Window Functions">Prev</a>&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="u" href="tutorial-advanced.html" title="Chapter&nbsp;3.&nbsp;Advanced Features">Up</a></td>
+      <td width="40%" align="right">&nbsp;<a accesskey="n" href="tutorial-conclusion.html" title="3.7.&nbsp;Conclusion">Next</a></td>
+    </tr>
+    <tr>
+      <td width="40%" align="left" valign="top">3.5.&nbsp;Window Functions&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="40%" align="right" valign="top">&nbsp;3.7.&nbsp;Conclusion</td>
+    </tr>
+  </table>
+</div>
+
+          </div>
+          
+            <div id="docComments">
+              <h2>Submit correction</h2>
+              <p>
+              If you see anything in the documentation that is not correct, does not match
+              your experience with the particular feature or requires further clarification,
+              please use
+              <a href="/account/comments/new/16/tutorial-inheritance.html/" rel="nofollow">this form</a>
+              to report a documentation issue.
+              </p>
+            </div>
+          
+        </div> <!-- pgContentWrap -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <!-- Copyright -->
+      <div class="container">
+        <a href="/about/policies/">Policies</a> |
+        <a href="/about/policies/coc/">Code of Conduct</a> |
+        <a href="/about/">About PostgreSQL</a> |
+        <a href="/about/contact/">Contact</a><br/>
+        <p>Copyright &copy; 1996-2026 The PostgreSQL Global Development Group</p>
+      </div>
+    </footer>
+    <script src="/media/js/main.js?8eb38fb2"></script>
+
+  </body>
+</html>

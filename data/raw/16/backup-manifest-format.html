@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>PostgreSQL: Documentation: 16: Chapter 77. Backup Manifest Format</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+   
+  <meta name="theme-color" content="#336791"/>
+  <meta name="copyright" content="The PostgreSQL Global Development Group" />
+  <meta property="og:url" content="https://www.postgresql.org/docs/16/backup-manifest-format.html" />
+  <meta property="og:type" content="article" />
+
+  <meta property="article:published_time" content="2026-08-13T12:52:44.176831" />
+  <meta property="og:image" content="https://www.postgresql.org/media/img/about/press/elephant.png" />
+  <meta property="og:title" content="Chapter 77. Backup Manifest Format" />
+  <meta property="og:description" content="Chapter&amp;nbsp;77.&amp;nbsp;Backup Manifest Format Table of Contents 77.1. Backup Manifest Top-level Object 77.2. Backup Manifest File Object 77.3. Backup Manifest WAL …" />
+  <meta property="og:site_name" content="PostgreSQL Documentation" />
+  <link href="/media/css/fontawesome.css?8eb38fb2" rel="stylesheet">
+  <link rel="stylesheet" href="/media/css/bootstrap-4.4.1.min.css">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" type="text/css" href="/dyncss/base.css?8eb38fb2">
+
+  <script src="/media/js/theme.js?8eb38fb2"></script>
+
+  
+
+
+  <link rel="canonical" href="https://www.postgresql.org/docs/current/backup-manifest-format.html" />
+
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <!-- Header -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/">
+              <img class="logo" src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo">
+            </a>
+            <input type="checkbox" id="navbar-toggler" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <label for="navbar-toggler" id="navbar-toggler-label" class="navbar-toggler" tabindex="0"><span class="navbar-toggler-icon"></span></label>
+            <div class="navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+                <li class="nav-item p-2"><a href="/download/" title="Download">Download</a></li>
+                <li class="nav-item p-2"><a href="/docs/" title="Documentation">Documentation</a></li>
+                <li class="nav-item p-2"><a href="/community/" title="Community">Community</a></li>
+                <li class="nav-item p-2"><a href="/developer/" title="Developers">Developers</a></li>
+                <li class="nav-item p-2"><a href="/support/" title="Support">Support</a></li>
+                <li class="nav-item p-2"><a href="/about/donate/" title="Donate">Donate</a></li>
+                <li class="nav-item p-2"><a href="/account/" title="Your account">Your account</a></li>
+              </ul>
+              <form role="search" method="get" action="/search/">
+                <div class="input-group">
+                  <input id="q" name="q" type="text" size="20" maxlength="255" accesskey="s"  class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+              <form id="form-theme" class="form-inline d-none">
+                <button id="btn-theme" class="btn btn-default ml-1" type="button"></button>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row justify-content-center pg-shout-box">
+        <div class="col text-white text-center">September 24, 2026: <a href="/about/news/postgresql-19-beta-4-released-3386/">PostgreSQL 19 Beta 4 Released!</a>
+
+</div>
+      </div>
+    </div>
+    
+    <div class="container-fluid margin">
+      <div class="row">
+        <div id="pgContentWrap" class="col-11">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/16/index.html">PostgreSQL 16</a>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="row">
+                  <div class="col">
+                    Supported Versions:
+                      
+                        
+                        
+                          <a href="/docs/current/backup-manifest-format.html" title="PostgreSQL 18 - Chapter 77. Backup Manifest Format" >Current</a>
+                          (<a href="/docs/18/backup-manifest-format.html" title="PostgreSQL 18 - Chapter 77. Backup Manifest Format" >18</a>)
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/17/backup-manifest-format.html" title="PostgreSQL 17 - Chapter 77. Backup Manifest Format" >17</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/16/backup-manifest-format.html" title="PostgreSQL 16 - Chapter 77. Backup Manifest Format" class="docs-version-selected">16</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/15/backup-manifest-format.html" title="PostgreSQL 15 - Chapter 77. Backup Manifest Format" >15</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/14/backup-manifest-format.html" title="PostgreSQL 14 - Chapter 77. Backup Manifest Format" >14</a>
+                        
+                      
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col">
+                    Development Versions:
+                    
+                      
+                      <a href="/docs/19/backup-manifest-format.html" title="PostgreSQL 19 - Chapter 77. Backup Manifest Format"  rel="nofollow">19</a>
+                    
+                       / 
+                      <a href="/docs/devel/backup-manifest-format.html" title="PostgreSQL devel - Chapter 77. Backup Manifest Format"  rel="nofollow">devel</a>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col-12">
+                    Unsupported versions:
+                    
+                      
+                      <a href="/docs/13/backup-manifest-format.html" title="PostgreSQL 13 - Chapter 77. Backup Manifest Format"  rel="nofollow">13</a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+            <div class="col-md-6 col-lg-5 offset-lg-1">
+              <form id="docSearchForm" role="search" method="get" action="/search/">
+                <input type="hidden" name="u" value="/docs/16/" />
+                <div class="input-group">
+                  <input type="text" id="q" name="q" class="form-control" placeholder="Search the documentation for..."/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+            </div>
+          </div>
+
+          <div id="docContent">
+            <div class="navheader">
+  <table width="100%" summary="Navigation header">
+    <tr>
+      <th colspan="5" align="center">Chapter&nbsp;77.&nbsp;Backup Manifest Format</th>
+    </tr>
+    <tr>
+      <td width="10%" align="left"><a accesskey="p" href="planner-stats-security.html" title="76.3.&nbsp;Planner Statistics and Security">Prev</a>&nbsp;</td>
+      <td width="10%" align="left"><a accesskey="u" href="internals.html" title="Part&nbsp;VII.&nbsp;Internals">Up</a></td>
+      <th width="60%" align="center">Part&nbsp;VII.&nbsp;Internals</th>
+      <td width="10%" align="right"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="10%" align="right">&nbsp;<a accesskey="n" href="backup-manifest-toplevel.html" title="77.1.&nbsp;Backup Manifest Top-level Object">Next</a></td>
+    </tr>
+  </table>
+  <hr />
+</div>
+<div class="chapter" id="BACKUP-MANIFEST-FORMAT">
+  <div class="titlepage">
+    <div>
+      <div>
+        <h2 class="title">Chapter&nbsp;77.&nbsp;Backup Manifest Format</h2>
+      </div>
+    </div>
+  </div>
+  <div class="toc">
+    <p><strong>Table of Contents</strong></p>
+    <dl class="toc">
+      <dt><span class="sect1"><a href="backup-manifest-toplevel.html">77.1. Backup Manifest Top-level Object</a></span></dt>
+      <dt><span class="sect1"><a href="backup-manifest-files.html">77.2. Backup Manifest File Object</a></span></dt>
+      <dt><span class="sect1"><a href="backup-manifest-wal-ranges.html">77.3. Backup Manifest WAL Range Object</a></span></dt>
+    </dl>
+  </div><a id="id-1.10.28.2" class="indexterm" name="id-1.10.28.2"></a>
+  <p>The backup manifest generated by <a class="xref" href="app-pgbasebackup.html" title="pg_basebackup"><span class="refentrytitle"><span class="application">pg_basebackup</span></span></a> is primarily intended to permit the backup to be verified using <a class="xref" href="app-pgverifybackup.html" title="pg_verifybackup"><span class="refentrytitle"><span class="application">pg_verifybackup</span></span></a>. However, it is also possible for other tools to read the backup manifest file and use the information contained therein for their own purposes. To that end, this chapter describes the format of the backup manifest file.</p>
+  <p>A backup manifest is a JSON document encoded as UTF-8. (Although in general JSON documents are required to be Unicode, PostgreSQL permits the <code class="type">json</code> and <code class="type">jsonb</code> data types to be used with any supported server encoding. There is no similar exception for backup manifests.) The JSON document is always an object; the keys that are present in this object are described in the next section.</p>
+</div>
+<div class="navfooter">
+  <hr />
+  <table width="100%" summary="Navigation footer">
+    <tr>
+      <td width="40%" align="left"><a accesskey="p" href="planner-stats-security.html" title="76.3.&nbsp;Planner Statistics and Security">Prev</a>&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="u" href="internals.html" title="Part&nbsp;VII.&nbsp;Internals">Up</a></td>
+      <td width="40%" align="right">&nbsp;<a accesskey="n" href="backup-manifest-toplevel.html" title="77.1.&nbsp;Backup Manifest Top-level Object">Next</a></td>
+    </tr>
+    <tr>
+      <td width="40%" align="left" valign="top">76.3.&nbsp;Planner Statistics and Security&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="40%" align="right" valign="top">&nbsp;77.1.&nbsp;Backup Manifest Top-level Object</td>
+    </tr>
+  </table>
+</div>
+
+          </div>
+          
+            <div id="docComments">
+              <h2>Submit correction</h2>
+              <p>
+              If you see anything in the documentation that is not correct, does not match
+              your experience with the particular feature or requires further clarification,
+              please use
+              <a href="/account/comments/new/16/backup-manifest-format.html/" rel="nofollow">this form</a>
+              to report a documentation issue.
+              </p>
+            </div>
+          
+        </div> <!-- pgContentWrap -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <!-- Copyright -->
+      <div class="container">
+        <a href="/about/policies/">Policies</a> |
+        <a href="/about/policies/coc/">Code of Conduct</a> |
+        <a href="/about/">About PostgreSQL</a> |
+        <a href="/about/contact/">Contact</a><br/>
+        <p>Copyright &copy; 1996-2026 The PostgreSQL Global Development Group</p>
+      </div>
+    </footer>
+    <script src="/media/js/main.js?8eb38fb2"></script>
+
+  </body>
+</html>

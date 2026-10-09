@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>PostgreSQL: Documentation: 16: Chapter 60. Writing a Table Sampling Method</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+   
+  <meta name="theme-color" content="#336791"/>
+  <meta name="copyright" content="The PostgreSQL Global Development Group" />
+  <meta property="og:url" content="https://www.postgresql.org/docs/16/tablesample-method.html" />
+  <meta property="og:type" content="article" />
+
+  <meta property="article:published_time" content="2026-08-13T12:52:44.176831" />
+  <meta property="og:image" content="https://www.postgresql.org/media/img/about/press/elephant.png" />
+  <meta property="og:title" content="Chapter 60. Writing a Table Sampling Method" />
+  <meta property="og:description" content="Chapter&amp;nbsp;60.&amp;nbsp;Writing a Table Sampling Method Table of Contents 60.1. Sampling Method Support Functions PostgreSQL&#x27;s implementation of the TABLESAMPLE clause supports …" />
+  <meta property="og:site_name" content="PostgreSQL Documentation" />
+  <link href="/media/css/fontawesome.css?8eb38fb2" rel="stylesheet">
+  <link rel="stylesheet" href="/media/css/bootstrap-4.4.1.min.css">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" type="text/css" href="/dyncss/base.css?8eb38fb2">
+
+  <script src="/media/js/theme.js?8eb38fb2"></script>
+
+  
+
+
+  <link rel="canonical" href="https://www.postgresql.org/docs/current/tablesample-method.html" />
+
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <!-- Header -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/">
+              <img class="logo" src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo">
+            </a>
+            <input type="checkbox" id="navbar-toggler" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <label for="navbar-toggler" id="navbar-toggler-label" class="navbar-toggler" tabindex="0"><span class="navbar-toggler-icon"></span></label>
+            <div class="navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+                <li class="nav-item p-2"><a href="/download/" title="Download">Download</a></li>
+                <li class="nav-item p-2"><a href="/docs/" title="Documentation">Documentation</a></li>
+                <li class="nav-item p-2"><a href="/community/" title="Community">Community</a></li>
+                <li class="nav-item p-2"><a href="/developer/" title="Developers">Developers</a></li>
+                <li class="nav-item p-2"><a href="/support/" title="Support">Support</a></li>
+                <li class="nav-item p-2"><a href="/about/donate/" title="Donate">Donate</a></li>
+                <li class="nav-item p-2"><a href="/account/" title="Your account">Your account</a></li>
+              </ul>
+              <form role="search" method="get" action="/search/">
+                <div class="input-group">
+                  <input id="q" name="q" type="text" size="20" maxlength="255" accesskey="s"  class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+              <form id="form-theme" class="form-inline d-none">
+                <button id="btn-theme" class="btn btn-default ml-1" type="button"></button>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row justify-content-center pg-shout-box">
+        <div class="col text-white text-center">September 24, 2026: <a href="/about/news/postgresql-19-beta-4-released-3386/">PostgreSQL 19 Beta 4 Released!</a>
+
+</div>
+      </div>
+    </div>
+    
+    <div class="container-fluid margin">
+      <div class="row">
+        <div id="pgContentWrap" class="col-11">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/16/index.html">PostgreSQL 16</a>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="row">
+                  <div class="col">
+                    Supported Versions:
+                      
+                        
+                        
+                          <a href="/docs/current/tablesample-method.html" title="PostgreSQL 18 - Chapter 60. Writing a Table Sampling Method" >Current</a>
+                          (<a href="/docs/18/tablesample-method.html" title="PostgreSQL 18 - Chapter 60. Writing a Table Sampling Method" >18</a>)
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/17/tablesample-method.html" title="PostgreSQL 17 - Chapter 60. Writing a Table Sampling Method" >17</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/16/tablesample-method.html" title="PostgreSQL 16 - Chapter 60. Writing a Table Sampling Method" class="docs-version-selected">16</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/15/tablesample-method.html" title="PostgreSQL 15 - Chapter 60. Writing a Table Sampling Method" >15</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/14/tablesample-method.html" title="PostgreSQL 14 - Chapter 60. Writing a Table Sampling Method" >14</a>
+                        
+                      
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col">
+                    Development Versions:
+                    
+                      
+                      <a href="/docs/19/tablesample-method.html" title="PostgreSQL 19 - Chapter 60. Writing a Table Sampling Method"  rel="nofollow">19</a>
+                    
+                       / 
+                      <a href="/docs/devel/tablesample-method.html" title="PostgreSQL devel - Chapter 60. Writing a Table Sampling Method"  rel="nofollow">devel</a>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col-12">
+                    Unsupported versions:
+                    
+                      
+                      <a href="/docs/13/tablesample-method.html" title="PostgreSQL 13 - Chapter 60. Writing a Table Sampling Method"  rel="nofollow">13</a>
+                    
+                       / 
+                      <a href="/docs/12/tablesample-method.html" title="PostgreSQL 12 - Chapter 60. Writing a Table Sampling Method"  rel="nofollow">12</a>
+                    
+                       / 
+                      <a href="/docs/11/tablesample-method.html" title="PostgreSQL 11 - Chapter 60. Writing a Table Sampling Method"  rel="nofollow">11</a>
+                    
+                       / 
+                      <a href="/docs/10/tablesample-method.html" title="PostgreSQL 10 - Chapter 60. Writing a Table Sampling Method"  rel="nofollow">10</a>
+                    
+                       / 
+                      <a href="/docs/9.6/tablesample-method.html" title="PostgreSQL 9.6 - Chapter 60. Writing a Table Sampling Method"  rel="nofollow">9.6</a>
+                    
+                       / 
+                      <a href="/docs/9.5/tablesample-method.html" title="PostgreSQL 9.5 - Chapter 60. Writing a Table Sampling Method"  rel="nofollow">9.5</a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+            <div class="col-md-6 col-lg-5 offset-lg-1">
+              <form id="docSearchForm" role="search" method="get" action="/search/">
+                <input type="hidden" name="u" value="/docs/16/" />
+                <div class="input-group">
+                  <input type="text" id="q" name="q" class="form-control" placeholder="Search the documentation for..."/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+            </div>
+          </div>
+
+          <div id="docContent">
+            <div class="navheader">
+  <table width="100%" summary="Navigation header">
+    <tr>
+      <th colspan="5" align="center">Chapter&nbsp;60.&nbsp;Writing a Table Sampling Method</th>
+    </tr>
+    <tr>
+      <td width="10%" align="left"><a accesskey="p" href="fdw-row-locking.html" title="59.5.&nbsp;Row Locking in Foreign Data Wrappers">Prev</a>&nbsp;</td>
+      <td width="10%" align="left"><a accesskey="u" href="internals.html" title="Part&nbsp;VII.&nbsp;Internals">Up</a></td>
+      <th width="60%" align="center">Part&nbsp;VII.&nbsp;Internals</th>
+      <td width="10%" align="right"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="10%" align="right">&nbsp;<a accesskey="n" href="tablesample-support-functions.html" title="60.1.&nbsp;Sampling Method Support Functions">Next</a></td>
+    </tr>
+  </table>
+  <hr />
+</div>
+<div class="chapter" id="TABLESAMPLE-METHOD">
+  <div class="titlepage">
+    <div>
+      <div>
+        <h2 class="title">Chapter&nbsp;60.&nbsp;Writing a Table Sampling Method</h2>
+      </div>
+    </div>
+  </div>
+  <div class="toc">
+    <p><strong>Table of Contents</strong></p>
+    <dl class="toc">
+      <dt><span class="sect1"><a href="tablesample-support-functions.html">60.1. Sampling Method Support Functions</a></span></dt>
+    </dl>
+  </div><a id="id-1.10.11.2" class="indexterm" name="id-1.10.11.2"></a><a id="id-1.10.11.3" class="indexterm" name="id-1.10.11.3"></a>
+  <p><span class="productname">PostgreSQL</span>'s implementation of the <code class="literal">TABLESAMPLE</code> clause supports custom table sampling methods, in addition to the <code class="literal">BERNOULLI</code> and <code class="literal">SYSTEM</code> methods that are required by the SQL standard. The sampling method determines which rows of the table will be selected when the <code class="literal">TABLESAMPLE</code> clause is used.</p>
+  <p>At the SQL level, a table sampling method is represented by a single SQL function, typically implemented in C, having the signature</p>
+  <pre class="programlisting">
+method_name(internal) RETURNS tsm_handler
+</pre>
+  <p>The name of the function is the same method name appearing in the <code class="literal">TABLESAMPLE</code> clause. The <code class="type">internal</code> argument is a dummy (always having value zero) that simply serves to prevent this function from being called directly from an SQL command. The result of the function must be a palloc'd struct of type <code class="type">TsmRoutine</code>, which contains pointers to support functions for the sampling method. These support functions are plain C functions and are not visible or callable at the SQL level. The support functions are described in <a class="xref" href="tablesample-support-functions.html" title="60.1.&nbsp;Sampling Method Support Functions">Section&nbsp;60.1</a>.</p>
+  <p>In addition to function pointers, the <code class="type">TsmRoutine</code> struct must provide these additional fields:</p>
+  <div class="variablelist">
+    <dl class="variablelist">
+      <dt><span class="term"><code class="literal">List *parameterTypes</code></span></dt>
+      <dd>
+        <p>This is an OID list containing the data type OIDs of the parameter(s) that will be accepted by the <code class="literal">TABLESAMPLE</code> clause when this sampling method is used. For example, for the built-in methods, this list contains a single item with value <code class="literal">FLOAT4OID</code>, which represents the sampling percentage. Custom sampling methods can have more or different parameters.</p>
+      </dd>
+      <dt><span class="term"><code class="literal">bool repeatable_across_queries</code></span></dt>
+      <dd>
+        <p>If <code class="literal">true</code>, the sampling method can deliver identical samples across successive queries, if the same parameters and <code class="literal">REPEATABLE</code> seed value are supplied each time and the table contents have not changed. When this is <code class="literal">false</code>, the <code class="literal">REPEATABLE</code> clause is not accepted for use with the sampling method.</p>
+      </dd>
+      <dt><span class="term"><code class="literal">bool repeatable_across_scans</code></span></dt>
+      <dd>
+        <p>If <code class="literal">true</code>, the sampling method can deliver identical samples across successive scans in the same query (assuming unchanging parameters, seed value, and snapshot). When this is <code class="literal">false</code>, the planner will not select plans that would require scanning the sampled table more than once, since that might result in inconsistent query output.</p>
+      </dd>
+    </dl>
+  </div>
+  <p>The <code class="type">TsmRoutine</code> struct type is declared in <code class="filename">src/include/access/tsmapi.h</code>, which see for additional details.</p>
+  <p>The table sampling methods included in the standard distribution are good references when trying to write your own. Look into the <code class="filename">src/backend/access/tablesample</code> subdirectory of the source tree for the built-in sampling methods, and into the <code class="filename">contrib</code> subdirectory for add-on methods.</p>
+</div>
+<div class="navfooter">
+  <hr />
+  <table width="100%" summary="Navigation footer">
+    <tr>
+      <td width="40%" align="left"><a accesskey="p" href="fdw-row-locking.html" title="59.5.&nbsp;Row Locking in Foreign Data Wrappers">Prev</a>&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="u" href="internals.html" title="Part&nbsp;VII.&nbsp;Internals">Up</a></td>
+      <td width="40%" align="right">&nbsp;<a accesskey="n" href="tablesample-support-functions.html" title="60.1.&nbsp;Sampling Method Support Functions">Next</a></td>
+    </tr>
+    <tr>
+      <td width="40%" align="left" valign="top">59.5.&nbsp;Row Locking in Foreign Data Wrappers&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="40%" align="right" valign="top">&nbsp;60.1.&nbsp;Sampling Method Support Functions</td>
+    </tr>
+  </table>
+</div>
+
+          </div>
+          
+            <div id="docComments">
+              <h2>Submit correction</h2>
+              <p>
+              If you see anything in the documentation that is not correct, does not match
+              your experience with the particular feature or requires further clarification,
+              please use
+              <a href="/account/comments/new/16/tablesample-method.html/" rel="nofollow">this form</a>
+              to report a documentation issue.
+              </p>
+            </div>
+          
+        </div> <!-- pgContentWrap -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <!-- Copyright -->
+      <div class="container">
+        <a href="/about/policies/">Policies</a> |
+        <a href="/about/policies/coc/">Code of Conduct</a> |
+        <a href="/about/">About PostgreSQL</a> |
+        <a href="/about/contact/">Contact</a><br/>
+        <p>Copyright &copy; 1996-2026 The PostgreSQL Global Development Group</p>
+      </div>
+    </footer>
+    <script src="/media/js/main.js?8eb38fb2"></script>
+
+  </body>
+</html>

@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>PostgreSQL: Documentation: 16: Chapter 46. PL/Python — Python Procedural Language</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+   
+  <meta name="theme-color" content="#336791"/>
+  <meta name="copyright" content="The PostgreSQL Global Development Group" />
+  <meta property="og:url" content="https://www.postgresql.org/docs/16/plpython.html" />
+  <meta property="og:type" content="article" />
+
+  <meta property="article:published_time" content="2026-08-13T12:52:44.176831" />
+  <meta property="og:image" content="https://www.postgresql.org/media/img/about/press/elephant.png" />
+  <meta property="og:title" content="Chapter 46. PL/Python — Python Procedural Language" />
+  <meta property="og:description" content="Chapter&amp;nbsp;46.&amp;nbsp;PL/Python — Python Procedural Language Table of Contents 46.1. PL/Python Functions 46.2. Data Values 46.2.1. Data Type Mapping 46.2.2. Null, …" />
+  <meta property="og:site_name" content="PostgreSQL Documentation" />
+  <link href="/media/css/fontawesome.css?8eb38fb2" rel="stylesheet">
+  <link rel="stylesheet" href="/media/css/bootstrap-4.4.1.min.css">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" type="text/css" href="/dyncss/base.css?8eb38fb2">
+
+  <script src="/media/js/theme.js?8eb38fb2"></script>
+
+  
+
+
+  <link rel="canonical" href="https://www.postgresql.org/docs/current/plpython.html" />
+
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <!-- Header -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/">
+              <img class="logo" src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo">
+            </a>
+            <input type="checkbox" id="navbar-toggler" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <label for="navbar-toggler" id="navbar-toggler-label" class="navbar-toggler" tabindex="0"><span class="navbar-toggler-icon"></span></label>
+            <div class="navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+                <li class="nav-item p-2"><a href="/download/" title="Download">Download</a></li>
+                <li class="nav-item p-2"><a href="/docs/" title="Documentation">Documentation</a></li>
+                <li class="nav-item p-2"><a href="/community/" title="Community">Community</a></li>
+                <li class="nav-item p-2"><a href="/developer/" title="Developers">Developers</a></li>
+                <li class="nav-item p-2"><a href="/support/" title="Support">Support</a></li>
+                <li class="nav-item p-2"><a href="/about/donate/" title="Donate">Donate</a></li>
+                <li class="nav-item p-2"><a href="/account/" title="Your account">Your account</a></li>
+              </ul>
+              <form role="search" method="get" action="/search/">
+                <div class="input-group">
+                  <input id="q" name="q" type="text" size="20" maxlength="255" accesskey="s"  class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+              <form id="form-theme" class="form-inline d-none">
+                <button id="btn-theme" class="btn btn-default ml-1" type="button"></button>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row justify-content-center pg-shout-box">
+        <div class="col text-white text-center">September 24, 2026: <a href="/about/news/postgresql-19-beta-4-released-3386/">PostgreSQL 19 Beta 4 Released!</a>
+
+</div>
+      </div>
+    </div>
+    
+    <div class="container-fluid margin">
+      <div class="row">
+        <div id="pgContentWrap" class="col-11">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/16/index.html">PostgreSQL 16</a>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="row">
+                  <div class="col">
+                    Supported Versions:
+                      
+                        
+                        
+                          <a href="/docs/current/plpython.html" title="PostgreSQL 18 - Chapter 46. PL/Python — Python Procedural Language" >Current</a>
+                          (<a href="/docs/18/plpython.html" title="PostgreSQL 18 - Chapter 46. PL/Python — Python Procedural Language" >18</a>)
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/17/plpython.html" title="PostgreSQL 17 - Chapter 46. PL/Python — Python Procedural Language" >17</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/16/plpython.html" title="PostgreSQL 16 - Chapter 46. PL/Python — Python Procedural Language" class="docs-version-selected">16</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/15/plpython.html" title="PostgreSQL 15 - Chapter 46. PL/Python — Python Procedural Language" >15</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/14/plpython.html" title="PostgreSQL 14 - Chapter 46. PL/Python — Python Procedural Language" >14</a>
+                        
+                      
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col">
+                    Development Versions:
+                    
+                      
+                      <a href="/docs/19/plpython.html" title="PostgreSQL 19 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">19</a>
+                    
+                       / 
+                      <a href="/docs/devel/plpython.html" title="PostgreSQL devel - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">devel</a>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col-12">
+                    Unsupported versions:
+                    
+                      
+                      <a href="/docs/13/plpython.html" title="PostgreSQL 13 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">13</a>
+                    
+                       / 
+                      <a href="/docs/12/plpython.html" title="PostgreSQL 12 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">12</a>
+                    
+                       / 
+                      <a href="/docs/11/plpython.html" title="PostgreSQL 11 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">11</a>
+                    
+                       / 
+                      <a href="/docs/10/plpython.html" title="PostgreSQL 10 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">10</a>
+                    
+                       / 
+                      <a href="/docs/9.6/plpython.html" title="PostgreSQL 9.6 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">9.6</a>
+                    
+                       / 
+                      <a href="/docs/9.5/plpython.html" title="PostgreSQL 9.5 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">9.5</a>
+                    
+                       / 
+                      <a href="/docs/9.4/plpython.html" title="PostgreSQL 9.4 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">9.4</a>
+                    
+                       / 
+                      <a href="/docs/9.3/plpython.html" title="PostgreSQL 9.3 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">9.3</a>
+                    
+                       / 
+                      <a href="/docs/9.2/plpython.html" title="PostgreSQL 9.2 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">9.2</a>
+                    
+                       / 
+                      <a href="/docs/9.1/plpython.html" title="PostgreSQL 9.1 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">9.1</a>
+                    
+                       / 
+                      <a href="/docs/9.0/plpython.html" title="PostgreSQL 9.0 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">9.0</a>
+                    
+                       / 
+                      <a href="/docs/8.4/plpython.html" title="PostgreSQL 8.4 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">8.4</a>
+                    
+                       / 
+                      <a href="/docs/8.3/plpython.html" title="PostgreSQL 8.3 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">8.3</a>
+                    
+                       / 
+                      <a href="/docs/8.2/plpython.html" title="PostgreSQL 8.2 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">8.2</a>
+                    
+                       / 
+                      <a href="/docs/8.1/plpython.html" title="PostgreSQL 8.1 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">8.1</a>
+                    
+                       / 
+                      <a href="/docs/8.0/plpython.html" title="PostgreSQL 8.0 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">8.0</a>
+                    
+                       / 
+                      <a href="/docs/7.4/plpython.html" title="PostgreSQL 7.4 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">7.4</a>
+                    
+                       / 
+                      <a href="/docs/7.3/plpython.html" title="PostgreSQL 7.3 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">7.3</a>
+                    
+                       / 
+                      <a href="/docs/7.2/plpython.html" title="PostgreSQL 7.2 - Chapter 46. PL/Python — Python Procedural Language"  rel="nofollow">7.2</a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+            <div class="col-md-6 col-lg-5 offset-lg-1">
+              <form id="docSearchForm" role="search" method="get" action="/search/">
+                <input type="hidden" name="u" value="/docs/16/" />
+                <div class="input-group">
+                  <input type="text" id="q" name="q" class="form-control" placeholder="Search the documentation for..."/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+            </div>
+          </div>
+
+          <div id="docContent">
+            <div class="navheader">
+  <table width="100%" summary="Navigation header">
+    <tr>
+      <th colspan="5" align="center">Chapter&nbsp;46.&nbsp;PL/Python — Python Procedural Language</th>
+    </tr>
+    <tr>
+      <td width="10%" align="left"><a accesskey="p" href="plperl-under-the-hood.html" title="45.8.&nbsp;PL/Perl Under the Hood">Prev</a>&nbsp;</td>
+      <td width="10%" align="left"><a accesskey="u" href="server-programming.html" title="Part&nbsp;V.&nbsp;Server Programming">Up</a></td>
+      <th width="60%" align="center">Part&nbsp;V.&nbsp;Server Programming</th>
+      <td width="10%" align="right"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="10%" align="right">&nbsp;<a accesskey="n" href="plpython-funcs.html" title="46.1.&nbsp;PL/Python Functions">Next</a></td>
+    </tr>
+  </table>
+  <hr />
+</div>
+<div class="chapter" id="PLPYTHON">
+  <div class="titlepage">
+    <div>
+      <div>
+        <h2 class="title">Chapter&nbsp;46.&nbsp;PL/Python — Python Procedural Language</h2>
+      </div>
+    </div>
+  </div>
+  <div class="toc">
+    <p><strong>Table of Contents</strong></p>
+    <dl class="toc">
+      <dt><span class="sect1"><a href="plpython-funcs.html">46.1. PL/Python Functions</a></span></dt>
+      <dt><span class="sect1"><a href="plpython-data.html">46.2. Data Values</a></span></dt>
+      <dd>
+        <dl>
+          <dt><span class="sect2"><a href="plpython-data.html#PLPYTHON-DATA-TYPE-MAPPING">46.2.1. Data Type Mapping</a></span></dt>
+          <dt><span class="sect2"><a href="plpython-data.html#PLPYTHON-DATA-NULL">46.2.2. Null, None</a></span></dt>
+          <dt><span class="sect2"><a href="plpython-data.html#PLPYTHON-ARRAYS">46.2.3. Arrays, Lists</a></span></dt>
+          <dt><span class="sect2"><a href="plpython-data.html#PLPYTHON-DATA-COMPOSITE-TYPES">46.2.4. Composite Types</a></span></dt>
+          <dt><span class="sect2"><a href="plpython-data.html#PLPYTHON-DATA-SET-RETURNING-FUNCS">46.2.5. Set-Returning Functions</a></span></dt>
+        </dl>
+      </dd>
+      <dt><span class="sect1"><a href="plpython-sharing.html">46.3. Sharing Data</a></span></dt>
+      <dt><span class="sect1"><a href="plpython-do.html">46.4. Anonymous Code Blocks</a></span></dt>
+      <dt><span class="sect1"><a href="plpython-trigger.html">46.5. Trigger Functions</a></span></dt>
+      <dt><span class="sect1"><a href="plpython-database.html">46.6. Database Access</a></span></dt>
+      <dd>
+        <dl>
+          <dt><span class="sect2"><a href="plpython-database.html#PLPYTHON-DATABASE-ACCESS-FUNCS">46.6.1. Database Access Functions</a></span></dt>
+          <dt><span class="sect2"><a href="plpython-database.html#PLPYTHON-TRAPPING">46.6.2. Trapping Errors</a></span></dt>
+        </dl>
+      </dd>
+      <dt><span class="sect1"><a href="plpython-subtransaction.html">46.7. Explicit Subtransactions</a></span></dt>
+      <dd>
+        <dl>
+          <dt><span class="sect2"><a href="plpython-subtransaction.html#PLPYTHON-SUBTRANSACTION-CONTEXT-MANAGERS">46.7.1. Subtransaction Context Managers</a></span></dt>
+        </dl>
+      </dd>
+      <dt><span class="sect1"><a href="plpython-transactions.html">46.8. Transaction Management</a></span></dt>
+      <dt><span class="sect1"><a href="plpython-util.html">46.9. Utility Functions</a></span></dt>
+      <dt><span class="sect1"><a href="plpython-python23.html">46.10. Python 2 vs. Python 3</a></span></dt>
+      <dt><span class="sect1"><a href="plpython-envar.html">46.11. Environment Variables</a></span></dt>
+    </dl>
+  </div><a id="id-1.8.11.2" class="indexterm" name="id-1.8.11.2"></a><a id="id-1.8.11.3" class="indexterm" name="id-1.8.11.3"></a>
+  <p>The <span class="application">PL/Python</span> procedural language allows <span class="productname">PostgreSQL</span> functions and procedures to be written in the <a class="ulink" href="https://www.python.org" target="_top">Python language</a>.</p>
+  <p>To install PL/Python in a particular database, use <code class="literal">CREATE EXTENSION plpython3u</code>.</p>
+  <div class="tip">
+    <h3 class="title">Tip</h3>
+    <p>If a language is installed into <code class="literal">template1</code>, all subsequently created databases will have the language installed automatically.</p>
+  </div>
+  <p>PL/Python is only available as an <span class="quote">“<span class="quote">untrusted</span>”</span> language, meaning it does not offer any way of restricting what users can do in it and is therefore named <code class="literal">plpython3u</code>. A trusted variant <code class="literal">plpython</code> might become available in the future if a secure execution mechanism is developed in Python. The writer of a function in untrusted PL/Python must take care that the function cannot be used to do anything unwanted, since it will be able to do anything that could be done by a user logged in as the database administrator. Only superusers can create functions in untrusted languages such as <code class="literal">plpython3u</code>.</p>
+  <div class="note">
+    <h3 class="title">Note</h3>
+    <p>Users of source packages must specially enable the build of PL/Python during the installation process. (Refer to the installation instructions for more information.) Users of binary packages might find PL/Python in a separate subpackage.</p>
+  </div>
+</div>
+<div class="navfooter">
+  <hr />
+  <table width="100%" summary="Navigation footer">
+    <tr>
+      <td width="40%" align="left"><a accesskey="p" href="plperl-under-the-hood.html" title="45.8.&nbsp;PL/Perl Under the Hood">Prev</a>&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="u" href="server-programming.html" title="Part&nbsp;V.&nbsp;Server Programming">Up</a></td>
+      <td width="40%" align="right">&nbsp;<a accesskey="n" href="plpython-funcs.html" title="46.1.&nbsp;PL/Python Functions">Next</a></td>
+    </tr>
+    <tr>
+      <td width="40%" align="left" valign="top">45.8.&nbsp;PL/Perl Under the Hood&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="40%" align="right" valign="top">&nbsp;46.1.&nbsp;PL/Python Functions</td>
+    </tr>
+  </table>
+</div>
+
+          </div>
+          
+            <div id="docComments">
+              <h2>Submit correction</h2>
+              <p>
+              If you see anything in the documentation that is not correct, does not match
+              your experience with the particular feature or requires further clarification,
+              please use
+              <a href="/account/comments/new/16/plpython.html/" rel="nofollow">this form</a>
+              to report a documentation issue.
+              </p>
+            </div>
+          
+        </div> <!-- pgContentWrap -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <!-- Copyright -->
+      <div class="container">
+        <a href="/about/policies/">Policies</a> |
+        <a href="/about/policies/coc/">Code of Conduct</a> |
+        <a href="/about/">About PostgreSQL</a> |
+        <a href="/about/contact/">Contact</a><br/>
+        <p>Copyright &copy; 1996-2026 The PostgreSQL Global Development Group</p>
+      </div>
+    </footer>
+    <script src="/media/js/main.js?8eb38fb2"></script>
+
+  </body>
+</html>

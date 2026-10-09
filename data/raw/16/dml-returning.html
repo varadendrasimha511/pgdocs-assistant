@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>PostgreSQL: Documentation: 16: 6.4. Returning Data from Modified Rows</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+   
+  <meta name="theme-color" content="#336791"/>
+  <meta name="copyright" content="The PostgreSQL Global Development Group" />
+  <meta property="og:url" content="https://www.postgresql.org/docs/16/dml-returning.html" />
+  <meta property="og:type" content="article" />
+
+  <meta property="article:published_time" content="2026-08-13T12:52:44.176831" />
+  <meta property="og:image" content="https://www.postgresql.org/media/img/about/press/elephant.png" />
+  <meta property="og:title" content="6.4. Returning Data from Modified Rows" />
+  <meta property="og:description" content="6.4.&amp;nbsp;Returning Data from Modified Rows # Sometimes it is useful to obtain data from modified rows while they are being …" />
+  <meta property="og:site_name" content="PostgreSQL Documentation" />
+  <link href="/media/css/fontawesome.css?8eb38fb2" rel="stylesheet">
+  <link rel="stylesheet" href="/media/css/bootstrap-4.4.1.min.css">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" type="text/css" href="/dyncss/base.css?8eb38fb2">
+
+  <script src="/media/js/theme.js?8eb38fb2"></script>
+
+  
+
+
+  <link rel="canonical" href="https://www.postgresql.org/docs/current/dml-returning.html" />
+
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <!-- Header -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/">
+              <img class="logo" src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo">
+            </a>
+            <input type="checkbox" id="navbar-toggler" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <label for="navbar-toggler" id="navbar-toggler-label" class="navbar-toggler" tabindex="0"><span class="navbar-toggler-icon"></span></label>
+            <div class="navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+                <li class="nav-item p-2"><a href="/download/" title="Download">Download</a></li>
+                <li class="nav-item p-2"><a href="/docs/" title="Documentation">Documentation</a></li>
+                <li class="nav-item p-2"><a href="/community/" title="Community">Community</a></li>
+                <li class="nav-item p-2"><a href="/developer/" title="Developers">Developers</a></li>
+                <li class="nav-item p-2"><a href="/support/" title="Support">Support</a></li>
+                <li class="nav-item p-2"><a href="/about/donate/" title="Donate">Donate</a></li>
+                <li class="nav-item p-2"><a href="/account/" title="Your account">Your account</a></li>
+              </ul>
+              <form role="search" method="get" action="/search/">
+                <div class="input-group">
+                  <input id="q" name="q" type="text" size="20" maxlength="255" accesskey="s"  class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+              <form id="form-theme" class="form-inline d-none">
+                <button id="btn-theme" class="btn btn-default ml-1" type="button"></button>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row justify-content-center pg-shout-box">
+        <div class="col text-white text-center">September 24, 2026: <a href="/about/news/postgresql-19-beta-4-released-3386/">PostgreSQL 19 Beta 4 Released!</a>
+
+</div>
+      </div>
+    </div>
+    
+    <div class="container-fluid margin">
+      <div class="row">
+        <div id="pgContentWrap" class="col-11">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/16/index.html">PostgreSQL 16</a>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="row">
+                  <div class="col">
+                    Supported Versions:
+                      
+                        
+                        
+                          <a href="/docs/current/dml-returning.html" title="PostgreSQL 18 - 6.4. Returning Data from Modified Rows" >Current</a>
+                          (<a href="/docs/18/dml-returning.html" title="PostgreSQL 18 - 6.4. Returning Data from Modified Rows" >18</a>)
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/17/dml-returning.html" title="PostgreSQL 17 - 6.4. Returning Data from Modified Rows" >17</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/16/dml-returning.html" title="PostgreSQL 16 - 6.4. Returning Data from Modified Rows" class="docs-version-selected">16</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/15/dml-returning.html" title="PostgreSQL 15 - 6.4. Returning Data from Modified Rows" >15</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/14/dml-returning.html" title="PostgreSQL 14 - 6.4. Returning Data from Modified Rows" >14</a>
+                        
+                      
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col">
+                    Development Versions:
+                    
+                      
+                      <a href="/docs/19/dml-returning.html" title="PostgreSQL 19 - 6.4. Returning Data from Modified Rows"  rel="nofollow">19</a>
+                    
+                       / 
+                      <a href="/docs/devel/dml-returning.html" title="PostgreSQL devel - 6.4. Returning Data from Modified Rows"  rel="nofollow">devel</a>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col-12">
+                    Unsupported versions:
+                    
+                      
+                      <a href="/docs/13/dml-returning.html" title="PostgreSQL 13 - 6.4. Returning Data from Modified Rows"  rel="nofollow">13</a>
+                    
+                       / 
+                      <a href="/docs/12/dml-returning.html" title="PostgreSQL 12 - 6.4. Returning Data from Modified Rows"  rel="nofollow">12</a>
+                    
+                       / 
+                      <a href="/docs/11/dml-returning.html" title="PostgreSQL 11 - 6.4. Returning Data from Modified Rows"  rel="nofollow">11</a>
+                    
+                       / 
+                      <a href="/docs/10/dml-returning.html" title="PostgreSQL 10 - 6.4. Returning Data from Modified Rows"  rel="nofollow">10</a>
+                    
+                       / 
+                      <a href="/docs/9.6/dml-returning.html" title="PostgreSQL 9.6 - 6.4. Returning Data from Modified Rows"  rel="nofollow">9.6</a>
+                    
+                       / 
+                      <a href="/docs/9.5/dml-returning.html" title="PostgreSQL 9.5 - 6.4. Returning Data from Modified Rows"  rel="nofollow">9.5</a>
+                    
+                       / 
+                      <a href="/docs/9.4/dml-returning.html" title="PostgreSQL 9.4 - 6.4. Returning Data from Modified Rows"  rel="nofollow">9.4</a>
+                    
+                       / 
+                      <a href="/docs/9.3/dml-returning.html" title="PostgreSQL 9.3 - 6.4. Returning Data from Modified Rows"  rel="nofollow">9.3</a>
+                    
+                       / 
+                      <a href="/docs/9.2/dml-returning.html" title="PostgreSQL 9.2 - 6.4. Returning Data from Modified Rows"  rel="nofollow">9.2</a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+            <div class="col-md-6 col-lg-5 offset-lg-1">
+              <form id="docSearchForm" role="search" method="get" action="/search/">
+                <input type="hidden" name="u" value="/docs/16/" />
+                <div class="input-group">
+                  <input type="text" id="q" name="q" class="form-control" placeholder="Search the documentation for..."/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+            </div>
+          </div>
+
+          <div id="docContent">
+            <div class="navheader">
+  <table width="100%" summary="Navigation header">
+    <tr>
+      <th colspan="5" align="center">6.4.&nbsp;Returning Data from Modified Rows</th>
+    </tr>
+    <tr>
+      <td width="10%" align="left"><a accesskey="p" href="dml-delete.html" title="6.3.&nbsp;Deleting Data">Prev</a>&nbsp;</td>
+      <td width="10%" align="left"><a accesskey="u" href="dml.html" title="Chapter&nbsp;6.&nbsp;Data Manipulation">Up</a></td>
+      <th width="60%" align="center">Chapter&nbsp;6.&nbsp;Data Manipulation</th>
+      <td width="10%" align="right"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="10%" align="right">&nbsp;<a accesskey="n" href="queries.html" title="Chapter&nbsp;7.&nbsp;Queries">Next</a></td>
+    </tr>
+  </table>
+  <hr />
+</div>
+<div class="sect1" id="DML-RETURNING">
+  <div class="titlepage">
+    <div>
+      <div>
+        <h2 class="title" style="clear: both">6.4.&nbsp;Returning Data from Modified Rows <a href="#DML-RETURNING" class="id_link">#</a></h2>
+      </div>
+    </div>
+  </div><a id="id-1.5.5.6.2" class="indexterm" name="id-1.5.5.6.2"></a><a id="id-1.5.5.6.3" class="indexterm" name="id-1.5.5.6.3"></a><a id="id-1.5.5.6.4" class="indexterm" name="id-1.5.5.6.4"></a><a id="id-1.5.5.6.5" class="indexterm" name="id-1.5.5.6.5"></a>
+  <p>Sometimes it is useful to obtain data from modified rows while they are being manipulated. The <code class="command">INSERT</code>, <code class="command">UPDATE</code>, and <code class="command">DELETE</code> commands all have an optional <code class="literal">RETURNING</code> clause that supports this. Use of <code class="literal">RETURNING</code> avoids performing an extra database query to collect the data, and is especially valuable when it would otherwise be difficult to identify the modified rows reliably.</p>
+  <p>The allowed contents of a <code class="literal">RETURNING</code> clause are the same as a <code class="command">SELECT</code> command's output list (see <a class="xref" href="queries-select-lists.html" title="7.3.&nbsp;Select Lists">Section&nbsp;7.3</a>). It can contain column names of the command's target table, or value expressions using those columns. A common shorthand is <code class="literal">RETURNING *</code>, which selects all columns of the target table in order.</p>
+  <p>In an <code class="command">INSERT</code>, the data available to <code class="literal">RETURNING</code> is the row as it was inserted. This is not so useful in trivial inserts, since it would just repeat the data provided by the client. But it can be very handy when relying on computed default values. For example, when using a <a class="link" href="datatype-numeric.html#DATATYPE-SERIAL" title="8.1.4.&nbsp;Serial Types"><code class="type">serial</code></a> column to provide unique identifiers, <code class="literal">RETURNING</code> can return the ID assigned to a new row:</p>
+  <pre class="programlisting">
+CREATE TABLE users (firstname text, lastname text, id serial primary key);
+
+INSERT INTO users (firstname, lastname) VALUES ('Joe', 'Cool') RETURNING id;
+</pre>
+  <p>The <code class="literal">RETURNING</code> clause is also very useful with <code class="literal">INSERT ... SELECT</code>.</p>
+  <p>In an <code class="command">UPDATE</code>, the data available to <code class="literal">RETURNING</code> is the new content of the modified row. For example:</p>
+  <pre class="programlisting">
+UPDATE products SET price = price * 1.10
+  WHERE price &lt;= 99.99
+  RETURNING name, price AS new_price;
+</pre>
+  <p>In a <code class="command">DELETE</code>, the data available to <code class="literal">RETURNING</code> is the content of the deleted row. For example:</p>
+  <pre class="programlisting">
+DELETE FROM products
+  WHERE obsoletion_date = 'today'
+  RETURNING *;
+</pre>
+  <p>If there are triggers (<a class="xref" href="triggers.html" title="Chapter&nbsp;39.&nbsp;Triggers">Chapter&nbsp;39</a>) on the target table, the data available to <code class="literal">RETURNING</code> is the row as modified by the triggers. Thus, inspecting columns computed by triggers is another common use-case for <code class="literal">RETURNING</code>.</p>
+</div>
+<div class="navfooter">
+  <hr />
+  <table width="100%" summary="Navigation footer">
+    <tr>
+      <td width="40%" align="left"><a accesskey="p" href="dml-delete.html" title="6.3.&nbsp;Deleting Data">Prev</a>&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="u" href="dml.html" title="Chapter&nbsp;6.&nbsp;Data Manipulation">Up</a></td>
+      <td width="40%" align="right">&nbsp;<a accesskey="n" href="queries.html" title="Chapter&nbsp;7.&nbsp;Queries">Next</a></td>
+    </tr>
+    <tr>
+      <td width="40%" align="left" valign="top">6.3.&nbsp;Deleting Data&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;7.&nbsp;Queries</td>
+    </tr>
+  </table>
+</div>
+
+          </div>
+          
+            <div id="docComments">
+              <h2>Submit correction</h2>
+              <p>
+              If you see anything in the documentation that is not correct, does not match
+              your experience with the particular feature or requires further clarification,
+              please use
+              <a href="/account/comments/new/16/dml-returning.html/" rel="nofollow">this form</a>
+              to report a documentation issue.
+              </p>
+            </div>
+          
+        </div> <!-- pgContentWrap -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <!-- Copyright -->
+      <div class="container">
+        <a href="/about/policies/">Policies</a> |
+        <a href="/about/policies/coc/">Code of Conduct</a> |
+        <a href="/about/">About PostgreSQL</a> |
+        <a href="/about/contact/">Contact</a><br/>
+        <p>Copyright &copy; 1996-2026 The PostgreSQL Global Development Group</p>
+      </div>
+    </footer>
+    <script src="/media/js/main.js?8eb38fb2"></script>
+
+  </body>
+</html>

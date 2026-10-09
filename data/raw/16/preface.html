@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>PostgreSQL: Documentation: 16: Preface</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+   
+  <meta name="theme-color" content="#336791"/>
+  <meta name="copyright" content="The PostgreSQL Global Development Group" />
+  <meta property="og:url" content="https://www.postgresql.org/docs/16/preface.html" />
+  <meta property="og:type" content="article" />
+
+  <meta property="article:published_time" content="2026-08-13T12:52:44.176831" />
+  <meta property="og:image" content="https://www.postgresql.org/media/img/about/press/elephant.png" />
+  <meta property="og:title" content="Preface" />
+  <meta property="og:description" content="Preface Table of Contents 1. What Is PostgreSQL? 2. A Brief History of PostgreSQL 2.1. The Berkeley POSTGRES Project 2.2. …" />
+  <meta property="og:site_name" content="PostgreSQL Documentation" />
+  <link href="/media/css/fontawesome.css?8eb38fb2" rel="stylesheet">
+  <link rel="stylesheet" href="/media/css/bootstrap-4.4.1.min.css">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" type="text/css" href="/dyncss/base.css?8eb38fb2">
+
+  <script src="/media/js/theme.js?8eb38fb2"></script>
+
+  
+
+
+  <link rel="canonical" href="https://www.postgresql.org/docs/current/preface.html" />
+
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <!-- Header -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/">
+              <img class="logo" src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo">
+            </a>
+            <input type="checkbox" id="navbar-toggler" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <label for="navbar-toggler" id="navbar-toggler-label" class="navbar-toggler" tabindex="0"><span class="navbar-toggler-icon"></span></label>
+            <div class="navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+                <li class="nav-item p-2"><a href="/download/" title="Download">Download</a></li>
+                <li class="nav-item p-2"><a href="/docs/" title="Documentation">Documentation</a></li>
+                <li class="nav-item p-2"><a href="/community/" title="Community">Community</a></li>
+                <li class="nav-item p-2"><a href="/developer/" title="Developers">Developers</a></li>
+                <li class="nav-item p-2"><a href="/support/" title="Support">Support</a></li>
+                <li class="nav-item p-2"><a href="/about/donate/" title="Donate">Donate</a></li>
+                <li class="nav-item p-2"><a href="/account/" title="Your account">Your account</a></li>
+              </ul>
+              <form role="search" method="get" action="/search/">
+                <div class="input-group">
+                  <input id="q" name="q" type="text" size="20" maxlength="255" accesskey="s"  class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+              <form id="form-theme" class="form-inline d-none">
+                <button id="btn-theme" class="btn btn-default ml-1" type="button"></button>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row justify-content-center pg-shout-box">
+        <div class="col text-white text-center">September 24, 2026: <a href="/about/news/postgresql-19-beta-4-released-3386/">PostgreSQL 19 Beta 4 Released!</a>
+
+</div>
+      </div>
+    </div>
+    
+    <div class="container-fluid margin">
+      <div class="row">
+        <div id="pgContentWrap" class="col-11">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/16/index.html">PostgreSQL 16</a>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="row">
+                  <div class="col">
+                    Supported Versions:
+                      
+                        
+                        
+                          <a href="/docs/current/preface.html" title="PostgreSQL 18 - Preface" >Current</a>
+                          (<a href="/docs/18/preface.html" title="PostgreSQL 18 - Preface" >18</a>)
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/17/preface.html" title="PostgreSQL 17 - Preface" >17</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/16/preface.html" title="PostgreSQL 16 - Preface" class="docs-version-selected">16</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/15/preface.html" title="PostgreSQL 15 - Preface" >15</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/14/preface.html" title="PostgreSQL 14 - Preface" >14</a>
+                        
+                      
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col">
+                    Development Versions:
+                    
+                      
+                      <a href="/docs/19/preface.html" title="PostgreSQL 19 - Preface"  rel="nofollow">19</a>
+                    
+                       / 
+                      <a href="/docs/devel/preface.html" title="PostgreSQL devel - Preface"  rel="nofollow">devel</a>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col-12">
+                    Unsupported versions:
+                    
+                      
+                      <a href="/docs/13/preface.html" title="PostgreSQL 13 - Preface"  rel="nofollow">13</a>
+                    
+                       / 
+                      <a href="/docs/12/preface.html" title="PostgreSQL 12 - Preface"  rel="nofollow">12</a>
+                    
+                       / 
+                      <a href="/docs/11/preface.html" title="PostgreSQL 11 - Preface"  rel="nofollow">11</a>
+                    
+                       / 
+                      <a href="/docs/10/preface.html" title="PostgreSQL 10 - Preface"  rel="nofollow">10</a>
+                    
+                       / 
+                      <a href="/docs/9.6/preface.html" title="PostgreSQL 9.6 - Preface"  rel="nofollow">9.6</a>
+                    
+                       / 
+                      <a href="/docs/9.5/preface.html" title="PostgreSQL 9.5 - Preface"  rel="nofollow">9.5</a>
+                    
+                       / 
+                      <a href="/docs/9.4/preface.html" title="PostgreSQL 9.4 - Preface"  rel="nofollow">9.4</a>
+                    
+                       / 
+                      <a href="/docs/9.3/preface.html" title="PostgreSQL 9.3 - Preface"  rel="nofollow">9.3</a>
+                    
+                       / 
+                      <a href="/docs/9.2/preface.html" title="PostgreSQL 9.2 - Preface"  rel="nofollow">9.2</a>
+                    
+                       / 
+                      <a href="/docs/9.1/preface.html" title="PostgreSQL 9.1 - Preface"  rel="nofollow">9.1</a>
+                    
+                       / 
+                      <a href="/docs/9.0/preface.html" title="PostgreSQL 9.0 - Preface"  rel="nofollow">9.0</a>
+                    
+                       / 
+                      <a href="/docs/8.4/preface.html" title="PostgreSQL 8.4 - Preface"  rel="nofollow">8.4</a>
+                    
+                       / 
+                      <a href="/docs/8.3/preface.html" title="PostgreSQL 8.3 - Preface"  rel="nofollow">8.3</a>
+                    
+                       / 
+                      <a href="/docs/8.2/preface.html" title="PostgreSQL 8.2 - Preface"  rel="nofollow">8.2</a>
+                    
+                       / 
+                      <a href="/docs/8.1/preface.html" title="PostgreSQL 8.1 - Preface"  rel="nofollow">8.1</a>
+                    
+                       / 
+                      <a href="/docs/8.0/preface.html" title="PostgreSQL 8.0 - Preface"  rel="nofollow">8.0</a>
+                    
+                       / 
+                      <a href="/docs/7.4/preface.html" title="PostgreSQL 7.4 - Preface"  rel="nofollow">7.4</a>
+                    
+                       / 
+                      <a href="/docs/7.2/preface.html" title="PostgreSQL 7.2 - Preface"  rel="nofollow">7.2</a>
+                    
+                       / 
+                      <a href="/docs/7.1/preface.html" title="PostgreSQL 7.1 - Preface"  rel="nofollow">7.1</a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+            <div class="col-md-6 col-lg-5 offset-lg-1">
+              <form id="docSearchForm" role="search" method="get" action="/search/">
+                <input type="hidden" name="u" value="/docs/16/" />
+                <div class="input-group">
+                  <input type="text" id="q" name="q" class="form-control" placeholder="Search the documentation for..."/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+            </div>
+          </div>
+
+          <div id="docContent">
+            <div class="navheader">
+  <table width="100%" summary="Navigation header">
+    <tr>
+      <th colspan="5" align="center">Preface</th>
+    </tr>
+    <tr>
+      <td width="10%" align="left"><a accesskey="p" href="index.html" title="PostgreSQL 16.15 Documentation">Prev</a>&nbsp;</td>
+      <td width="10%" align="left"><a accesskey="u" href="index.html" title="PostgreSQL 16.15 Documentation">Up</a></td>
+      <th width="60%" align="center">PostgreSQL 16.15 Documentation</th>
+      <td width="10%" align="right"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="10%" align="right">&nbsp;<a accesskey="n" href="intro-whatis.html" title="1.&nbsp; What Is PostgreSQL?">Next</a></td>
+    </tr>
+  </table>
+  <hr />
+</div>
+<div class="preface" id="PREFACE">
+  <div class="titlepage">
+    <div>
+      <div>
+        <h1 class="title">Preface</h1>
+      </div>
+    </div>
+  </div>
+  <div class="toc">
+    <p><strong>Table of Contents</strong></p>
+    <dl class="toc">
+      <dt><span class="sect1"><a href="intro-whatis.html">1. What Is <span class="productname">PostgreSQL</span>?</a></span></dt>
+      <dt><span class="sect1"><a href="history.html">2. A Brief History of <span class="productname">PostgreSQL</span></a></span></dt>
+      <dd>
+        <dl>
+          <dt><span class="sect2"><a href="history.html#HISTORY-BERKELEY">2.1. The Berkeley <span class="productname">POSTGRES</span> Project</a></span></dt>
+          <dt><span class="sect2"><a href="history.html#HISTORY-POSTGRES95">2.2. <span class="productname">Postgres95</span></a></span></dt>
+          <dt><span class="sect2"><a href="history.html#HISTORY-POSTGRESQL">2.3. <span class="productname">PostgreSQL</span></a></span></dt>
+        </dl>
+      </dd>
+      <dt><span class="sect1"><a href="notation.html">3. Conventions</a></span></dt>
+      <dt><span class="sect1"><a href="resources.html">4. Further Information</a></span></dt>
+      <dt><span class="sect1"><a href="bug-reporting.html">5. Bug Reporting Guidelines</a></span></dt>
+      <dd>
+        <dl>
+          <dt><span class="sect2"><a href="bug-reporting.html#BUG-REPORTING-IDENTIFYING-BUGS">5.1. Identifying Bugs</a></span></dt>
+          <dt><span class="sect2"><a href="bug-reporting.html#BUG-REPORTING-WHAT-TO-REPORT">5.2. What to Report</a></span></dt>
+          <dt><span class="sect2"><a href="bug-reporting.html#BUG-REPORTING-WHERE-TO-REPORT-BUGS">5.3. Where to Report Bugs</a></span></dt>
+        </dl>
+      </dd>
+    </dl>
+  </div>
+  <p>This book is the official documentation of <span class="productname">PostgreSQL</span>. It has been written by the <span class="productname">PostgreSQL</span> developers and other volunteers in parallel to the development of the <span class="productname">PostgreSQL</span> software. It describes all the functionality that the current version of <span class="productname">PostgreSQL</span> officially supports.</p>
+  <p>To make the large amount of information about <span class="productname">PostgreSQL</span> manageable, this book has been organized in several parts. Each part is targeted at a different class of users, or at users in different stages of their <span class="productname">PostgreSQL</span> experience:</p>
+  <div class="itemizedlist">
+    <ul class="itemizedlist" style="list-style-type: disc;">
+      <li class="listitem">
+        <p><a class="xref" href="tutorial.html" title="Part&nbsp;I.&nbsp;Tutorial">Part&nbsp;I</a> is an informal introduction for new users.</p>
+      </li>
+      <li class="listitem">
+        <p><a class="xref" href="sql.html" title="Part&nbsp;II.&nbsp;The SQL Language">Part&nbsp;II</a> documents the <acronym class="acronym">SQL</acronym> query language environment, including data types and functions, as well as user-level performance tuning. Every <span class="productname">PostgreSQL</span> user should read this.</p>
+      </li>
+      <li class="listitem">
+        <p><a class="xref" href="admin.html" title="Part&nbsp;III.&nbsp;Server Administration">Part&nbsp;III</a> describes the installation and administration of the server. Everyone who runs a <span class="productname">PostgreSQL</span> server, be it for private use or for others, should read this part.</p>
+      </li>
+      <li class="listitem">
+        <p><a class="xref" href="client-interfaces.html" title="Part&nbsp;IV.&nbsp;Client Interfaces">Part&nbsp;IV</a> describes the programming interfaces for <span class="productname">PostgreSQL</span> client programs.</p>
+      </li>
+      <li class="listitem">
+        <p><a class="xref" href="server-programming.html" title="Part&nbsp;V.&nbsp;Server Programming">Part&nbsp;V</a> contains information for advanced users about the extensibility capabilities of the server. Topics include user-defined data types and functions.</p>
+      </li>
+      <li class="listitem">
+        <p><a class="xref" href="reference.html" title="Part&nbsp;VI.&nbsp;Reference">Part&nbsp;VI</a> contains reference information about SQL commands, client and server programs. This part supports the other parts with structured information sorted by command or program.</p>
+      </li>
+      <li class="listitem">
+        <p><a class="xref" href="internals.html" title="Part&nbsp;VII.&nbsp;Internals">Part&nbsp;VII</a> contains assorted information that might be of use to <span class="productname">PostgreSQL</span> developers.</p>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="navfooter">
+  <hr />
+  <table width="100%" summary="Navigation footer">
+    <tr>
+      <td width="40%" align="left"><a accesskey="p" href="index.html" title="PostgreSQL 16.15 Documentation">Prev</a>&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="u" href="index.html" title="PostgreSQL 16.15 Documentation">Up</a></td>
+      <td width="40%" align="right">&nbsp;<a accesskey="n" href="intro-whatis.html" title="1.&nbsp; What Is PostgreSQL?">Next</a></td>
+    </tr>
+    <tr>
+      <td width="40%" align="left" valign="top">PostgreSQL 16.15 Documentation&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="40%" align="right" valign="top">&nbsp;1.&nbsp; What Is <span class="productname">PostgreSQL</span>?</td>
+    </tr>
+  </table>
+</div>
+
+          </div>
+          
+            <div id="docComments">
+              <h2>Submit correction</h2>
+              <p>
+              If you see anything in the documentation that is not correct, does not match
+              your experience with the particular feature or requires further clarification,
+              please use
+              <a href="/account/comments/new/16/preface.html/" rel="nofollow">this form</a>
+              to report a documentation issue.
+              </p>
+            </div>
+          
+        </div> <!-- pgContentWrap -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <!-- Copyright -->
+      <div class="container">
+        <a href="/about/policies/">Policies</a> |
+        <a href="/about/policies/coc/">Code of Conduct</a> |
+        <a href="/about/">About PostgreSQL</a> |
+        <a href="/about/contact/">Contact</a><br/>
+        <p>Copyright &copy; 1996-2026 The PostgreSQL Global Development Group</p>
+      </div>
+    </footer>
+    <script src="/media/js/main.js?8eb38fb2"></script>
+
+  </body>
+</html>

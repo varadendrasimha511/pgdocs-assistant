@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>PostgreSQL: Documentation: 16: 5.2. Default Values</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+   
+  <meta name="theme-color" content="#336791"/>
+  <meta name="copyright" content="The PostgreSQL Global Development Group" />
+  <meta property="og:url" content="https://www.postgresql.org/docs/16/ddl-default.html" />
+  <meta property="og:type" content="article" />
+
+  <meta property="article:published_time" content="2026-08-13T12:52:44.176831" />
+  <meta property="og:image" content="https://www.postgresql.org/media/img/about/press/elephant.png" />
+  <meta property="og:title" content="5.2. Default Values" />
+  <meta property="og:description" content="5.2.&amp;nbsp;Default Values # A column can be assigned a default value. When a new row is created and no values …" />
+  <meta property="og:site_name" content="PostgreSQL Documentation" />
+  <link href="/media/css/fontawesome.css?8eb38fb2" rel="stylesheet">
+  <link rel="stylesheet" href="/media/css/bootstrap-4.4.1.min.css">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" type="text/css" href="/dyncss/base.css?8eb38fb2">
+
+  <script src="/media/js/theme.js?8eb38fb2"></script>
+
+  
+
+
+  <link rel="canonical" href="https://www.postgresql.org/docs/current/ddl-default.html" />
+
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <!-- Header -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/">
+              <img class="logo" src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo">
+            </a>
+            <input type="checkbox" id="navbar-toggler" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <label for="navbar-toggler" id="navbar-toggler-label" class="navbar-toggler" tabindex="0"><span class="navbar-toggler-icon"></span></label>
+            <div class="navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+                <li class="nav-item p-2"><a href="/download/" title="Download">Download</a></li>
+                <li class="nav-item p-2"><a href="/docs/" title="Documentation">Documentation</a></li>
+                <li class="nav-item p-2"><a href="/community/" title="Community">Community</a></li>
+                <li class="nav-item p-2"><a href="/developer/" title="Developers">Developers</a></li>
+                <li class="nav-item p-2"><a href="/support/" title="Support">Support</a></li>
+                <li class="nav-item p-2"><a href="/about/donate/" title="Donate">Donate</a></li>
+                <li class="nav-item p-2"><a href="/account/" title="Your account">Your account</a></li>
+              </ul>
+              <form role="search" method="get" action="/search/">
+                <div class="input-group">
+                  <input id="q" name="q" type="text" size="20" maxlength="255" accesskey="s"  class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+              <form id="form-theme" class="form-inline d-none">
+                <button id="btn-theme" class="btn btn-default ml-1" type="button"></button>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row justify-content-center pg-shout-box">
+        <div class="col text-white text-center">September 24, 2026: <a href="/about/news/postgresql-19-beta-4-released-3386/">PostgreSQL 19 Beta 4 Released!</a>
+
+</div>
+      </div>
+    </div>
+    
+    <div class="container-fluid margin">
+      <div class="row">
+        <div id="pgContentWrap" class="col-11">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/16/index.html">PostgreSQL 16</a>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="row">
+                  <div class="col">
+                    Supported Versions:
+                      
+                        
+                        
+                          <a href="/docs/current/ddl-default.html" title="PostgreSQL 18 - 5.2. Default Values" >Current</a>
+                          (<a href="/docs/18/ddl-default.html" title="PostgreSQL 18 - 5.2. Default Values" >18</a>)
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/17/ddl-default.html" title="PostgreSQL 17 - 5.2. Default Values" >17</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/16/ddl-default.html" title="PostgreSQL 16 - 5.2. Default Values" class="docs-version-selected">16</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/15/ddl-default.html" title="PostgreSQL 15 - 5.2. Default Values" >15</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/14/ddl-default.html" title="PostgreSQL 14 - 5.2. Default Values" >14</a>
+                        
+                      
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col">
+                    Development Versions:
+                    
+                      
+                      <a href="/docs/19/ddl-default.html" title="PostgreSQL 19 - 5.2. Default Values"  rel="nofollow">19</a>
+                    
+                       / 
+                      <a href="/docs/devel/ddl-default.html" title="PostgreSQL devel - 5.2. Default Values"  rel="nofollow">devel</a>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col-12">
+                    Unsupported versions:
+                    
+                      
+                      <a href="/docs/13/ddl-default.html" title="PostgreSQL 13 - 5.2. Default Values"  rel="nofollow">13</a>
+                    
+                       / 
+                      <a href="/docs/12/ddl-default.html" title="PostgreSQL 12 - 5.2. Default Values"  rel="nofollow">12</a>
+                    
+                       / 
+                      <a href="/docs/11/ddl-default.html" title="PostgreSQL 11 - 5.2. Default Values"  rel="nofollow">11</a>
+                    
+                       / 
+                      <a href="/docs/10/ddl-default.html" title="PostgreSQL 10 - 5.2. Default Values"  rel="nofollow">10</a>
+                    
+                       / 
+                      <a href="/docs/9.6/ddl-default.html" title="PostgreSQL 9.6 - 5.2. Default Values"  rel="nofollow">9.6</a>
+                    
+                       / 
+                      <a href="/docs/9.5/ddl-default.html" title="PostgreSQL 9.5 - 5.2. Default Values"  rel="nofollow">9.5</a>
+                    
+                       / 
+                      <a href="/docs/9.4/ddl-default.html" title="PostgreSQL 9.4 - 5.2. Default Values"  rel="nofollow">9.4</a>
+                    
+                       / 
+                      <a href="/docs/9.3/ddl-default.html" title="PostgreSQL 9.3 - 5.2. Default Values"  rel="nofollow">9.3</a>
+                    
+                       / 
+                      <a href="/docs/9.2/ddl-default.html" title="PostgreSQL 9.2 - 5.2. Default Values"  rel="nofollow">9.2</a>
+                    
+                       / 
+                      <a href="/docs/9.1/ddl-default.html" title="PostgreSQL 9.1 - 5.2. Default Values"  rel="nofollow">9.1</a>
+                    
+                       / 
+                      <a href="/docs/9.0/ddl-default.html" title="PostgreSQL 9.0 - 5.2. Default Values"  rel="nofollow">9.0</a>
+                    
+                       / 
+                      <a href="/docs/8.4/ddl-default.html" title="PostgreSQL 8.4 - 5.2. Default Values"  rel="nofollow">8.4</a>
+                    
+                       / 
+                      <a href="/docs/8.3/ddl-default.html" title="PostgreSQL 8.3 - 5.2. Default Values"  rel="nofollow">8.3</a>
+                    
+                       / 
+                      <a href="/docs/8.2/ddl-default.html" title="PostgreSQL 8.2 - 5.2. Default Values"  rel="nofollow">8.2</a>
+                    
+                       / 
+                      <a href="/docs/8.1/ddl-default.html" title="PostgreSQL 8.1 - 5.2. Default Values"  rel="nofollow">8.1</a>
+                    
+                       / 
+                      <a href="/docs/8.0/ddl-default.html" title="PostgreSQL 8.0 - 5.2. Default Values"  rel="nofollow">8.0</a>
+                    
+                       / 
+                      <a href="/docs/7.4/ddl-default.html" title="PostgreSQL 7.4 - 5.2. Default Values"  rel="nofollow">7.4</a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+            <div class="col-md-6 col-lg-5 offset-lg-1">
+              <form id="docSearchForm" role="search" method="get" action="/search/">
+                <input type="hidden" name="u" value="/docs/16/" />
+                <div class="input-group">
+                  <input type="text" id="q" name="q" class="form-control" placeholder="Search the documentation for..."/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+            </div>
+          </div>
+
+          <div id="docContent">
+            <div class="navheader">
+  <table width="100%" summary="Navigation header">
+    <tr>
+      <th colspan="5" align="center">5.2.&nbsp;Default Values</th>
+    </tr>
+    <tr>
+      <td width="10%" align="left"><a accesskey="p" href="ddl-basics.html" title="5.1.&nbsp;Table Basics">Prev</a>&nbsp;</td>
+      <td width="10%" align="left"><a accesskey="u" href="ddl.html" title="Chapter&nbsp;5.&nbsp;Data Definition">Up</a></td>
+      <th width="60%" align="center">Chapter&nbsp;5.&nbsp;Data Definition</th>
+      <td width="10%" align="right"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="10%" align="right">&nbsp;<a accesskey="n" href="ddl-generated-columns.html" title="5.3.&nbsp;Generated Columns">Next</a></td>
+    </tr>
+  </table>
+  <hr />
+</div>
+<div class="sect1" id="DDL-DEFAULT">
+  <div class="titlepage">
+    <div>
+      <div>
+        <h2 class="title" style="clear: both">5.2.&nbsp;Default Values <a href="#DDL-DEFAULT" class="id_link">#</a></h2>
+      </div>
+    </div>
+  </div><a id="id-1.5.4.4.2" class="indexterm" name="id-1.5.4.4.2"></a>
+  <p>A column can be assigned a default value. When a new row is created and no values are specified for some of the columns, those columns will be filled with their respective default values. A data manipulation command can also request explicitly that a column be set to its default value, without having to know what that value is. (Details about data manipulation commands are in <a class="xref" href="dml.html" title="Chapter&nbsp;6.&nbsp;Data Manipulation">Chapter&nbsp;6</a>.)</p>
+  <p><a id="id-1.5.4.4.4.1" class="indexterm" name="id-1.5.4.4.4.1"></a> If no default value is declared explicitly, the default value is the null value. This usually makes sense because a null value can be considered to represent unknown data.</p>
+  <p>In a table definition, default values are listed after the column data type. For example:</p>
+  <pre class="programlisting">
+CREATE TABLE products (
+    product_no integer,
+    name text,
+    price numeric <span class="emphasis"><strong>DEFAULT 9.99</strong></span>
+);
+</pre>
+  <p>The default value can be an expression, which will be evaluated whenever the default value is inserted (<span class="emphasis"><em>not</em></span> when the table is created). A common example is for a <code class="type">timestamp</code> column to have a default of <code class="literal">CURRENT_TIMESTAMP</code>, so that it gets set to the time of row insertion. Another common example is generating a <span class="quote">“<span class="quote">serial number</span>”</span> for each row. In <span class="productname">PostgreSQL</span> this is typically done by something like:</p>
+  <pre class="programlisting">
+CREATE TABLE products (
+    product_no integer <span class="emphasis"><strong>DEFAULT nextval('products_product_no_seq')</strong></span>,
+    ...
+);
+</pre>
+  <p>where the <code class="literal">nextval()</code> function supplies successive values from a <em class="firstterm">sequence object</em> (see <a class="xref" href="functions-sequence.html" title="9.17.&nbsp;Sequence Manipulation Functions">Section&nbsp;9.17</a>). This arrangement is sufficiently common that there's a special shorthand for it:</p>
+  <pre class="programlisting">
+CREATE TABLE products (
+    product_no <span class="emphasis"><strong>SERIAL</strong></span>,
+    ...
+);
+</pre>
+  <p>The <code class="literal">SERIAL</code> shorthand is discussed further in <a class="xref" href="datatype-numeric.html#DATATYPE-SERIAL" title="8.1.4.&nbsp;Serial Types">Section&nbsp;8.1.4</a>.</p>
+</div>
+<div class="navfooter">
+  <hr />
+  <table width="100%" summary="Navigation footer">
+    <tr>
+      <td width="40%" align="left"><a accesskey="p" href="ddl-basics.html" title="5.1.&nbsp;Table Basics">Prev</a>&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="u" href="ddl.html" title="Chapter&nbsp;5.&nbsp;Data Definition">Up</a></td>
+      <td width="40%" align="right">&nbsp;<a accesskey="n" href="ddl-generated-columns.html" title="5.3.&nbsp;Generated Columns">Next</a></td>
+    </tr>
+    <tr>
+      <td width="40%" align="left" valign="top">5.1.&nbsp;Table Basics&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="40%" align="right" valign="top">&nbsp;5.3.&nbsp;Generated Columns</td>
+    </tr>
+  </table>
+</div>
+
+          </div>
+          
+            <div id="docComments">
+              <h2>Submit correction</h2>
+              <p>
+              If you see anything in the documentation that is not correct, does not match
+              your experience with the particular feature or requires further clarification,
+              please use
+              <a href="/account/comments/new/16/ddl-default.html/" rel="nofollow">this form</a>
+              to report a documentation issue.
+              </p>
+            </div>
+          
+        </div> <!-- pgContentWrap -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <!-- Copyright -->
+      <div class="container">
+        <a href="/about/policies/">Policies</a> |
+        <a href="/about/policies/coc/">Code of Conduct</a> |
+        <a href="/about/">About PostgreSQL</a> |
+        <a href="/about/contact/">Contact</a><br/>
+        <p>Copyright &copy; 1996-2026 The PostgreSQL Global Development Group</p>
+      </div>
+    </footer>
+    <script src="/media/js/main.js?8eb38fb2"></script>
+
+  </body>
+</html>

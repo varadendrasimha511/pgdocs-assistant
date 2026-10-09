@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>PostgreSQL: Documentation: 16: Chapter 54. System Views</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+   
+  <meta name="theme-color" content="#336791"/>
+  <meta name="copyright" content="The PostgreSQL Global Development Group" />
+  <meta property="og:url" content="https://www.postgresql.org/docs/16/views.html" />
+  <meta property="og:type" content="article" />
+
+  <meta property="article:published_time" content="2026-08-13T12:52:44.176831" />
+  <meta property="og:image" content="https://www.postgresql.org/media/img/about/press/elephant.png" />
+  <meta property="og:title" content="Chapter 54. System Views" />
+  <meta property="og:description" content="Chapter&amp;nbsp;54.&amp;nbsp;System Views Table of Contents 54.1. Overview 54.2. pg_available_extensions 54.3. pg_available_extension_versions 54.4. pg_backend_memory_contexts 54.5. pg_config 54.6. pg_cursors 54.7. pg_file_settings 54.8. …" />
+  <meta property="og:site_name" content="PostgreSQL Documentation" />
+  <link href="/media/css/fontawesome.css?8eb38fb2" rel="stylesheet">
+  <link rel="stylesheet" href="/media/css/bootstrap-4.4.1.min.css">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" type="text/css" href="/dyncss/base.css?8eb38fb2">
+
+  <script src="/media/js/theme.js?8eb38fb2"></script>
+
+  
+
+
+  <link rel="canonical" href="https://www.postgresql.org/docs/current/views.html" />
+
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <!-- Header -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/">
+              <img class="logo" src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo">
+            </a>
+            <input type="checkbox" id="navbar-toggler" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <label for="navbar-toggler" id="navbar-toggler-label" class="navbar-toggler" tabindex="0"><span class="navbar-toggler-icon"></span></label>
+            <div class="navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+                <li class="nav-item p-2"><a href="/download/" title="Download">Download</a></li>
+                <li class="nav-item p-2"><a href="/docs/" title="Documentation">Documentation</a></li>
+                <li class="nav-item p-2"><a href="/community/" title="Community">Community</a></li>
+                <li class="nav-item p-2"><a href="/developer/" title="Developers">Developers</a></li>
+                <li class="nav-item p-2"><a href="/support/" title="Support">Support</a></li>
+                <li class="nav-item p-2"><a href="/about/donate/" title="Donate">Donate</a></li>
+                <li class="nav-item p-2"><a href="/account/" title="Your account">Your account</a></li>
+              </ul>
+              <form role="search" method="get" action="/search/">
+                <div class="input-group">
+                  <input id="q" name="q" type="text" size="20" maxlength="255" accesskey="s"  class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+              <form id="form-theme" class="form-inline d-none">
+                <button id="btn-theme" class="btn btn-default ml-1" type="button"></button>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row justify-content-center pg-shout-box">
+        <div class="col text-white text-center">September 24, 2026: <a href="/about/news/postgresql-19-beta-4-released-3386/">PostgreSQL 19 Beta 4 Released!</a>
+
+</div>
+      </div>
+    </div>
+    
+    <div class="container-fluid margin">
+      <div class="row">
+        <div id="pgContentWrap" class="col-11">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/16/index.html">PostgreSQL 16</a>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="row">
+                  <div class="col">
+                    Supported Versions:
+                      
+                        
+                        
+                          <a href="/docs/current/views.html" title="PostgreSQL 18 - Chapter 54. System Views" >Current</a>
+                          (<a href="/docs/18/views.html" title="PostgreSQL 18 - Chapter 54. System Views" >18</a>)
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/17/views.html" title="PostgreSQL 17 - Chapter 54. System Views" >17</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/16/views.html" title="PostgreSQL 16 - Chapter 54. System Views" class="docs-version-selected">16</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/15/views.html" title="PostgreSQL 15 - Chapter 54. System Views" >15</a>
+                        
+                      
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col">
+                    Development Versions:
+                    
+                      
+                      <a href="/docs/19/views.html" title="PostgreSQL 19 - Chapter 54. System Views"  rel="nofollow">19</a>
+                    
+                       / 
+                      <a href="/docs/devel/views.html" title="PostgreSQL devel - Chapter 54. System Views"  rel="nofollow">devel</a>
+                    
+                  </div>
+                </div>
+              
+              
+            </div>
+            <div class="col-md-6 col-lg-5 offset-lg-1">
+              <form id="docSearchForm" role="search" method="get" action="/search/">
+                <input type="hidden" name="u" value="/docs/16/" />
+                <div class="input-group">
+                  <input type="text" id="q" name="q" class="form-control" placeholder="Search the documentation for..."/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+            </div>
+          </div>
+
+          <div id="docContent">
+            <div class="navheader">
+  <table width="100%" summary="Navigation header">
+    <tr>
+      <th colspan="5" align="center">Chapter&nbsp;54.&nbsp;System Views</th>
+    </tr>
+    <tr>
+      <td width="10%" align="left"><a accesskey="p" href="catalog-pg-user-mapping.html" title="53.65.&nbsp;pg_user_mapping">Prev</a>&nbsp;</td>
+      <td width="10%" align="left"><a accesskey="u" href="internals.html" title="Part&nbsp;VII.&nbsp;Internals">Up</a></td>
+      <th width="60%" align="center">Part&nbsp;VII.&nbsp;Internals</th>
+      <td width="10%" align="right"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="10%" align="right">&nbsp;<a accesskey="n" href="views-overview.html" title="54.1.&nbsp;Overview">Next</a></td>
+    </tr>
+  </table>
+  <hr />
+</div>
+<div class="chapter" id="VIEWS">
+  <div class="titlepage">
+    <div>
+      <div>
+        <h2 class="title">Chapter&nbsp;54.&nbsp;System Views</h2>
+      </div>
+    </div>
+  </div>
+  <div class="toc">
+    <p><strong>Table of Contents</strong></p>
+    <dl class="toc">
+      <dt><span class="sect1"><a href="views-overview.html">54.1. Overview</a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-available-extensions.html">54.2. <code class="structname">pg_available_extensions</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-available-extension-versions.html">54.3. <code class="structname">pg_available_extension_versions</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-backend-memory-contexts.html">54.4. <code class="structname">pg_backend_memory_contexts</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-config.html">54.5. <code class="structname">pg_config</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-cursors.html">54.6. <code class="structname">pg_cursors</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-file-settings.html">54.7. <code class="structname">pg_file_settings</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-group.html">54.8. <code class="structname">pg_group</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-hba-file-rules.html">54.9. <code class="structname">pg_hba_file_rules</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-ident-file-mappings.html">54.10. <code class="structname">pg_ident_file_mappings</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-indexes.html">54.11. <code class="structname">pg_indexes</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-locks.html">54.12. <code class="structname">pg_locks</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-matviews.html">54.13. <code class="structname">pg_matviews</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-policies.html">54.14. <code class="structname">pg_policies</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-prepared-statements.html">54.15. <code class="structname">pg_prepared_statements</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-prepared-xacts.html">54.16. <code class="structname">pg_prepared_xacts</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-publication-tables.html">54.17. <code class="structname">pg_publication_tables</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-replication-origin-status.html">54.18. <code class="structname">pg_replication_origin_status</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-replication-slots.html">54.19. <code class="structname">pg_replication_slots</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-roles.html">54.20. <code class="structname">pg_roles</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-rules.html">54.21. <code class="structname">pg_rules</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-seclabels.html">54.22. <code class="structname">pg_seclabels</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-sequences.html">54.23. <code class="structname">pg_sequences</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-settings.html">54.24. <code class="structname">pg_settings</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-shadow.html">54.25. <code class="structname">pg_shadow</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-shmem-allocations.html">54.26. <code class="structname">pg_shmem_allocations</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-stats.html">54.27. <code class="structname">pg_stats</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-stats-ext.html">54.28. <code class="structname">pg_stats_ext</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-stats-ext-exprs.html">54.29. <code class="structname">pg_stats_ext_exprs</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-tables.html">54.30. <code class="structname">pg_tables</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-timezone-abbrevs.html">54.31. <code class="structname">pg_timezone_abbrevs</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-timezone-names.html">54.32. <code class="structname">pg_timezone_names</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-user.html">54.33. <code class="structname">pg_user</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-user-mappings.html">54.34. <code class="structname">pg_user_mappings</code></a></span></dt>
+      <dt><span class="sect1"><a href="view-pg-views.html">54.35. <code class="structname">pg_views</code></a></span></dt>
+    </dl>
+  </div>
+  <p>In addition to the system catalogs, <span class="productname">PostgreSQL</span> provides a number of built-in views. Some system views provide convenient access to some commonly used queries on the system catalogs. Other views provide access to internal server state.</p>
+  <p>The information schema (<a class="xref" href="information-schema.html" title="Chapter&nbsp;37.&nbsp;The Information Schema">Chapter&nbsp;37</a>) provides an alternative set of views which overlap the functionality of the system views. Since the information schema is SQL-standard whereas the views described here are <span class="productname">PostgreSQL</span>-specific, it's usually better to use the information schema if it provides all the information you need.</p>
+  <p><a class="xref" href="views-overview.html#VIEW-TABLE" title="Table&nbsp;54.1.&nbsp;System Views">Table&nbsp;54.1</a> lists the system views described here. More detailed documentation of each view follows below. There are some additional views that provide access to accumulated statistics; they are described in <a class="xref" href="monitoring-stats.html#MONITORING-STATS-VIEWS-TABLE" title="Table&nbsp;28.2.&nbsp;Collected Statistics Views">Table&nbsp;28.2</a>.</p>
+</div>
+<div class="navfooter">
+  <hr />
+  <table width="100%" summary="Navigation footer">
+    <tr>
+      <td width="40%" align="left"><a accesskey="p" href="catalog-pg-user-mapping.html" title="53.65.&nbsp;pg_user_mapping">Prev</a>&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="u" href="internals.html" title="Part&nbsp;VII.&nbsp;Internals">Up</a></td>
+      <td width="40%" align="right">&nbsp;<a accesskey="n" href="views-overview.html" title="54.1.&nbsp;Overview">Next</a></td>
+    </tr>
+    <tr>
+      <td width="40%" align="left" valign="top">53.65.&nbsp;<code class="structname">pg_user_mapping</code>&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="40%" align="right" valign="top">&nbsp;54.1.&nbsp;Overview</td>
+    </tr>
+  </table>
+</div>
+
+          </div>
+          
+            <div id="docComments">
+              <h2>Submit correction</h2>
+              <p>
+              If you see anything in the documentation that is not correct, does not match
+              your experience with the particular feature or requires further clarification,
+              please use
+              <a href="/account/comments/new/16/views.html/" rel="nofollow">this form</a>
+              to report a documentation issue.
+              </p>
+            </div>
+          
+        </div> <!-- pgContentWrap -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <!-- Copyright -->
+      <div class="container">
+        <a href="/about/policies/">Policies</a> |
+        <a href="/about/policies/coc/">Code of Conduct</a> |
+        <a href="/about/">About PostgreSQL</a> |
+        <a href="/about/contact/">Contact</a><br/>
+        <p>Copyright &copy; 1996-2026 The PostgreSQL Global Development Group</p>
+      </div>
+    </footer>
+    <script src="/media/js/main.js?8eb38fb2"></script>
+
+  </body>
+</html>

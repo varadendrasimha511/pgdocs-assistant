@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>PostgreSQL: Documentation: 16: Chapter 44. PL/Tcl — Tcl Procedural Language</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+   
+  <meta name="theme-color" content="#336791"/>
+  <meta name="copyright" content="The PostgreSQL Global Development Group" />
+  <meta property="og:url" content="https://www.postgresql.org/docs/16/pltcl.html" />
+  <meta property="og:type" content="article" />
+
+  <meta property="article:published_time" content="2026-08-13T12:52:44.176831" />
+  <meta property="og:image" content="https://www.postgresql.org/media/img/about/press/elephant.png" />
+  <meta property="og:title" content="Chapter 44. PL/Tcl — Tcl Procedural Language" />
+  <meta property="og:description" content="Chapter&amp;nbsp;44.&amp;nbsp;PL/Tcl — Tcl Procedural Language Table of Contents 44.1. Overview 44.2. PL/Tcl Functions and Arguments 44.3. Data Values in PL/Tcl …" />
+  <meta property="og:site_name" content="PostgreSQL Documentation" />
+  <link href="/media/css/fontawesome.css?8eb38fb2" rel="stylesheet">
+  <link rel="stylesheet" href="/media/css/bootstrap-4.4.1.min.css">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" type="text/css" href="/dyncss/base.css?8eb38fb2">
+
+  <script src="/media/js/theme.js?8eb38fb2"></script>
+
+  
+
+
+  <link rel="canonical" href="https://www.postgresql.org/docs/current/pltcl.html" />
+
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <!-- Header -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/">
+              <img class="logo" src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo">
+            </a>
+            <input type="checkbox" id="navbar-toggler" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <label for="navbar-toggler" id="navbar-toggler-label" class="navbar-toggler" tabindex="0"><span class="navbar-toggler-icon"></span></label>
+            <div class="navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+                <li class="nav-item p-2"><a href="/download/" title="Download">Download</a></li>
+                <li class="nav-item p-2"><a href="/docs/" title="Documentation">Documentation</a></li>
+                <li class="nav-item p-2"><a href="/community/" title="Community">Community</a></li>
+                <li class="nav-item p-2"><a href="/developer/" title="Developers">Developers</a></li>
+                <li class="nav-item p-2"><a href="/support/" title="Support">Support</a></li>
+                <li class="nav-item p-2"><a href="/about/donate/" title="Donate">Donate</a></li>
+                <li class="nav-item p-2"><a href="/account/" title="Your account">Your account</a></li>
+              </ul>
+              <form role="search" method="get" action="/search/">
+                <div class="input-group">
+                  <input id="q" name="q" type="text" size="20" maxlength="255" accesskey="s"  class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+              <form id="form-theme" class="form-inline d-none">
+                <button id="btn-theme" class="btn btn-default ml-1" type="button"></button>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row justify-content-center pg-shout-box">
+        <div class="col text-white text-center">September 24, 2026: <a href="/about/news/postgresql-19-beta-4-released-3386/">PostgreSQL 19 Beta 4 Released!</a>
+
+</div>
+      </div>
+    </div>
+    
+    <div class="container-fluid margin">
+      <div class="row">
+        <div id="pgContentWrap" class="col-11">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/16/index.html">PostgreSQL 16</a>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="row">
+                  <div class="col">
+                    Supported Versions:
+                      
+                        
+                        
+                          <a href="/docs/current/pltcl.html" title="PostgreSQL 18 - Chapter 44. PL/Tcl — Tcl Procedural Language" >Current</a>
+                          (<a href="/docs/18/pltcl.html" title="PostgreSQL 18 - Chapter 44. PL/Tcl — Tcl Procedural Language" >18</a>)
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/17/pltcl.html" title="PostgreSQL 17 - Chapter 44. PL/Tcl — Tcl Procedural Language" >17</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/16/pltcl.html" title="PostgreSQL 16 - Chapter 44. PL/Tcl — Tcl Procedural Language" class="docs-version-selected">16</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/15/pltcl.html" title="PostgreSQL 15 - Chapter 44. PL/Tcl — Tcl Procedural Language" >15</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/14/pltcl.html" title="PostgreSQL 14 - Chapter 44. PL/Tcl — Tcl Procedural Language" >14</a>
+                        
+                      
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col">
+                    Development Versions:
+                    
+                      
+                      <a href="/docs/19/pltcl.html" title="PostgreSQL 19 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">19</a>
+                    
+                       / 
+                      <a href="/docs/devel/pltcl.html" title="PostgreSQL devel - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">devel</a>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col-12">
+                    Unsupported versions:
+                    
+                      
+                      <a href="/docs/13/pltcl.html" title="PostgreSQL 13 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">13</a>
+                    
+                       / 
+                      <a href="/docs/12/pltcl.html" title="PostgreSQL 12 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">12</a>
+                    
+                       / 
+                      <a href="/docs/11/pltcl.html" title="PostgreSQL 11 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">11</a>
+                    
+                       / 
+                      <a href="/docs/10/pltcl.html" title="PostgreSQL 10 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">10</a>
+                    
+                       / 
+                      <a href="/docs/9.6/pltcl.html" title="PostgreSQL 9.6 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">9.6</a>
+                    
+                       / 
+                      <a href="/docs/9.5/pltcl.html" title="PostgreSQL 9.5 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">9.5</a>
+                    
+                       / 
+                      <a href="/docs/9.4/pltcl.html" title="PostgreSQL 9.4 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">9.4</a>
+                    
+                       / 
+                      <a href="/docs/9.3/pltcl.html" title="PostgreSQL 9.3 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">9.3</a>
+                    
+                       / 
+                      <a href="/docs/9.2/pltcl.html" title="PostgreSQL 9.2 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">9.2</a>
+                    
+                       / 
+                      <a href="/docs/9.1/pltcl.html" title="PostgreSQL 9.1 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">9.1</a>
+                    
+                       / 
+                      <a href="/docs/9.0/pltcl.html" title="PostgreSQL 9.0 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">9.0</a>
+                    
+                       / 
+                      <a href="/docs/8.4/pltcl.html" title="PostgreSQL 8.4 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">8.4</a>
+                    
+                       / 
+                      <a href="/docs/8.3/pltcl.html" title="PostgreSQL 8.3 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">8.3</a>
+                    
+                       / 
+                      <a href="/docs/8.2/pltcl.html" title="PostgreSQL 8.2 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">8.2</a>
+                    
+                       / 
+                      <a href="/docs/8.1/pltcl.html" title="PostgreSQL 8.1 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">8.1</a>
+                    
+                       / 
+                      <a href="/docs/8.0/pltcl.html" title="PostgreSQL 8.0 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">8.0</a>
+                    
+                       / 
+                      <a href="/docs/7.4/pltcl.html" title="PostgreSQL 7.4 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">7.4</a>
+                    
+                       / 
+                      <a href="/docs/7.3/pltcl.html" title="PostgreSQL 7.3 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">7.3</a>
+                    
+                       / 
+                      <a href="/docs/7.2/pltcl.html" title="PostgreSQL 7.2 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">7.2</a>
+                    
+                       / 
+                      <a href="/docs/7.1/pltcl.html" title="PostgreSQL 7.1 - Chapter 44. PL/Tcl — Tcl Procedural Language"  rel="nofollow">7.1</a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+            <div class="col-md-6 col-lg-5 offset-lg-1">
+              <form id="docSearchForm" role="search" method="get" action="/search/">
+                <input type="hidden" name="u" value="/docs/16/" />
+                <div class="input-group">
+                  <input type="text" id="q" name="q" class="form-control" placeholder="Search the documentation for..."/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+            </div>
+          </div>
+
+          <div id="docContent">
+            <div class="navheader">
+  <table width="100%" summary="Navigation header">
+    <tr>
+      <th colspan="5" align="center">Chapter&nbsp;44.&nbsp;PL/Tcl — Tcl Procedural Language</th>
+    </tr>
+    <tr>
+      <td width="10%" align="left"><a accesskey="p" href="plpgsql-porting.html" title="43.13.&nbsp;Porting from Oracle PL/SQL">Prev</a>&nbsp;</td>
+      <td width="10%" align="left"><a accesskey="u" href="server-programming.html" title="Part&nbsp;V.&nbsp;Server Programming">Up</a></td>
+      <th width="60%" align="center">Part&nbsp;V.&nbsp;Server Programming</th>
+      <td width="10%" align="right"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="10%" align="right">&nbsp;<a accesskey="n" href="pltcl-overview.html" title="44.1.&nbsp;Overview">Next</a></td>
+    </tr>
+  </table>
+  <hr />
+</div>
+<div class="chapter" id="PLTCL">
+  <div class="titlepage">
+    <div>
+      <div>
+        <h2 class="title">Chapter&nbsp;44.&nbsp;PL/Tcl — Tcl Procedural Language</h2>
+      </div>
+    </div>
+  </div>
+  <div class="toc">
+    <p><strong>Table of Contents</strong></p>
+    <dl class="toc">
+      <dt><span class="sect1"><a href="pltcl-overview.html">44.1. Overview</a></span></dt>
+      <dt><span class="sect1"><a href="pltcl-functions.html">44.2. PL/Tcl Functions and Arguments</a></span></dt>
+      <dt><span class="sect1"><a href="pltcl-data.html">44.3. Data Values in PL/Tcl</a></span></dt>
+      <dt><span class="sect1"><a href="pltcl-global.html">44.4. Global Data in PL/Tcl</a></span></dt>
+      <dt><span class="sect1"><a href="pltcl-dbaccess.html">44.5. Database Access from PL/Tcl</a></span></dt>
+      <dt><span class="sect1"><a href="pltcl-trigger.html">44.6. Trigger Functions in PL/Tcl</a></span></dt>
+      <dt><span class="sect1"><a href="pltcl-event-trigger.html">44.7. Event Trigger Functions in PL/Tcl</a></span></dt>
+      <dt><span class="sect1"><a href="pltcl-error-handling.html">44.8. Error Handling in PL/Tcl</a></span></dt>
+      <dt><span class="sect1"><a href="pltcl-subtransactions.html">44.9. Explicit Subtransactions in PL/Tcl</a></span></dt>
+      <dt><span class="sect1"><a href="pltcl-transactions.html">44.10. Transaction Management</a></span></dt>
+      <dt><span class="sect1"><a href="pltcl-config.html">44.11. PL/Tcl Configuration</a></span></dt>
+      <dt><span class="sect1"><a href="pltcl-procnames.html">44.12. Tcl Procedure Names</a></span></dt>
+    </dl>
+  </div><a id="id-1.8.9.2" class="indexterm" name="id-1.8.9.2"></a><a id="id-1.8.9.3" class="indexterm" name="id-1.8.9.3"></a>
+  <p>PL/Tcl is a loadable procedural language for the <span class="productname">PostgreSQL</span> database system that enables the <a class="ulink" href="https://www.tcl.tk/" target="_top">Tcl language</a> to be used to write <span class="productname">PostgreSQL</span> functions and procedures.</p>
+</div>
+<div class="navfooter">
+  <hr />
+  <table width="100%" summary="Navigation footer">
+    <tr>
+      <td width="40%" align="left"><a accesskey="p" href="plpgsql-porting.html" title="43.13.&nbsp;Porting from Oracle PL/SQL">Prev</a>&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="u" href="server-programming.html" title="Part&nbsp;V.&nbsp;Server Programming">Up</a></td>
+      <td width="40%" align="right">&nbsp;<a accesskey="n" href="pltcl-overview.html" title="44.1.&nbsp;Overview">Next</a></td>
+    </tr>
+    <tr>
+      <td width="40%" align="left" valign="top">43.13.&nbsp;Porting from <span class="productname">Oracle</span> PL/SQL&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="40%" align="right" valign="top">&nbsp;44.1.&nbsp;Overview</td>
+    </tr>
+  </table>
+</div>
+
+          </div>
+          
+            <div id="docComments">
+              <h2>Submit correction</h2>
+              <p>
+              If you see anything in the documentation that is not correct, does not match
+              your experience with the particular feature or requires further clarification,
+              please use
+              <a href="/account/comments/new/16/pltcl.html/" rel="nofollow">this form</a>
+              to report a documentation issue.
+              </p>
+            </div>
+          
+        </div> <!-- pgContentWrap -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <!-- Copyright -->
+      <div class="container">
+        <a href="/about/policies/">Policies</a> |
+        <a href="/about/policies/coc/">Code of Conduct</a> |
+        <a href="/about/">About PostgreSQL</a> |
+        <a href="/about/contact/">Contact</a><br/>
+        <p>Copyright &copy; 1996-2026 The PostgreSQL Global Development Group</p>
+      </div>
+    </footer>
+    <script src="/media/js/main.js?8eb38fb2"></script>
+
+  </body>
+</html>

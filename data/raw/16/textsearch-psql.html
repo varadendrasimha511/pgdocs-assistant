@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>PostgreSQL: Documentation: 16: 12.10. psql Support</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+   
+  <meta name="theme-color" content="#336791"/>
+  <meta name="copyright" content="The PostgreSQL Global Development Group" />
+  <meta property="og:url" content="https://www.postgresql.org/docs/16/textsearch-psql.html" />
+  <meta property="og:type" content="article" />
+
+  <meta property="article:published_time" content="2026-08-13T12:52:44.176831" />
+  <meta property="og:image" content="https://www.postgresql.org/media/img/about/press/elephant.png" />
+  <meta property="og:title" content="12.10. psql Support" />
+  <meta property="og:description" content="12.10.&amp;nbsp;psql Support # Information about text search configuration objects can be obtained in psql using a set of commands: \dF{d,p,t}[+] …" />
+  <meta property="og:site_name" content="PostgreSQL Documentation" />
+  <link href="/media/css/fontawesome.css?8eb38fb2" rel="stylesheet">
+  <link rel="stylesheet" href="/media/css/bootstrap-4.4.1.min.css">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" type="text/css" href="/dyncss/base.css?8eb38fb2">
+
+  <script src="/media/js/theme.js?8eb38fb2"></script>
+
+  
+
+
+  <link rel="canonical" href="https://www.postgresql.org/docs/current/textsearch-psql.html" />
+
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <!-- Header -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/">
+              <img class="logo" src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo">
+            </a>
+            <input type="checkbox" id="navbar-toggler" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <label for="navbar-toggler" id="navbar-toggler-label" class="navbar-toggler" tabindex="0"><span class="navbar-toggler-icon"></span></label>
+            <div class="navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+                <li class="nav-item p-2"><a href="/download/" title="Download">Download</a></li>
+                <li class="nav-item p-2"><a href="/docs/" title="Documentation">Documentation</a></li>
+                <li class="nav-item p-2"><a href="/community/" title="Community">Community</a></li>
+                <li class="nav-item p-2"><a href="/developer/" title="Developers">Developers</a></li>
+                <li class="nav-item p-2"><a href="/support/" title="Support">Support</a></li>
+                <li class="nav-item p-2"><a href="/about/donate/" title="Donate">Donate</a></li>
+                <li class="nav-item p-2"><a href="/account/" title="Your account">Your account</a></li>
+              </ul>
+              <form role="search" method="get" action="/search/">
+                <div class="input-group">
+                  <input id="q" name="q" type="text" size="20" maxlength="255" accesskey="s"  class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+              <form id="form-theme" class="form-inline d-none">
+                <button id="btn-theme" class="btn btn-default ml-1" type="button"></button>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row justify-content-center pg-shout-box">
+        <div class="col text-white text-center">September 24, 2026: <a href="/about/news/postgresql-19-beta-4-released-3386/">PostgreSQL 19 Beta 4 Released!</a>
+
+</div>
+      </div>
+    </div>
+    
+    <div class="container-fluid margin">
+      <div class="row">
+        <div id="pgContentWrap" class="col-11">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/16/index.html">PostgreSQL 16</a>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="row">
+                  <div class="col">
+                    Supported Versions:
+                      
+                        
+                        
+                          <a href="/docs/current/textsearch-psql.html" title="PostgreSQL 18 - 12.10. psql Support" >Current</a>
+                          (<a href="/docs/18/textsearch-psql.html" title="PostgreSQL 18 - 12.10. psql Support" >18</a>)
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/17/textsearch-psql.html" title="PostgreSQL 17 - 12.10. psql Support" >17</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/16/textsearch-psql.html" title="PostgreSQL 16 - 12.10. psql Support" class="docs-version-selected">16</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/15/textsearch-psql.html" title="PostgreSQL 15 - 12.10. psql Support" >15</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/14/textsearch-psql.html" title="PostgreSQL 14 - 12.10. psql Support" >14</a>
+                        
+                      
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col">
+                    Development Versions:
+                    
+                      
+                      <a href="/docs/19/textsearch-psql.html" title="PostgreSQL 19 - 12.10. psql Support"  rel="nofollow">19</a>
+                    
+                       / 
+                      <a href="/docs/devel/textsearch-psql.html" title="PostgreSQL devel - 12.10. psql Support"  rel="nofollow">devel</a>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col-12">
+                    Unsupported versions:
+                    
+                      
+                      <a href="/docs/13/textsearch-psql.html" title="PostgreSQL 13 - 12.10. psql Support"  rel="nofollow">13</a>
+                    
+                       / 
+                      <a href="/docs/12/textsearch-psql.html" title="PostgreSQL 12 - 12.10. psql Support"  rel="nofollow">12</a>
+                    
+                       / 
+                      <a href="/docs/11/textsearch-psql.html" title="PostgreSQL 11 - 12.10. psql Support"  rel="nofollow">11</a>
+                    
+                       / 
+                      <a href="/docs/10/textsearch-psql.html" title="PostgreSQL 10 - 12.10. psql Support"  rel="nofollow">10</a>
+                    
+                       / 
+                      <a href="/docs/9.6/textsearch-psql.html" title="PostgreSQL 9.6 - 12.10. psql Support"  rel="nofollow">9.6</a>
+                    
+                       / 
+                      <a href="/docs/9.5/textsearch-psql.html" title="PostgreSQL 9.5 - 12.10. psql Support"  rel="nofollow">9.5</a>
+                    
+                       / 
+                      <a href="/docs/9.4/textsearch-psql.html" title="PostgreSQL 9.4 - 12.10. psql Support"  rel="nofollow">9.4</a>
+                    
+                       / 
+                      <a href="/docs/9.3/textsearch-psql.html" title="PostgreSQL 9.3 - 12.10. psql Support"  rel="nofollow">9.3</a>
+                    
+                       / 
+                      <a href="/docs/9.2/textsearch-psql.html" title="PostgreSQL 9.2 - 12.10. psql Support"  rel="nofollow">9.2</a>
+                    
+                       / 
+                      <a href="/docs/9.1/textsearch-psql.html" title="PostgreSQL 9.1 - 12.10. psql Support"  rel="nofollow">9.1</a>
+                    
+                       / 
+                      <a href="/docs/9.0/textsearch-psql.html" title="PostgreSQL 9.0 - 12.10. psql Support"  rel="nofollow">9.0</a>
+                    
+                       / 
+                      <a href="/docs/8.4/textsearch-psql.html" title="PostgreSQL 8.4 - 12.10. psql Support"  rel="nofollow">8.4</a>
+                    
+                       / 
+                      <a href="/docs/8.3/textsearch-psql.html" title="PostgreSQL 8.3 - 12.10. psql Support"  rel="nofollow">8.3</a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+            <div class="col-md-6 col-lg-5 offset-lg-1">
+              <form id="docSearchForm" role="search" method="get" action="/search/">
+                <input type="hidden" name="u" value="/docs/16/" />
+                <div class="input-group">
+                  <input type="text" id="q" name="q" class="form-control" placeholder="Search the documentation for..."/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+            </div>
+          </div>
+
+          <div id="docContent">
+            <div class="navheader">
+  <table width="100%" summary="Navigation header">
+    <tr>
+      <th colspan="5" align="center">12.10.&nbsp;<span class="application">psql</span> Support</th>
+    </tr>
+    <tr>
+      <td width="10%" align="left"><a accesskey="p" href="textsearch-indexes.html" title="12.9.&nbsp;Preferred Index Types for Text Search">Prev</a>&nbsp;</td>
+      <td width="10%" align="left"><a accesskey="u" href="textsearch.html" title="Chapter&nbsp;12.&nbsp;Full Text Search">Up</a></td>
+      <th width="60%" align="center">Chapter&nbsp;12.&nbsp;Full Text Search</th>
+      <td width="10%" align="right"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="10%" align="right">&nbsp;<a accesskey="n" href="textsearch-limitations.html" title="12.11.&nbsp;Limitations">Next</a></td>
+    </tr>
+  </table>
+  <hr />
+</div>
+<div class="sect1" id="TEXTSEARCH-PSQL">
+  <div class="titlepage">
+    <div>
+      <div>
+        <h2 class="title" style="clear: both">12.10.&nbsp;<span class="application">psql</span> Support <a href="#TEXTSEARCH-PSQL" class="id_link">#</a></h2>
+      </div>
+    </div>
+  </div>
+  <p>Information about text search configuration objects can be obtained in <span class="application">psql</span> using a set of commands:</p>
+  <pre class="synopsis">
+\dF{d,p,t}[<span class="optional">+</span>] [<span class="optional">PATTERN</span>]
+</pre>
+  <p>An optional <code class="literal">+</code> produces more details.</p>
+  <p>The optional parameter <em class="replaceable"><code>PATTERN</code></em> can be the name of a text search object, optionally schema-qualified. If <em class="replaceable"><code>PATTERN</code></em> is omitted then information about all visible objects will be displayed. <em class="replaceable"><code>PATTERN</code></em> can be a regular expression and can provide <span class="emphasis"><em>separate</em></span> patterns for the schema and object names. The following examples illustrate this:</p>
+  <pre class="screen">
+=&gt; \dF *fulltext*
+       List of text search configurations
+ Schema |  Name        | Description
+--------+--------------+-------------
+ public | fulltext_cfg |
+</pre>
+  <pre class="screen">
+=&gt; \dF *.fulltext*
+       List of text search configurations
+ Schema   |  Name        | Description
+----------+----------------------------
+ fulltext | fulltext_cfg |
+ public   | fulltext_cfg |
+</pre>
+  <p>The available commands are:</p>
+  <div class="variablelist">
+    <dl class="variablelist">
+      <dt><span class="term"><code class="literal">\dF[<span class="optional">+</span>] [<span class="optional">PATTERN</span>]</code></span></dt>
+      <dd>
+        <p>List text search configurations (add <code class="literal">+</code> for more detail).</p>
+        <pre class="screen">
+=&gt; \dF russian
+            List of text search configurations
+   Schema   |  Name   |            Description
+------------+---------+------------------------------------
+ pg_catalog | russian | configuration for russian language
+
+=&gt; \dF+ russian
+Text search configuration "pg_catalog.russian"
+Parser: "pg_catalog.default"
+      Token      | Dictionaries
+-----------------+--------------
+ asciihword      | english_stem
+ asciiword       | english_stem
+ email           | simple
+ file            | simple
+ float           | simple
+ host            | simple
+ hword           | russian_stem
+ hword_asciipart | english_stem
+ hword_numpart   | simple
+ hword_part      | russian_stem
+ int             | simple
+ numhword        | simple
+ numword         | simple
+ sfloat          | simple
+ uint            | simple
+ url             | simple
+ url_path        | simple
+ version         | simple
+ word            | russian_stem
+</pre>
+      </dd>
+      <dt><span class="term"><code class="literal">\dFd[<span class="optional">+</span>] [<span class="optional">PATTERN</span>]</code></span></dt>
+      <dd>
+        <p>List text search dictionaries (add <code class="literal">+</code> for more detail).</p>
+        <pre class="screen">
+=&gt; \dFd
+                             List of text search dictionaries
+   Schema   |      Name       |                        Description
+------------+-----------------+-----------------------------------------------------------
+ pg_catalog | arabic_stem     | snowball stemmer for arabic language
+ pg_catalog | armenian_stem   | snowball stemmer for armenian language
+ pg_catalog | basque_stem     | snowball stemmer for basque language
+ pg_catalog | catalan_stem    | snowball stemmer for catalan language
+ pg_catalog | danish_stem     | snowball stemmer for danish language
+ pg_catalog | dutch_stem      | snowball stemmer for dutch language
+ pg_catalog | english_stem    | snowball stemmer for english language
+ pg_catalog | finnish_stem    | snowball stemmer for finnish language
+ pg_catalog | french_stem     | snowball stemmer for french language
+ pg_catalog | german_stem     | snowball stemmer for german language
+ pg_catalog | greek_stem      | snowball stemmer for greek language
+ pg_catalog | hindi_stem      | snowball stemmer for hindi language
+ pg_catalog | hungarian_stem  | snowball stemmer for hungarian language
+ pg_catalog | indonesian_stem | snowball stemmer for indonesian language
+ pg_catalog | irish_stem      | snowball stemmer for irish language
+ pg_catalog | italian_stem    | snowball stemmer for italian language
+ pg_catalog | lithuanian_stem | snowball stemmer for lithuanian language
+ pg_catalog | nepali_stem     | snowball stemmer for nepali language
+ pg_catalog | norwegian_stem  | snowball stemmer for norwegian language
+ pg_catalog | portuguese_stem | snowball stemmer for portuguese language
+ pg_catalog | romanian_stem   | snowball stemmer for romanian language
+ pg_catalog | russian_stem    | snowball stemmer for russian language
+ pg_catalog | serbian_stem    | snowball stemmer for serbian language
+ pg_catalog | simple          | simple dictionary: just lower case and check for stopword
+ pg_catalog | spanish_stem    | snowball stemmer for spanish language
+ pg_catalog | swedish_stem    | snowball stemmer for swedish language
+ pg_catalog | tamil_stem      | snowball stemmer for tamil language
+ pg_catalog | turkish_stem    | snowball stemmer for turkish language
+ pg_catalog | yiddish_stem    | snowball stemmer for yiddish language
+</pre>
+      </dd>
+      <dt><span class="term"><code class="literal">\dFp[<span class="optional">+</span>] [<span class="optional">PATTERN</span>]</code></span></dt>
+      <dd>
+        <p>List text search parsers (add <code class="literal">+</code> for more detail).</p>
+        <pre class="screen">
+=&gt; \dFp
+        List of text search parsers
+   Schema   |  Name   |     Description
+------------+---------+---------------------
+ pg_catalog | default | default word parser
+=&gt; \dFp+
+    Text search parser "pg_catalog.default"
+     Method      |    Function    | Description
+-----------------+----------------+-------------
+ Start parse     | prsd_start     |
+ Get next token  | prsd_nexttoken |
+ End parse       | prsd_end       |
+ Get headline    | prsd_headline  |
+ Get token types | prsd_lextype   |
+
+        Token types for parser "pg_catalog.default"
+   Token name    |               Description
+-----------------+------------------------------------------
+ asciihword      | Hyphenated word, all ASCII
+ asciiword       | Word, all ASCII
+ blank           | Space symbols
+ email           | Email address
+ entity          | XML entity
+ file            | File or path name
+ float           | Decimal notation
+ host            | Host
+ hword           | Hyphenated word, all letters
+ hword_asciipart | Hyphenated word part, all ASCII
+ hword_numpart   | Hyphenated word part, letters and digits
+ hword_part      | Hyphenated word part, all letters
+ int             | Signed integer
+ numhword        | Hyphenated word, letters and digits
+ numword         | Word, letters and digits
+ protocol        | Protocol head
+ sfloat          | Scientific notation
+ tag             | XML tag
+ uint            | Unsigned integer
+ url             | URL
+ url_path        | URL path
+ version         | Version number
+ word            | Word, all letters
+(23 rows)
+</pre>
+      </dd>
+      <dt><span class="term"><code class="literal">\dFt[<span class="optional">+</span>] [<span class="optional">PATTERN</span>]</code></span></dt>
+      <dd>
+        <p>List text search templates (add <code class="literal">+</code> for more detail).</p>
+        <pre class="screen">
+=&gt; \dFt
+                           List of text search templates
+   Schema   |   Name    |                        Description
+------------+-----------+-----------------------------------------------------------
+ pg_catalog | ispell    | ispell dictionary
+ pg_catalog | simple    | simple dictionary: just lower case and check for stopword
+ pg_catalog | snowball  | snowball stemmer
+ pg_catalog | synonym   | synonym dictionary: replace word by its synonym
+ pg_catalog | thesaurus | thesaurus dictionary: phrase by phrase substitution
+</pre>
+      </dd>
+    </dl>
+  </div>
+</div>
+<div class="navfooter">
+  <hr />
+  <table width="100%" summary="Navigation footer">
+    <tr>
+      <td width="40%" align="left"><a accesskey="p" href="textsearch-indexes.html" title="12.9.&nbsp;Preferred Index Types for Text Search">Prev</a>&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="u" href="textsearch.html" title="Chapter&nbsp;12.&nbsp;Full Text Search">Up</a></td>
+      <td width="40%" align="right">&nbsp;<a accesskey="n" href="textsearch-limitations.html" title="12.11.&nbsp;Limitations">Next</a></td>
+    </tr>
+    <tr>
+      <td width="40%" align="left" valign="top">12.9.&nbsp;Preferred Index Types for Text Search&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="40%" align="right" valign="top">&nbsp;12.11.&nbsp;Limitations</td>
+    </tr>
+  </table>
+</div>
+
+          </div>
+          
+            <div id="docComments">
+              <h2>Submit correction</h2>
+              <p>
+              If you see anything in the documentation that is not correct, does not match
+              your experience with the particular feature or requires further clarification,
+              please use
+              <a href="/account/comments/new/16/textsearch-psql.html/" rel="nofollow">this form</a>
+              to report a documentation issue.
+              </p>
+            </div>
+          
+        </div> <!-- pgContentWrap -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <!-- Copyright -->
+      <div class="container">
+        <a href="/about/policies/">Policies</a> |
+        <a href="/about/policies/coc/">Code of Conduct</a> |
+        <a href="/about/">About PostgreSQL</a> |
+        <a href="/about/contact/">Contact</a><br/>
+        <p>Copyright &copy; 1996-2026 The PostgreSQL Global Development Group</p>
+      </div>
+    </footer>
+    <script src="/media/js/main.js?8eb38fb2"></script>
+
+  </body>
+</html>

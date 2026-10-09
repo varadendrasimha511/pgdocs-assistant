@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>PostgreSQL: Documentation: 16: Chapter 65. Generic WAL Records</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+   
+  <meta name="theme-color" content="#336791"/>
+  <meta name="copyright" content="The PostgreSQL Global Development Group" />
+  <meta property="og:url" content="https://www.postgresql.org/docs/16/generic-wal.html" />
+  <meta property="og:type" content="article" />
+
+  <meta property="article:published_time" content="2026-08-13T12:52:44.176831" />
+  <meta property="og:image" content="https://www.postgresql.org/media/img/about/press/elephant.png" />
+  <meta property="og:title" content="Chapter 65. Generic WAL Records" />
+  <meta property="og:description" content="Chapter&amp;nbsp;65.&amp;nbsp;Generic WAL Records Although all built-in WAL-logged modules have their own types of WAL records, there is also a generic …" />
+  <meta property="og:site_name" content="PostgreSQL Documentation" />
+  <link href="/media/css/fontawesome.css?8eb38fb2" rel="stylesheet">
+  <link rel="stylesheet" href="/media/css/bootstrap-4.4.1.min.css">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" type="text/css" href="/dyncss/base.css?8eb38fb2">
+
+  <script src="/media/js/theme.js?8eb38fb2"></script>
+
+  
+
+
+  <link rel="canonical" href="https://www.postgresql.org/docs/current/generic-wal.html" />
+
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <!-- Header -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/">
+              <img class="logo" src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo">
+            </a>
+            <input type="checkbox" id="navbar-toggler" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <label for="navbar-toggler" id="navbar-toggler-label" class="navbar-toggler" tabindex="0"><span class="navbar-toggler-icon"></span></label>
+            <div class="navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+                <li class="nav-item p-2"><a href="/download/" title="Download">Download</a></li>
+                <li class="nav-item p-2"><a href="/docs/" title="Documentation">Documentation</a></li>
+                <li class="nav-item p-2"><a href="/community/" title="Community">Community</a></li>
+                <li class="nav-item p-2"><a href="/developer/" title="Developers">Developers</a></li>
+                <li class="nav-item p-2"><a href="/support/" title="Support">Support</a></li>
+                <li class="nav-item p-2"><a href="/about/donate/" title="Donate">Donate</a></li>
+                <li class="nav-item p-2"><a href="/account/" title="Your account">Your account</a></li>
+              </ul>
+              <form role="search" method="get" action="/search/">
+                <div class="input-group">
+                  <input id="q" name="q" type="text" size="20" maxlength="255" accesskey="s"  class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+              <form id="form-theme" class="form-inline d-none">
+                <button id="btn-theme" class="btn btn-default ml-1" type="button"></button>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row justify-content-center pg-shout-box">
+        <div class="col text-white text-center">September 24, 2026: <a href="/about/news/postgresql-19-beta-4-released-3386/">PostgreSQL 19 Beta 4 Released!</a>
+
+</div>
+      </div>
+    </div>
+    
+    <div class="container-fluid margin">
+      <div class="row">
+        <div id="pgContentWrap" class="col-11">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/16/index.html">PostgreSQL 16</a>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="row">
+                  <div class="col">
+                    Supported Versions:
+                      
+                        
+                        
+                          <a href="/docs/current/generic-wal.html" title="PostgreSQL 18 - Chapter 65. Generic WAL Records" >Current</a>
+                          (<a href="/docs/18/generic-wal.html" title="PostgreSQL 18 - Chapter 65. Generic WAL Records" >18</a>)
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/17/generic-wal.html" title="PostgreSQL 17 - Chapter 65. Generic WAL Records" >17</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/16/generic-wal.html" title="PostgreSQL 16 - Chapter 65. Generic WAL Records" class="docs-version-selected">16</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/15/generic-wal.html" title="PostgreSQL 15 - Chapter 65. Generic WAL Records" >15</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/14/generic-wal.html" title="PostgreSQL 14 - Chapter 65. Generic WAL Records" >14</a>
+                        
+                      
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col">
+                    Development Versions:
+                    
+                      
+                      <a href="/docs/19/generic-wal.html" title="PostgreSQL 19 - Chapter 65. Generic WAL Records"  rel="nofollow">19</a>
+                    
+                       / 
+                      <a href="/docs/devel/generic-wal.html" title="PostgreSQL devel - Chapter 65. Generic WAL Records"  rel="nofollow">devel</a>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col-12">
+                    Unsupported versions:
+                    
+                      
+                      <a href="/docs/13/generic-wal.html" title="PostgreSQL 13 - Chapter 65. Generic WAL Records"  rel="nofollow">13</a>
+                    
+                       / 
+                      <a href="/docs/12/generic-wal.html" title="PostgreSQL 12 - Chapter 65. Generic WAL Records"  rel="nofollow">12</a>
+                    
+                       / 
+                      <a href="/docs/11/generic-wal.html" title="PostgreSQL 11 - Chapter 65. Generic WAL Records"  rel="nofollow">11</a>
+                    
+                       / 
+                      <a href="/docs/10/generic-wal.html" title="PostgreSQL 10 - Chapter 65. Generic WAL Records"  rel="nofollow">10</a>
+                    
+                       / 
+                      <a href="/docs/9.6/generic-wal.html" title="PostgreSQL 9.6 - Chapter 65. Generic WAL Records"  rel="nofollow">9.6</a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+            <div class="col-md-6 col-lg-5 offset-lg-1">
+              <form id="docSearchForm" role="search" method="get" action="/search/">
+                <input type="hidden" name="u" value="/docs/16/" />
+                <div class="input-group">
+                  <input type="text" id="q" name="q" class="form-control" placeholder="Search the documentation for..."/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+            </div>
+          </div>
+
+          <div id="docContent">
+            <div class="navheader">
+  <table width="100%" summary="Navigation header">
+    <tr>
+      <th colspan="5" align="center">Chapter&nbsp;65.&nbsp;Generic WAL Records</th>
+    </tr>
+    <tr>
+      <td width="10%" align="left"><a accesskey="p" href="index-cost-estimation.html" title="64.6.&nbsp;Index Cost Estimation Functions">Prev</a>&nbsp;</td>
+      <td width="10%" align="left"><a accesskey="u" href="internals.html" title="Part&nbsp;VII.&nbsp;Internals">Up</a></td>
+      <th width="60%" align="center">Part&nbsp;VII.&nbsp;Internals</th>
+      <td width="10%" align="right"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="10%" align="right">&nbsp;<a accesskey="n" href="custom-rmgr.html" title="Chapter&nbsp;66.&nbsp;Custom WAL Resource Managers">Next</a></td>
+    </tr>
+  </table>
+  <hr />
+</div>
+<div class="chapter" id="GENERIC-WAL">
+  <div class="titlepage">
+    <div>
+      <div>
+        <h2 class="title">Chapter&nbsp;65.&nbsp;Generic WAL Records</h2>
+      </div>
+    </div>
+  </div>
+  <p>Although all built-in WAL-logged modules have their own types of WAL records, there is also a generic WAL record type, which describes changes to pages in a generic way. This is useful for extensions that provide custom access methods.</p>
+  <p>In comparison with <a class="link" href="custom-rmgr.html" title="Chapter&nbsp;66.&nbsp;Custom WAL Resource Managers">Custom WAL Resource Managers</a>, Generic WAL is simpler for an extension to implement and does not require the extension library to be loaded in order to apply the records.</p>
+  <div class="note">
+    <h3 class="title">Note</h3>
+    <p>Generic WAL records are ignored during <a class="link" href="logicaldecoding.html" title="Chapter&nbsp;49.&nbsp;Logical Decoding">Logical Decoding</a>. If logical decoding is required for your extension, consider a Custom WAL Resource Manager.</p>
+  </div>
+  <p>The API for constructing generic WAL records is defined in <code class="filename">access/generic_xlog.h</code> and implemented in <code class="filename">access/transam/generic_xlog.c</code>.</p>
+  <p>To perform a WAL-logged data update using the generic WAL record facility, follow these steps:</p>
+  <div class="orderedlist">
+    <ol class="orderedlist" type="1">
+      <li class="listitem">
+        <p><code class="function">state = GenericXLogStart(relation)</code> — start construction of a generic WAL record for the given relation.</p>
+      </li>
+      <li class="listitem">
+        <p><code class="function">page = GenericXLogRegisterBuffer(state, buffer, flags)</code> — register a buffer to be modified within the current generic WAL record. This function returns a pointer to a temporary copy of the buffer's page, where modifications should be made. (Do not modify the buffer's contents directly.) The third argument is a bit mask of flags applicable to the operation. Currently the only such flag is <code class="literal">GENERIC_XLOG_FULL_IMAGE</code>, which indicates that a full-page image rather than a delta update should be included in the WAL record. Typically this flag would be set if the page is new or has been rewritten completely. <code class="function">GenericXLogRegisterBuffer</code> can be repeated if the WAL-logged action needs to modify multiple pages.</p>
+      </li>
+      <li class="listitem">
+        <p>Apply modifications to the page images obtained in the previous step.</p>
+      </li>
+      <li class="listitem">
+        <p><code class="function">GenericXLogFinish(state)</code> — apply the changes to the buffers and emit the generic WAL record.</p>
+      </li>
+    </ol>
+  </div>
+  <p>WAL record construction can be canceled between any of the above steps by calling <code class="function">GenericXLogAbort(state)</code>. This will discard all changes to the page image copies.</p>
+  <p>Please note the following points when using the generic WAL record facility:</p>
+  <div class="itemizedlist">
+    <ul class="itemizedlist" style="list-style-type: disc;">
+      <li class="listitem">
+        <p>No direct modifications of buffers are allowed! All modifications must be done in copies acquired from <code class="function">GenericXLogRegisterBuffer()</code>. In other words, code that makes generic WAL records should never call <code class="function">BufferGetPage()</code> for itself. However, it remains the caller's responsibility to pin/unpin and lock/unlock the buffers at appropriate times. Exclusive lock must be held on each target buffer from before <code class="function">GenericXLogRegisterBuffer()</code> until after <code class="function">GenericXLogFinish()</code>.</p>
+      </li>
+      <li class="listitem">
+        <p>Registrations of buffers (step 2) and modifications of page images (step 3) can be mixed freely, i.e., both steps may be repeated in any sequence. Keep in mind that buffers should be registered in the same order in which locks are to be obtained on them during replay.</p>
+      </li>
+      <li class="listitem">
+        <p>The maximum number of buffers that can be registered for a generic WAL record is <code class="literal">MAX_GENERIC_XLOG_PAGES</code>. An error will be thrown if this limit is exceeded.</p>
+      </li>
+      <li class="listitem">
+        <p>Generic WAL assumes that the pages to be modified have standard layout, and in particular that there is no useful data between <code class="structfield">pd_lower</code> and <code class="structfield">pd_upper</code>.</p>
+      </li>
+      <li class="listitem">
+        <p>Since you are modifying copies of buffer pages, <code class="function">GenericXLogStart()</code> does not start a critical section. Thus, you can safely do memory allocation, error throwing, etc. between <code class="function">GenericXLogStart()</code> and <code class="function">GenericXLogFinish()</code>. The only actual critical section is present inside <code class="function">GenericXLogFinish()</code>. There is no need to worry about calling <code class="function">GenericXLogAbort()</code> during an error exit, either.</p>
+      </li>
+      <li class="listitem">
+        <p><code class="function">GenericXLogFinish()</code> takes care of marking buffers dirty and setting their LSNs. You do not need to do this explicitly.</p>
+      </li>
+      <li class="listitem">
+        <p>For unlogged relations, everything works the same except that no actual WAL record is emitted. Thus, you typically do not need to do any explicit checks for unlogged relations.</p>
+      </li>
+      <li class="listitem">
+        <p>The generic WAL redo function will acquire exclusive locks to buffers in the same order as they were registered. After redoing all changes, the locks will be released in the same order.</p>
+      </li>
+      <li class="listitem">
+        <p>If <code class="literal">GENERIC_XLOG_FULL_IMAGE</code> is not specified for a registered buffer, the generic WAL record contains a delta between the old and the new page images. This delta is based on byte-by-byte comparison. This is not very compact for the case of moving data within a page, and might be improved in the future.</p>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="navfooter">
+  <hr />
+  <table width="100%" summary="Navigation footer">
+    <tr>
+      <td width="40%" align="left"><a accesskey="p" href="index-cost-estimation.html" title="64.6.&nbsp;Index Cost Estimation Functions">Prev</a>&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="u" href="internals.html" title="Part&nbsp;VII.&nbsp;Internals">Up</a></td>
+      <td width="40%" align="right">&nbsp;<a accesskey="n" href="custom-rmgr.html" title="Chapter&nbsp;66.&nbsp;Custom WAL Resource Managers">Next</a></td>
+    </tr>
+    <tr>
+      <td width="40%" align="left" valign="top">64.6.&nbsp;Index Cost Estimation Functions&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;66.&nbsp;Custom WAL Resource Managers</td>
+    </tr>
+  </table>
+</div>
+
+          </div>
+          
+            <div id="docComments">
+              <h2>Submit correction</h2>
+              <p>
+              If you see anything in the documentation that is not correct, does not match
+              your experience with the particular feature or requires further clarification,
+              please use
+              <a href="/account/comments/new/16/generic-wal.html/" rel="nofollow">this form</a>
+              to report a documentation issue.
+              </p>
+            </div>
+          
+        </div> <!-- pgContentWrap -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <!-- Copyright -->
+      <div class="container">
+        <a href="/about/policies/">Policies</a> |
+        <a href="/about/policies/coc/">Code of Conduct</a> |
+        <a href="/about/">About PostgreSQL</a> |
+        <a href="/about/contact/">Contact</a><br/>
+        <p>Copyright &copy; 1996-2026 The PostgreSQL Global Development Group</p>
+      </div>
+    </footer>
+    <script src="/media/js/main.js?8eb38fb2"></script>
+
+  </body>
+</html>

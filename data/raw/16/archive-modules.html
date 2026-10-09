@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>PostgreSQL: Documentation: 16: Chapter 51. Archive Modules</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+   
+  <meta name="theme-color" content="#336791"/>
+  <meta name="copyright" content="The PostgreSQL Global Development Group" />
+  <meta property="og:url" content="https://www.postgresql.org/docs/16/archive-modules.html" />
+  <meta property="og:type" content="article" />
+
+  <meta property="article:published_time" content="2026-08-13T12:52:44.176831" />
+  <meta property="og:image" content="https://www.postgresql.org/media/img/about/press/elephant.png" />
+  <meta property="og:title" content="Chapter 51. Archive Modules" />
+  <meta property="og:description" content="Chapter&amp;nbsp;51.&amp;nbsp;Archive Modules Table of Contents 51.1. Initialization Functions 51.2. Archive Module Callbacks 51.2.1. Startup Callback 51.2.2. Check Callback 51.2.3. Archive …" />
+  <meta property="og:site_name" content="PostgreSQL Documentation" />
+  <link href="/media/css/fontawesome.css?8eb38fb2" rel="stylesheet">
+  <link rel="stylesheet" href="/media/css/bootstrap-4.4.1.min.css">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" type="text/css" href="/dyncss/base.css?8eb38fb2">
+
+  <script src="/media/js/theme.js?8eb38fb2"></script>
+
+  
+
+
+  <link rel="canonical" href="https://www.postgresql.org/docs/current/archive-modules.html" />
+
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <!-- Header -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/">
+              <img class="logo" src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo">
+            </a>
+            <input type="checkbox" id="navbar-toggler" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <label for="navbar-toggler" id="navbar-toggler-label" class="navbar-toggler" tabindex="0"><span class="navbar-toggler-icon"></span></label>
+            <div class="navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+                <li class="nav-item p-2"><a href="/download/" title="Download">Download</a></li>
+                <li class="nav-item p-2"><a href="/docs/" title="Documentation">Documentation</a></li>
+                <li class="nav-item p-2"><a href="/community/" title="Community">Community</a></li>
+                <li class="nav-item p-2"><a href="/developer/" title="Developers">Developers</a></li>
+                <li class="nav-item p-2"><a href="/support/" title="Support">Support</a></li>
+                <li class="nav-item p-2"><a href="/about/donate/" title="Donate">Donate</a></li>
+                <li class="nav-item p-2"><a href="/account/" title="Your account">Your account</a></li>
+              </ul>
+              <form role="search" method="get" action="/search/">
+                <div class="input-group">
+                  <input id="q" name="q" type="text" size="20" maxlength="255" accesskey="s"  class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+              <form id="form-theme" class="form-inline d-none">
+                <button id="btn-theme" class="btn btn-default ml-1" type="button"></button>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row justify-content-center pg-shout-box">
+        <div class="col text-white text-center">September 24, 2026: <a href="/about/news/postgresql-19-beta-4-released-3386/">PostgreSQL 19 Beta 4 Released!</a>
+
+</div>
+      </div>
+    </div>
+    
+    <div class="container-fluid margin">
+      <div class="row">
+        <div id="pgContentWrap" class="col-11">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/16/index.html">PostgreSQL 16</a>
+                  </div>
+                </div>
+              </div>
+              
+                <div class="row">
+                  <div class="col">
+                    Supported Versions:
+                      
+                        
+                        
+                          <a href="/docs/current/archive-modules.html" title="PostgreSQL 18 - Chapter 51. Archive Modules" >Current</a>
+                          (<a href="/docs/18/archive-modules.html" title="PostgreSQL 18 - Chapter 51. Archive Modules" >18</a>)
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/17/archive-modules.html" title="PostgreSQL 17 - Chapter 51. Archive Modules" >17</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/16/archive-modules.html" title="PostgreSQL 16 - Chapter 51. Archive Modules" class="docs-version-selected">16</a>
+                        
+                      
+                         / 
+                        
+                          <a href="/docs/15/archive-modules.html" title="PostgreSQL 15 - Chapter 51. Archive Modules" >15</a>
+                        
+                      
+                  </div>
+                </div>
+              
+              
+                <div class="row">
+                  <div class="col">
+                    Development Versions:
+                    
+                      
+                      <a href="/docs/19/archive-modules.html" title="PostgreSQL 19 - Chapter 51. Archive Modules"  rel="nofollow">19</a>
+                    
+                       / 
+                      <a href="/docs/devel/archive-modules.html" title="PostgreSQL devel - Chapter 51. Archive Modules"  rel="nofollow">devel</a>
+                    
+                  </div>
+                </div>
+              
+              
+            </div>
+            <div class="col-md-6 col-lg-5 offset-lg-1">
+              <form id="docSearchForm" role="search" method="get" action="/search/">
+                <input type="hidden" name="u" value="/docs/16/" />
+                <div class="input-group">
+                  <input type="text" id="q" name="q" class="form-control" placeholder="Search the documentation for..."/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+            </div>
+          </div>
+
+          <div id="docContent">
+            <div class="navheader">
+  <table width="100%" summary="Navigation header">
+    <tr>
+      <th colspan="5" align="center">Chapter&nbsp;51.&nbsp;Archive Modules</th>
+    </tr>
+    <tr>
+      <td width="10%" align="left"><a accesskey="p" href="replication-origins.html" title="Chapter&nbsp;50.&nbsp;Replication Progress Tracking">Prev</a>&nbsp;</td>
+      <td width="10%" align="left"><a accesskey="u" href="server-programming.html" title="Part&nbsp;V.&nbsp;Server Programming">Up</a></td>
+      <th width="60%" align="center">Part&nbsp;V.&nbsp;Server Programming</th>
+      <td width="10%" align="right"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="10%" align="right">&nbsp;<a accesskey="n" href="archive-module-init.html" title="51.1.&nbsp;Initialization Functions">Next</a></td>
+    </tr>
+  </table>
+  <hr />
+</div>
+<div class="chapter" id="ARCHIVE-MODULES">
+  <div class="titlepage">
+    <div>
+      <div>
+        <h2 class="title">Chapter&nbsp;51.&nbsp;Archive Modules</h2>
+      </div>
+    </div>
+  </div>
+  <div class="toc">
+    <p><strong>Table of Contents</strong></p>
+    <dl class="toc">
+      <dt><span class="sect1"><a href="archive-module-init.html">51.1. Initialization Functions</a></span></dt>
+      <dt><span class="sect1"><a href="archive-module-callbacks.html">51.2. Archive Module Callbacks</a></span></dt>
+      <dd>
+        <dl>
+          <dt><span class="sect2"><a href="archive-module-callbacks.html#ARCHIVE-MODULE-STARTUP">51.2.1. Startup Callback</a></span></dt>
+          <dt><span class="sect2"><a href="archive-module-callbacks.html#ARCHIVE-MODULE-CHECK">51.2.2. Check Callback</a></span></dt>
+          <dt><span class="sect2"><a href="archive-module-callbacks.html#ARCHIVE-MODULE-ARCHIVE">51.2.3. Archive Callback</a></span></dt>
+          <dt><span class="sect2"><a href="archive-module-callbacks.html#ARCHIVE-MODULE-SHUTDOWN">51.2.4. Shutdown Callback</a></span></dt>
+        </dl>
+      </dd>
+    </dl>
+  </div><a id="id-1.8.16.2" class="indexterm" name="id-1.8.16.2"></a>
+  <p>PostgreSQL provides infrastructure to create custom modules for continuous archiving (see <a class="xref" href="continuous-archiving.html" title="26.3.&nbsp;Continuous Archiving and Point-in-Time Recovery (PITR)">Section&nbsp;26.3</a>). While archiving via a shell command (i.e., <a class="xref" href="runtime-config-wal.html#GUC-ARCHIVE-COMMAND">archive_command</a>) is much simpler, a custom archive module will often be considerably more robust and performant.</p>
+  <p>When a custom <a class="xref" href="runtime-config-wal.html#GUC-ARCHIVE-LIBRARY">archive_library</a> is configured, PostgreSQL will submit completed WAL files to the module, and the server will avoid recycling or removing these WAL files until the module indicates that the files were successfully archived. It is ultimately up to the module to decide what to do with each WAL file, but many recommendations are listed at <a class="xref" href="continuous-archiving.html#BACKUP-ARCHIVING-WAL" title="26.3.1.&nbsp;Setting Up WAL Archiving">Section&nbsp;26.3.1</a>.</p>
+  <p>Archiving modules must at least consist of an initialization function (see <a class="xref" href="archive-module-init.html" title="51.1.&nbsp;Initialization Functions">Section&nbsp;51.1</a>) and the required callbacks (see <a class="xref" href="archive-module-callbacks.html" title="51.2.&nbsp;Archive Module Callbacks">Section&nbsp;51.2</a>). However, archive modules are also permitted to do much more (e.g., declare GUCs and register background workers).</p>
+  <p>The <code class="filename">contrib/basic_archive</code> module contains a working example, which demonstrates some useful techniques.</p>
+</div>
+<div class="navfooter">
+  <hr />
+  <table width="100%" summary="Navigation footer">
+    <tr>
+      <td width="40%" align="left"><a accesskey="p" href="replication-origins.html" title="Chapter&nbsp;50.&nbsp;Replication Progress Tracking">Prev</a>&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="u" href="server-programming.html" title="Part&nbsp;V.&nbsp;Server Programming">Up</a></td>
+      <td width="40%" align="right">&nbsp;<a accesskey="n" href="archive-module-init.html" title="51.1.&nbsp;Initialization Functions">Next</a></td>
+    </tr>
+    <tr>
+      <td width="40%" align="left" valign="top">Chapter&nbsp;50.&nbsp;Replication Progress Tracking&nbsp;</td>
+      <td width="20%" align="center"><a accesskey="h" href="index.html" title="PostgreSQL 16.15 Documentation">Home</a></td>
+      <td width="40%" align="right" valign="top">&nbsp;51.1.&nbsp;Initialization Functions</td>
+    </tr>
+  </table>
+</div>
+
+          </div>
+          
+            <div id="docComments">
+              <h2>Submit correction</h2>
+              <p>
+              If you see anything in the documentation that is not correct, does not match
+              your experience with the particular feature or requires further clarification,
+              please use
+              <a href="/account/comments/new/16/archive-modules.html/" rel="nofollow">this form</a>
+              to report a documentation issue.
+              </p>
+            </div>
+          
+        </div> <!-- pgContentWrap -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <!-- Copyright -->
+      <div class="container">
+        <a href="/about/policies/">Policies</a> |
+        <a href="/about/policies/coc/">Code of Conduct</a> |
+        <a href="/about/">About PostgreSQL</a> |
+        <a href="/about/contact/">Contact</a><br/>
+        <p>Copyright &copy; 1996-2026 The PostgreSQL Global Development Group</p>
+      </div>
+    </footer>
+    <script src="/media/js/main.js?8eb38fb2"></script>
+
+  </body>
+</html>
