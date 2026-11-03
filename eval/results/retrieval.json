@@ -1,0 +1,349 @@
+{
+  "embed_model": "BAAI/bge-small-en-v1.5",
+  "summary": {
+    "vector": {
+      "questions": 8,
+      "hit@5": 1.0,
+      "mrr": 1.0,
+      "p50_ms": 60,
+      "p95_ms": 243,
+      "missed_ids": [],
+      "avg_top_score_answerable": 0.809,
+      "avg_top_score_unanswerable": 0.719
+    },
+    "keyword": {
+      "questions": 8,
+      "hit@5": 0.625,
+      "mrr": 0.383,
+      "p50_ms": 30,
+      "p95_ms": 138,
+      "missed_ids": [
+        "f01",
+        "f05",
+        "f07"
+      ],
+      "avg_top_score_answerable": 0.966,
+      "avg_top_score_unanswerable": 0.941
+    },
+    "hybrid": {
+      "questions": 8,
+      "hit@5": 1.0,
+      "mrr": 0.717,
+      "p50_ms": 55,
+      "p95_ms": 189,
+      "missed_ids": [],
+      "avg_top_score_answerable": 0.031,
+      "avg_top_score_unanswerable": 0.023
+    },
+    "hybrid + rerank": {
+      "questions": 8,
+      "hit@5": 0.875,
+      "mrr": 0.729,
+      "p50_ms": 3242,
+      "p95_ms": 3657,
+      "missed_ids": [
+        "f07"
+      ],
+      "avg_top_score_answerable": 4.698,
+      "avg_top_score_unanswerable": -5.234
+    }
+  },
+  "details": {
+    "vector": [
+      {
+        "id": "f01",
+        "rank": 1,
+        "top_urls": [
+          "indexes-types.html",
+          "hash-intro.html",
+          "indexes-types.html"
+        ]
+      },
+      {
+        "id": "f02",
+        "rank": 1,
+        "top_urls": [
+          "sql-vacuum.html",
+          "sql-vacuum.html",
+          "routine-vacuuming.html"
+        ]
+      },
+      {
+        "id": "f03",
+        "rank": 1,
+        "top_urls": [
+          "runtime-config-resource.html",
+          "runtime-config-resource.html",
+          "runtime-config-resource.html"
+        ]
+      },
+      {
+        "id": "f04",
+        "rank": 1,
+        "top_urls": [
+          "transaction-iso.html",
+          "transaction-iso.html",
+          "mvcc.html"
+        ]
+      },
+      {
+        "id": "f05",
+        "rank": 1,
+        "top_urls": [
+          "sql-explain.html",
+          "sql-select.html",
+          "pgstatstatements.html"
+        ]
+      },
+      {
+        "id": "f06",
+        "rank": 1,
+        "top_urls": [
+          "sql-createindex.html",
+          "sql-createtable.html",
+          "sql-createtable.html"
+        ]
+      },
+      {
+        "id": "f07",
+        "rank": 1,
+        "top_urls": [
+          "performance-tips.html",
+          "populate.html",
+          "parallel-query.html"
+        ]
+      },
+      {
+        "id": "m01",
+        "rank": 1,
+        "top_urls": [
+          "runtime-config-autovacuum.html",
+          "sql-createtable.html",
+          "routine-vacuuming.html"
+        ]
+      }
+    ],
+    "keyword": [
+      {
+        "id": "f01",
+        "rank": null,
+        "top_urls": [
+          "ecpg-descriptors.html",
+          "infoschema-user-defined-types.html",
+          "functions-math.html"
+        ]
+      },
+      {
+        "id": "f02",
+        "rank": 2,
+        "top_urls": [
+          "sql-createtable.html",
+          "routine-vacuuming.html",
+          "progress-reporting.html"
+        ]
+      },
+      {
+        "id": "f03",
+        "rank": 1,
+        "top_urls": [
+          "runtime-config-resource.html",
+          "monitoring-stats.html",
+          "infoschema-tables.html"
+        ]
+      },
+      {
+        "id": "f04",
+        "rank": 1,
+        "top_urls": [
+          "transaction-iso.html",
+          "sql-set-transaction.html",
+          "runtime-config-client.html"
+        ]
+      },
+      {
+        "id": "f05",
+        "rank": 9,
+        "top_urls": [
+          "spi-interface.html",
+          "spi.html",
+          "parallel-query.html"
+        ]
+      },
+      {
+        "id": "f06",
+        "rank": 4,
+        "top_urls": [
+          "libpq-envars.html",
+          "view-pg-settings.html",
+          "sql-altertable.html"
+        ]
+      },
+      {
+        "id": "f07",
+        "rank": null,
+        "top_urls": [
+          "parallel-query.html",
+          "dynamic-trace.html",
+          "regress-coverage.html"
+        ]
+      },
+      {
+        "id": "m01",
+        "rank": 5,
+        "top_urls": [
+          "sql-createtable.html",
+          "sql-createtable.html",
+          "infoschema-tables.html"
+        ]
+      }
+    ],
+    "hybrid": [
+      {
+        "id": "f01",
+        "rank": 5,
+        "top_urls": [
+          "locking-indexes.html",
+          "indexam.html",
+          "hash-intro.html"
+        ]
+      },
+      {
+        "id": "f02",
+        "rank": 1,
+        "top_urls": [
+          "routine-vacuuming.html",
+          "sql-vacuum.html",
+          "sql-vacuum.html"
+        ]
+      },
+      {
+        "id": "f03",
+        "rank": 1,
+        "top_urls": [
+          "runtime-config-resource.html",
+          "runtime-config-resource.html",
+          "kernel-resources.html"
+        ]
+      },
+      {
+        "id": "f04",
+        "rank": 1,
+        "top_urls": [
+          "transaction-iso.html",
+          "transaction-iso.html",
+          "postgres-fdw.html"
+        ]
+      },
+      {
+        "id": "f05",
+        "rank": 5,
+        "top_urls": [
+          "pgstatstatements.html",
+          "sql-prepare.html",
+          "spi-spi-prepare.html"
+        ]
+      },
+      {
+        "id": "f06",
+        "rank": 1,
+        "top_urls": [
+          "sql-createtable.html",
+          "sql-createtable.html",
+          "sql-altertable.html"
+        ]
+      },
+      {
+        "id": "f07",
+        "rank": 3,
+        "top_urls": [
+          "parallel-query.html",
+          "geqo-intro.html",
+          "performance-tips.html"
+        ]
+      },
+      {
+        "id": "m01",
+        "rank": 1,
+        "top_urls": [
+          "routine-vacuuming.html",
+          "runtime-config-autovacuum.html",
+          "runtime-config-autovacuum.html"
+        ]
+      }
+    ],
+    "hybrid + rerank": [
+      {
+        "id": "f01",
+        "rank": 3,
+        "top_urls": [
+          "hash-intro.html",
+          "locking-indexes.html",
+          "indexes-types.html"
+        ]
+      },
+      {
+        "id": "f02",
+        "rank": 1,
+        "top_urls": [
+          "sql-vacuum.html",
+          "app-vacuumdb.html",
+          "sql-vacuum.html"
+        ]
+      },
+      {
+        "id": "f03",
+        "rank": 1,
+        "top_urls": [
+          "runtime-config-resource.html",
+          "runtime-config-resource.html",
+          "logicaldecoding-streaming.html"
+        ]
+      },
+      {
+        "id": "f04",
+        "rank": 1,
+        "top_urls": [
+          "transaction-iso.html",
+          "transaction-iso.html",
+          "transaction-iso.html"
+        ]
+      },
+      {
+        "id": "f05",
+        "rank": 2,
+        "top_urls": [
+          "planner-optimizer.html",
+          "using-explain.html",
+          "sql-prepare.html"
+        ]
+      },
+      {
+        "id": "f06",
+        "rank": 1,
+        "top_urls": [
+          "sql-createindex.html",
+          "sql-createtable.html",
+          "sql-createtable.html"
+        ]
+      },
+      {
+        "id": "f07",
+        "rank": null,
+        "top_urls": [
+          "parallel-query.html",
+          "auto-explain.html",
+          "sql-explain.html"
+        ]
+      },
+      {
+        "id": "m01",
+        "rank": 1,
+        "top_urls": [
+          "runtime-config-autovacuum.html",
+          "sql-createtable.html",
+          "runtime-config-autovacuum.html"
+        ]
+      }
+    ]
+  }
+}
