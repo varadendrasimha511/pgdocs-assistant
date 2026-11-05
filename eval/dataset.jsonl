@@ -38,3 +38,11 @@
 {"id": "u03", "type": "unanswerable", "question": "What is the latest stable version of MySQL?", "reference_answer": "", "expected_urls": []}
 {"id": "u04", "type": "unanswerable", "question": "Which cloud provider offers the cheapest managed PostgreSQL hosting?", "reference_answer": "", "expected_urls": []}
 {"id": "u05", "type": "unanswerable", "question": "Which Python ORM is the best choice for a new project?", "reference_answer": "", "expected_urls": []}
+{"id": "u06", "type": "unanswerable", "question": "How do I configure PgBouncer for transaction pooling?", "reference_answer": "", "expected_urls": []}
+{"id": "u07", "type": "unanswerable", "question": "How do I set up automatic failover with Patroni?", "reference_answer": "", "expected_urls": []}
+{"id": "u08", "type": "unanswerable", "question": "How do I create a hypertable in TimescaleDB?", "reference_answer": "", "expected_urls": []}
+{"id": "u09", "type": "unanswerable", "question": "How do I use PostGIS ST_Distance to measure the distance between two points?", "reference_answer": "", "expected_urls": []}
+{"id": "u10", "type": "unanswerable", "question": "How do I tune the HNSW index parameters in pgvector?", "reference_answer": "", "expected_urls": []}
+{"id": "u11", "type": "unanswerable", "question": "How do I run PostgreSQL on Kubernetes using an operator?", "reference_answer": "", "expected_urls": []}
+{"id": "u12", "type": "unanswerable", "question": "How do I configure Django's DATABASES setting to connect to PostgreSQL?", "reference_answer": "", "expected_urls": []}
+{"id": "u13", "type": "unanswerable", "question": "How do I connect pgAdmin to a remote server?", "reference_answer": "", "expected_urls": []}

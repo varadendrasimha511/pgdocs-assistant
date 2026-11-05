@@ -57,6 +57,7 @@ def search(
     top_k: int = 5,
     candidates: int = 30,
     rerank: bool | None = None,
+    vector_weight: float = 1.0,
 ) -> SearchResult:
     version = version or settings.default_version
     rerank = settings.rerank_enabled if rerank is None else rerank
@@ -88,7 +89,7 @@ def search(
     elif mode == "keyword":
         hits = kw_hits
     else:
-        hits = reciprocal_rank_fusion([vec_hits, kw_hits])
+        hits = reciprocal_rank_fusion([vec_hits, kw_hits], weights=[vector_weight, 1.0])
 
     if rerank and hits:
         s = time.perf_counter()

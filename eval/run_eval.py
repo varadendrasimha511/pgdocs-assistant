@@ -11,9 +11,9 @@ OUT = Path("eval/results/retrieval.json")
 K = 10  # retrieve 10; hit@5 and MRR are computed from this list
 
 CONFIGS = {
-    "vector": {"mode": "vector", "rerank": False},
-    "keyword": {"mode": "keyword", "rerank": False},
-    "hybrid": {"mode": "hybrid", "rerank": False},
+        "vector + rerank": {"mode": "vector", "rerank": True},
+    "vector + rerank (10)": {"mode": "vector", "rerank": True, "candidates": 10},
+    "vector + rerank (5)": {"mode": "vector", "rerank": True, "candidates": 5},
     "hybrid + rerank": {"mode": "hybrid", "rerank": True},
 }
 
@@ -96,16 +96,16 @@ def main() -> None:
         encoding="utf-8",
     )
 
-    print(f"\n{'config':<18}{'hit@5':>8}{'MRR':>8}{'multi@5':>9}{'p50 ms':>9}{'p95 ms':>9}")
+    print(f"\n{'config':<22}{'hit@5':>8}{'MRR':>8}{'multi@5':>9}{'p50 ms':>9}{'p95 ms':>9}")
     for name, s in summary.items():
         print(
-            f"{name:<18}{s['hit@5']:>8}{s['mrr']:>8}{s['multi_coverage@5']:>9}"
+            f"{name:<22}{s['hit@5']:>8}{s['mrr']:>8}{s['multi_coverage@5']:>9}"
             f"{s['p50_ms']:>9}{s['p95_ms']:>9}"
         )
 
     print("\nMissed questions (not in top 5):")
     for name, s in summary.items():
-        print(f"  {name:<18}{s['missed_ids']}")
+        print(f"  {name:<22}{s['missed_ids']}")
 
     # Data for the 'no evidence, no answer' guardrail (hybrid + rerank scores)
     scores = details["hybrid + rerank"]
