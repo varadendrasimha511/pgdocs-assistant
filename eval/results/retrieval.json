@@ -1,13 +1,106 @@
 {
   "embed_model": "BAAI/bge-small-en-v1.5",
   "summary": {
+    "vector": {
+      "questions": 35,
+      "hit@5": 0.829,
+      "mrr": 0.665,
+      "multi_coverage@5": 0.517,
+      "p50_ms": 17,
+      "p95_ms": 111,
+      "missed_ids": [
+        "f12",
+        "f15",
+        "f17",
+        "f19",
+        "f22",
+        "m04"
+      ]
+    },
+    "keyword": {
+      "questions": 35,
+      "hit@5": 0.429,
+      "mrr": 0.281,
+      "multi_coverage@5": 0.25,
+      "p50_ms": 40,
+      "p95_ms": 106,
+      "missed_ids": [
+        "f01",
+        "f05",
+        "f07",
+        "f10",
+        "f11",
+        "f12",
+        "f15",
+        "f16",
+        "f17",
+        "f18",
+        "f19",
+        "f20",
+        "f21",
+        "f24",
+        "m02",
+        "m03",
+        "m04",
+        "m06",
+        "m07",
+        "m10"
+      ]
+    },
+    "hybrid": {
+      "questions": 35,
+      "hit@5": 0.829,
+      "mrr": 0.609,
+      "multi_coverage@5": 0.517,
+      "p50_ms": 78,
+      "p95_ms": 188,
+      "missed_ids": [
+        "f17",
+        "f19",
+        "f21",
+        "m04",
+        "m06",
+        "m10"
+      ]
+    },
+    "hybrid (vector 2x)": {
+      "questions": 35,
+      "hit@5": 0.829,
+      "mrr": 0.607,
+      "multi_coverage@5": 0.467,
+      "p50_ms": 66,
+      "p95_ms": 166,
+      "missed_ids": [
+        "f17",
+        "f19",
+        "f21",
+        "m04",
+        "m06",
+        "m10"
+      ]
+    },
+    "hybrid (vector 3x)": {
+      "questions": 35,
+      "hit@5": 0.857,
+      "mrr": 0.597,
+      "multi_coverage@5": 0.467,
+      "p50_ms": 67,
+      "p95_ms": 180,
+      "missed_ids": [
+        "f17",
+        "f19",
+        "f21",
+        "m04",
+        "m10"
+      ]
+    },
     "vector + rerank": {
       "questions": 35,
       "hit@5": 0.771,
       "mrr": 0.647,
       "multi_coverage@5": 0.383,
-      "p50_ms": 3135,
-      "p95_ms": 3545,
+      "p50_ms": 3387,
+      "p95_ms": 4805,
       "missed_ids": [
         "f07",
         "f15",
@@ -24,8 +117,8 @@
       "hit@5": 0.771,
       "mrr": 0.667,
       "multi_coverage@5": 0.417,
-      "p50_ms": 1325,
-      "p95_ms": 1641,
+      "p50_ms": 1360,
+      "p95_ms": 1639,
       "missed_ids": [
         "f07",
         "f11",
@@ -42,8 +135,8 @@
       "hit@5": 0.829,
       "mrr": 0.65,
       "multi_coverage@5": 0.517,
-      "p50_ms": 743,
-      "p95_ms": 1095,
+      "p50_ms": 908,
+      "p95_ms": 1173,
       "missed_ids": [
         "f12",
         "f15",
@@ -58,8 +151,8 @@
       "hit@5": 0.771,
       "mrr": 0.65,
       "multi_coverage@5": 0.483,
-      "p50_ms": 3363,
-      "p95_ms": 3633,
+      "p50_ms": 3682,
+      "p95_ms": 4519,
       "missed_ids": [
         "f07",
         "f15",
@@ -73,6 +166,2591 @@
     }
   },
   "details": {
+    "vector": [
+      {
+        "id": "f01",
+        "type": "factual",
+        "top_score": 0.845,
+        "top_urls": [
+          "indexes-types.html",
+          "hash-intro.html",
+          "indexes-types.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f02",
+        "type": "factual",
+        "top_score": 0.78,
+        "top_urls": [
+          "sql-vacuum.html",
+          "sql-vacuum.html",
+          "routine-vacuuming.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f03",
+        "type": "factual",
+        "top_score": 0.791,
+        "top_urls": [
+          "runtime-config-resource.html",
+          "runtime-config-resource.html",
+          "runtime-config-resource.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f04",
+        "type": "factual",
+        "top_score": 0.888,
+        "top_urls": [
+          "transaction-iso.html",
+          "transaction-iso.html",
+          "mvcc.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f05",
+        "type": "factual",
+        "top_score": 0.808,
+        "top_urls": [
+          "sql-explain.html",
+          "sql-select.html",
+          "pgstatstatements.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f06",
+        "type": "factual",
+        "top_score": 0.837,
+        "top_urls": [
+          "sql-createindex.html",
+          "sql-createtable.html",
+          "sql-createtable.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f07",
+        "type": "factual",
+        "top_score": 0.719,
+        "top_urls": [
+          "performance-tips.html",
+          "populate.html",
+          "parallel-query.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m01",
+        "type": "multi",
+        "top_score": 0.808,
+        "top_urls": [
+          "runtime-config-autovacuum.html",
+          "sql-createtable.html",
+          "routine-vacuuming.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "u01",
+        "type": "unanswerable",
+        "top_score": 0.725,
+        "top_urls": [
+          "postgres-fdw.html",
+          "postgres-fdw.html",
+          "limits.html"
+        ]
+      },
+      {
+        "id": "u02",
+        "type": "unanswerable",
+        "top_score": 0.712,
+        "top_urls": [
+          "sql-comment.html",
+          "functions-aggregate.html",
+          "sql-createsequence.html"
+        ]
+      },
+      {
+        "id": "f08",
+        "type": "factual",
+        "top_score": 0.767,
+        "top_urls": [
+          "ddl-partitioning.html",
+          "ddl-partitioning.html",
+          "ddl-partitioning.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f09",
+        "type": "factual",
+        "top_score": 0.888,
+        "top_urls": [
+          "datatype-json.html",
+          "datatype-json.html",
+          "datatype-json.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f10",
+        "type": "factual",
+        "top_score": 0.747,
+        "top_urls": [
+          "tutorial-populate.html",
+          "sql-selectinto.html",
+          "sql-copy.html"
+        ],
+        "rank": 3
+      },
+      {
+        "id": "f11",
+        "type": "factual",
+        "top_score": 0.746,
+        "top_urls": [
+          "backup-file.html",
+          "app-pgbasebackup.html",
+          "backup.html"
+        ],
+        "rank": 4
+      },
+      {
+        "id": "f12",
+        "type": "factual",
+        "top_score": 0.766,
+        "top_urls": [
+          "libpq-pgpass.html",
+          "libpq-connect.html",
+          "app-pgamcheck.html"
+        ],
+        "rank": 8
+      },
+      {
+        "id": "f13",
+        "type": "factual",
+        "top_score": 0.745,
+        "top_urls": [
+          "sql-createdatabase.html",
+          "kernel-resources.html",
+          "installation-platform-notes.html"
+        ],
+        "rank": 4
+      },
+      {
+        "id": "f14",
+        "type": "factual",
+        "top_score": 0.802,
+        "top_urls": [
+          "queries-with.html",
+          "queries-with.html",
+          "queries-with.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f15",
+        "type": "factual",
+        "top_score": 0.76,
+        "top_urls": [
+          "sql-createpolicy.html",
+          "sql-update.html",
+          "logical-replication-row-filter.html"
+        ],
+        "rank": 6
+      },
+      {
+        "id": "f16",
+        "type": "factual",
+        "top_score": 0.776,
+        "top_urls": [
+          "sql-createindex.html",
+          "indexes-intro.html",
+          "indexes-partial.html"
+        ],
+        "rank": 3
+      },
+      {
+        "id": "f17",
+        "type": "factual",
+        "top_score": 0.676,
+        "top_urls": [
+          "bug-reporting.html",
+          "rules-views.html",
+          "queries-limit.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "f18",
+        "type": "factual",
+        "top_score": 0.75,
+        "top_urls": [
+          "ddl-rowsecurity.html",
+          "ddl-rowsecurity.html",
+          "sql-select.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f19",
+        "type": "factual",
+        "top_score": 0.699,
+        "top_urls": [
+          "sql-values.html",
+          "sql-selectinto.html",
+          "sql-dropprocedure.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "f20",
+        "type": "factual",
+        "top_score": 0.83,
+        "top_urls": [
+          "runtime-config-resource.html",
+          "kernel-resources.html",
+          "runtime-config-resource.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f21",
+        "type": "factual",
+        "top_score": 0.808,
+        "top_urls": [
+          "limits.html",
+          "lo-intro.html",
+          "limits.html"
+        ],
+        "rank": 4
+      },
+      {
+        "id": "f22",
+        "type": "factual",
+        "top_score": 0.731,
+        "top_urls": [
+          "sql-select.html",
+          "sql-select.html",
+          "sql-select.html"
+        ],
+        "rank": 7
+      },
+      {
+        "id": "f23",
+        "type": "factual",
+        "top_score": 0.788,
+        "top_urls": [
+          "indexes-multicolumn.html",
+          "indexes-multicolumn.html",
+          "sql-createindex.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f24",
+        "type": "factual",
+        "top_score": 0.772,
+        "top_urls": [
+          "indexes-index-only-scans.html",
+          "indexes-index-only-scans.html",
+          "textsearch-tables.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f25",
+        "type": "factual",
+        "top_score": 0.733,
+        "top_urls": [
+          "textsearch-intro.html",
+          "textsearch-controls.html",
+          "sql-createtsparser.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m02",
+        "type": "multi",
+        "top_score": 0.748,
+        "top_urls": [
+          "continuous-archiving.html",
+          "continuous-archiving.html",
+          "continuous-archiving.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m03",
+        "type": "multi",
+        "top_score": 0.845,
+        "top_urls": [
+          "logicaldecoding-synchronous.html",
+          "different-replication-solutions.html",
+          "protocol-logical-replication.html"
+        ],
+        "rank": 5
+      },
+      {
+        "id": "m04",
+        "type": "multi",
+        "top_score": 0.703,
+        "top_urls": [
+          "app-createuser.html",
+          "sql-createtablespace.html",
+          "sql-createpolicy.html"
+        ],
+        "rank": 8
+      },
+      {
+        "id": "m05",
+        "type": "multi",
+        "top_score": 0.724,
+        "top_urls": [
+          "monitoring-locks.html",
+          "view-pg-locks.html",
+          "monitoring-ps.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "m06",
+        "type": "multi",
+        "top_score": 0.655,
+        "top_urls": [
+          "runtime-config-resource.html",
+          "sql-begin.html",
+          "routine-vacuuming.html"
+        ],
+        "rank": 3
+      },
+      {
+        "id": "m07",
+        "type": "multi",
+        "top_score": 0.81,
+        "top_urls": [
+          "datatype-json.html",
+          "textsearch-indexes.html",
+          "datatype-json.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m08",
+        "type": "multi",
+        "top_score": 0.76,
+        "top_urls": [
+          "ddl-partitioning.html",
+          "ddl-partitioning.html",
+          "ddl-partitioning.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m09",
+        "type": "multi",
+        "top_score": 0.809,
+        "top_urls": [
+          "runtime-config-query.html",
+          "runtime-config-query.html",
+          "runtime-config-query.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m10",
+        "type": "multi",
+        "top_score": 0.729,
+        "top_urls": [
+          "bug-reporting.html",
+          "performance-tips.html",
+          "auto-explain.html"
+        ],
+        "rank": 4
+      },
+      {
+        "id": "u03",
+        "type": "unanswerable",
+        "top_score": 0.704,
+        "top_urls": [
+          "preface.html",
+          "index.html",
+          "features.html"
+        ]
+      },
+      {
+        "id": "u04",
+        "type": "unanswerable",
+        "top_score": 0.693,
+        "top_urls": [
+          "different-replication-solutions.html",
+          "auth-pg-hba-conf.html",
+          "supported-platforms.html"
+        ]
+      },
+      {
+        "id": "u05",
+        "type": "unanswerable",
+        "top_score": 0.683,
+        "top_urls": [
+          "install-requirements.html",
+          "plpython.html",
+          "sql-createlanguage.html"
+        ]
+      },
+      {
+        "id": "u06",
+        "type": "unanswerable",
+        "top_score": 0.727,
+        "top_urls": [
+          "pgbench.html",
+          "pgbench.html",
+          "pgbench.html"
+        ]
+      },
+      {
+        "id": "u07",
+        "type": "unanswerable",
+        "top_score": 0.655,
+        "top_urls": [
+          "warm-standby-failover.html",
+          "warm-standby-failover.html",
+          "warm-standby-failover.html"
+        ]
+      },
+      {
+        "id": "u08",
+        "type": "unanswerable",
+        "top_score": 0.713,
+        "top_urls": [
+          "sql-createtable.html",
+          "sql-createsequence.html",
+          "sql-createtableas.html"
+        ]
+      },
+      {
+        "id": "u09",
+        "type": "unanswerable",
+        "top_score": 0.723,
+        "top_urls": [
+          "earthdistance.html",
+          "earthdistance.html",
+          "functions-geometry.html"
+        ]
+      },
+      {
+        "id": "u10",
+        "type": "unanswerable",
+        "top_score": 0.697,
+        "top_urls": [
+          "gist-extensibility.html",
+          "brin-builtin-opclasses.html",
+          "libpq-envars.html"
+        ]
+      },
+      {
+        "id": "u11",
+        "type": "unanswerable",
+        "top_score": 0.737,
+        "top_urls": [
+          "supported-platforms.html",
+          "install-windows-full.html",
+          "app-postgres.html"
+        ]
+      },
+      {
+        "id": "u12",
+        "type": "unanswerable",
+        "top_score": 0.727,
+        "top_urls": [
+          "app-psql.html",
+          "tutorial-createdb.html",
+          "logical-replication-quick-setup.html"
+        ]
+      },
+      {
+        "id": "u13",
+        "type": "unanswerable",
+        "top_score": 0.719,
+        "top_urls": [
+          "adminpack.html",
+          "ssh-tunnels.html",
+          "auth-pg-hba-conf.html"
+        ]
+      }
+    ],
+    "keyword": [
+      {
+        "id": "f01",
+        "type": "factual",
+        "top_score": 0.978,
+        "top_urls": [
+          "ecpg-descriptors.html",
+          "infoschema-user-defined-types.html",
+          "functions-math.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "f02",
+        "type": "factual",
+        "top_score": 0.958,
+        "top_urls": [
+          "sql-createtable.html",
+          "routine-vacuuming.html",
+          "progress-reporting.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "f03",
+        "type": "factual",
+        "top_score": 0.971,
+        "top_urls": [
+          "runtime-config-resource.html",
+          "monitoring-stats.html",
+          "infoschema-tables.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f04",
+        "type": "factual",
+        "top_score": 0.968,
+        "top_urls": [
+          "transaction-iso.html",
+          "sql-set-transaction.html",
+          "runtime-config-client.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f05",
+        "type": "factual",
+        "top_score": 0.96,
+        "top_urls": [
+          "spi-interface.html",
+          "spi.html",
+          "parallel-query.html"
+        ],
+        "rank": 9
+      },
+      {
+        "id": "f06",
+        "type": "factual",
+        "top_score": 0.957,
+        "top_urls": [
+          "libpq-envars.html",
+          "view-pg-settings.html",
+          "sql-altertable.html"
+        ],
+        "rank": 4
+      },
+      {
+        "id": "f07",
+        "type": "factual",
+        "top_score": 0.959,
+        "top_urls": [
+          "parallel-query.html",
+          "dynamic-trace.html",
+          "regress-coverage.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "m01",
+        "type": "multi",
+        "top_score": 0.976,
+        "top_urls": [
+          "sql-createtable.html",
+          "sql-createtable.html",
+          "infoschema-tables.html"
+        ],
+        "rank": 5
+      },
+      {
+        "id": "u01",
+        "type": "unanswerable",
+        "top_score": 0.952,
+        "top_urls": [
+          "reference.html",
+          "infoschema-routines.html",
+          "infoschema-user-defined-types.html"
+        ]
+      },
+      {
+        "id": "u02",
+        "type": "unanswerable",
+        "top_score": 0.931,
+        "top_urls": [
+          "textsearch-intro.html",
+          "textsearch-configuration.html",
+          "install-meson.html"
+        ]
+      },
+      {
+        "id": "f08",
+        "type": "factual",
+        "top_score": 0.975,
+        "top_urls": [
+          "sql-createtable.html",
+          "ddl-partitioning.html",
+          "sql-createtable.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "f09",
+        "type": "factual",
+        "top_score": 0.978,
+        "top_urls": [
+          "ecpg-descriptors.html",
+          "datatype-json.html",
+          "functions-json.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "f10",
+        "type": "factual",
+        "top_score": 0.964,
+        "top_urls": [
+          "infoschema-tables.html",
+          "monitoring-stats.html",
+          "monitoring-stats.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "f11",
+        "type": "factual",
+        "top_score": 0.957,
+        "top_urls": [
+          "catalog-pg-database.html",
+          "monitoring-stats.html",
+          "monitoring-stats.html"
+        ],
+        "rank": 7
+      },
+      {
+        "id": "f12",
+        "type": "factual",
+        "top_score": 0.965,
+        "top_urls": [
+          "ecpg-sql-connect.html",
+          "libpq-connect.html",
+          "auth-methods.html"
+        ],
+        "rank": 6
+      },
+      {
+        "id": "f13",
+        "type": "factual",
+        "top_score": 0.964,
+        "top_urls": [
+          "ecpg-sql-connect.html",
+          "libpq-connect.html",
+          "functions-json.html"
+        ],
+        "rank": 5
+      },
+      {
+        "id": "f14",
+        "type": "factual",
+        "top_score": 0.957,
+        "top_urls": [
+          "rules-update.html",
+          "queries-with.html",
+          "queries-with.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "f15",
+        "type": "factual",
+        "top_score": 0.974,
+        "top_urls": [
+          "sql-createpolicy.html",
+          "sql-createtrigger.html",
+          "transaction-iso.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "f16",
+        "type": "factual",
+        "top_score": 0.978,
+        "top_urls": [
+          "logical-replication-subscription.html",
+          "monitoring-stats.html",
+          "sql-createindex.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "f17",
+        "type": "factual",
+        "top_score": 0.95,
+        "top_urls": [
+          "dynamic-trace.html",
+          "parallel-query.html",
+          "monitoring-stats.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "f18",
+        "type": "factual",
+        "top_score": 0.976,
+        "top_urls": [
+          "monitoring-stats.html",
+          "monitoring-stats.html",
+          "infoschema-tables.html"
+        ],
+        "rank": 6
+      },
+      {
+        "id": "f19",
+        "type": "factual",
+        "top_score": 0.949,
+        "top_urls": [
+          "pgstatstatements.html",
+          "view-pg-prepared-statements.html",
+          "runtime-config-logging.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "f20",
+        "type": "factual",
+        "top_score": 0.967,
+        "top_urls": [
+          "pageinspect.html",
+          "kernel-resources.html",
+          "infoschema-parameters.html"
+        ],
+        "rank": 6
+      },
+      {
+        "id": "f21",
+        "type": "factual",
+        "top_score": 0.966,
+        "top_urls": [
+          "sql-alterforeigntable.html",
+          "ddl-generated-columns.html",
+          "largeobjects.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "f22",
+        "type": "factual",
+        "top_score": 0.963,
+        "top_urls": [
+          "sql-alterforeigntable.html",
+          "infoschema-columns.html",
+          "logical-replication-col-lists.html"
+        ],
+        "rank": 4
+      },
+      {
+        "id": "f23",
+        "type": "factual",
+        "top_score": 0.966,
+        "top_urls": [
+          "indexes-multicolumn.html",
+          "sql-alterforeigntable.html",
+          "sql-createindex.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f24",
+        "type": "factual",
+        "top_score": 0.975,
+        "top_urls": [
+          "monitoring-stats.html",
+          "monitoring-stats.html",
+          "infoschema-tables.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "f25",
+        "type": "factual",
+        "top_score": 0.965,
+        "top_urls": [
+          "dict-xsyn.html",
+          "sql-alterforeigntable.html",
+          "functions-textsearch.html"
+        ],
+        "rank": 4
+      },
+      {
+        "id": "m02",
+        "type": "multi",
+        "top_score": 0.975,
+        "top_urls": [
+          "functions-datetime.html",
+          "datatype-datetime.html",
+          "pgstatstatements.html"
+        ],
+        "rank": 6
+      },
+      {
+        "id": "m03",
+        "type": "multi",
+        "top_score": 0.965,
+        "top_urls": [
+          "logicaldecoding-streaming.html",
+          "protocol-replication.html",
+          "logicaldecoding.html"
+        ],
+        "rank": 9
+      },
+      {
+        "id": "m04",
+        "type": "multi",
+        "top_score": 0.978,
+        "top_urls": [
+          "logical-replication-subscription.html",
+          "sql-createpublication.html",
+          "monitoring-stats.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "m05",
+        "type": "multi",
+        "top_score": 0.966,
+        "top_urls": [
+          "explicit-locking.html",
+          "view-pg-locks.html",
+          "functions-admin.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m06",
+        "type": "multi",
+        "top_score": 0.938,
+        "top_urls": [
+          "sql-explain.html",
+          "pgwalinspect.html",
+          "protocol-flow.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "m07",
+        "type": "multi",
+        "top_score": 0.977,
+        "top_urls": [
+          "functions-json.html",
+          "functions-json.html",
+          "sql-createindex.html"
+        ],
+        "rank": 7
+      },
+      {
+        "id": "m08",
+        "type": "multi",
+        "top_score": 0.975,
+        "top_urls": [
+          "sql-createtable.html",
+          "ddl-partitioning.html",
+          "sql-createtable.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "m09",
+        "type": "multi",
+        "top_score": 0.971,
+        "top_urls": [
+          "runtime-config-query.html",
+          "jit-decision.html",
+          "index-cost-estimation.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m10",
+        "type": "multi",
+        "top_score": 0.95,
+        "top_urls": [
+          "dynamic-trace.html",
+          "parallel-query.html",
+          "monitoring-stats.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "u03",
+        "type": "unanswerable",
+        "top_score": 0.938,
+        "top_urls": [
+          "upgrading.html",
+          "libpq-status.html",
+          "protocol-logical-replication.html"
+        ]
+      },
+      {
+        "id": "u04",
+        "type": "unanswerable",
+        "top_score": 0.952,
+        "top_urls": [
+          "infoschema-routines.html",
+          "reference.html",
+          "infoschema-user-defined-types.html"
+        ]
+      },
+      {
+        "id": "u05",
+        "type": "unanswerable",
+        "top_score": 0.96,
+        "top_urls": [
+          "sql-commands.html",
+          "reference.html",
+          "sql-altertype.html"
+        ]
+      },
+      {
+        "id": "u06",
+        "type": "unanswerable",
+        "top_score": 0.953,
+        "top_urls": [
+          "sql-set-transaction.html",
+          "sql-set-transaction.html",
+          "runtime-config-client.html"
+        ]
+      },
+      {
+        "id": "u07",
+        "type": "unanswerable",
+        "top_score": 0.946,
+        "top_urls": [
+          "multibyte.html",
+          "sql-createdatabase.html",
+          "sql-set.html"
+        ]
+      },
+      {
+        "id": "u08",
+        "type": "unanswerable",
+        "top_score": 0.968,
+        "top_urls": [
+          "event-trigger-matrix.html",
+          "sql-commands.html",
+          "reference.html"
+        ]
+      },
+      {
+        "id": "u09",
+        "type": "unanswerable",
+        "top_score": 0.972,
+        "top_urls": [
+          "spgist-builtin-opclasses.html",
+          "functions-geometry.html",
+          "earthdistance.html"
+        ]
+      },
+      {
+        "id": "u10",
+        "type": "unanswerable",
+        "top_score": 0.957,
+        "top_urls": [
+          "libpq-envars.html",
+          "indexam.html",
+          "sql-createindex.html"
+        ]
+      },
+      {
+        "id": "u11",
+        "type": "unanswerable",
+        "top_score": 0.979,
+        "top_urls": [
+          "brin-extensibility.html",
+          "xindex.html",
+          "sql-alteropfamily.html"
+        ]
+      },
+      {
+        "id": "u12",
+        "type": "unanswerable",
+        "top_score": 0.968,
+        "top_urls": [
+          "reference.html",
+          "reference.html",
+          "sql-createdatabase.html"
+        ]
+      },
+      {
+        "id": "u13",
+        "type": "unanswerable",
+        "top_score": 0.966,
+        "top_urls": [
+          "runtime-config-connection.html",
+          "libpq-connect.html",
+          "ecpg-sql-connect.html"
+        ]
+      }
+    ],
+    "hybrid": [
+      {
+        "id": "f01",
+        "type": "factual",
+        "top_score": 0.029,
+        "top_urls": [
+          "locking-indexes.html",
+          "indexam.html",
+          "hash-intro.html"
+        ],
+        "rank": 5
+      },
+      {
+        "id": "f02",
+        "type": "factual",
+        "top_score": 0.03,
+        "top_urls": [
+          "routine-vacuuming.html",
+          "sql-vacuum.html",
+          "sql-vacuum.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f03",
+        "type": "factual",
+        "top_score": 0.033,
+        "top_urls": [
+          "runtime-config-resource.html",
+          "runtime-config-resource.html",
+          "kernel-resources.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f04",
+        "type": "factual",
+        "top_score": 0.033,
+        "top_urls": [
+          "transaction-iso.html",
+          "transaction-iso.html",
+          "postgres-fdw.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f05",
+        "type": "factual",
+        "top_score": 0.03,
+        "top_urls": [
+          "pgstatstatements.html",
+          "sql-prepare.html",
+          "spi-spi-prepare.html"
+        ],
+        "rank": 5
+      },
+      {
+        "id": "f06",
+        "type": "factual",
+        "top_score": 0.031,
+        "top_urls": [
+          "sql-createtable.html",
+          "sql-createtable.html",
+          "sql-altertable.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f07",
+        "type": "factual",
+        "top_score": 0.032,
+        "top_urls": [
+          "parallel-query.html",
+          "geqo-intro.html",
+          "performance-tips.html"
+        ],
+        "rank": 3
+      },
+      {
+        "id": "m01",
+        "type": "multi",
+        "top_score": 0.03,
+        "top_urls": [
+          "routine-vacuuming.html",
+          "runtime-config-autovacuum.html",
+          "runtime-config-autovacuum.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "u01",
+        "type": "unanswerable",
+        "top_score": 0.03,
+        "top_urls": [
+          "limits.html",
+          "postgres-fdw.html",
+          "reference.html"
+        ]
+      },
+      {
+        "id": "u02",
+        "type": "unanswerable",
+        "top_score": 0.016,
+        "top_urls": [
+          "sql-comment.html",
+          "textsearch-intro.html",
+          "functions-aggregate.html"
+        ]
+      },
+      {
+        "id": "f08",
+        "type": "factual",
+        "top_score": 0.032,
+        "top_urls": [
+          "ddl-partitioning.html",
+          "sql-createtable.html",
+          "sql-createtable.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f09",
+        "type": "factual",
+        "top_score": 0.033,
+        "top_urls": [
+          "datatype-json.html",
+          "functions-json.html",
+          "functions-json.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f10",
+        "type": "factual",
+        "top_score": 0.016,
+        "top_urls": [
+          "tutorial-populate.html",
+          "infoschema-tables.html",
+          "sql-selectinto.html"
+        ],
+        "rank": 5
+      },
+      {
+        "id": "f11",
+        "type": "factual",
+        "top_score": 0.029,
+        "top_urls": [
+          "app-pgdump.html",
+          "backup-file.html",
+          "catalog-pg-database.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f12",
+        "type": "factual",
+        "top_score": 0.03,
+        "top_urls": [
+          "libpq-connect.html",
+          "libpq-connect.html",
+          "admin.html"
+        ],
+        "rank": 4
+      },
+      {
+        "id": "f13",
+        "type": "factual",
+        "top_score": 0.031,
+        "top_urls": [
+          "runtime-config-connection.html",
+          "runtime-config-connection.html",
+          "kernel-resources.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f14",
+        "type": "factual",
+        "top_score": 0.033,
+        "top_urls": [
+          "queries-with.html",
+          "queries-with.html",
+          "queries-with.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f15",
+        "type": "factual",
+        "top_score": 0.033,
+        "top_urls": [
+          "sql-createpolicy.html",
+          "logical-replication-row-filter.html",
+          "dml-update.html"
+        ],
+        "rank": 5
+      },
+      {
+        "id": "f16",
+        "type": "factual",
+        "top_score": 0.016,
+        "top_urls": [
+          "sql-createindex.html",
+          "logical-replication-subscription.html",
+          "indexes-intro.html"
+        ],
+        "rank": 5
+      },
+      {
+        "id": "f17",
+        "type": "factual",
+        "top_score": 0.016,
+        "top_urls": [
+          "bug-reporting.html",
+          "dynamic-trace.html",
+          "rules-views.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "f18",
+        "type": "factual",
+        "top_score": 0.031,
+        "top_urls": [
+          "ddl-rowsecurity.html",
+          "ddl-rowsecurity.html",
+          "ddl-rowsecurity.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f19",
+        "type": "factual",
+        "top_score": 0.024,
+        "top_urls": [
+          "protocol-flow.html",
+          "plpgsql-control-structures.html",
+          "sql-values.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "f20",
+        "type": "factual",
+        "top_score": 0.032,
+        "top_urls": [
+          "kernel-resources.html",
+          "runtime-config-resource.html",
+          "kernel-resources.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "f21",
+        "type": "factual",
+        "top_score": 0.029,
+        "top_urls": [
+          "largeobjects.html",
+          "lo-interfaces.html",
+          "limits.html"
+        ],
+        "rank": 8
+      },
+      {
+        "id": "f22",
+        "type": "factual",
+        "top_score": 0.03,
+        "top_urls": [
+          "ddl-generated-columns.html",
+          "ddl-generated-columns.html",
+          "sql-alterforeigntable.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f23",
+        "type": "factual",
+        "top_score": 0.031,
+        "top_urls": [
+          "indexes-multicolumn.html",
+          "sql-createindex.html",
+          "indexes-index-only-scans.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f24",
+        "type": "factual",
+        "top_score": 0.03,
+        "top_urls": [
+          "indexes-intro.html",
+          "indexes-index-only-scans.html",
+          "indexes-index-only-scans.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "f25",
+        "type": "factual",
+        "top_score": 0.032,
+        "top_urls": [
+          "textsearch-intro.html",
+          "sql-createtsconfig.html",
+          "textsearch-configuration.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m02",
+        "type": "multi",
+        "top_score": 0.028,
+        "top_urls": [
+          "continuous-archiving.html",
+          "app-pgbasebackup.html",
+          "continuous-archiving.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m03",
+        "type": "multi",
+        "top_score": 0.031,
+        "top_urls": [
+          "different-replication-solutions.html",
+          "protocol-logical-replication.html",
+          "logical-replication.html"
+        ],
+        "rank": 3
+      },
+      {
+        "id": "m04",
+        "type": "multi",
+        "top_score": 0.027,
+        "top_urls": [
+          "ddl-rowsecurity.html",
+          "reference.html",
+          "app-createuser.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "m05",
+        "type": "multi",
+        "top_score": 0.031,
+        "top_urls": [
+          "functions-admin.html",
+          "view-pg-locks.html",
+          "functions-admin.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "m06",
+        "type": "multi",
+        "top_score": 0.03,
+        "top_urls": [
+          "sql-explain.html",
+          "app-pgamcheck.html",
+          "hot-standby.html"
+        ],
+        "rank": 7
+      },
+      {
+        "id": "m07",
+        "type": "multi",
+        "top_score": 0.03,
+        "top_urls": [
+          "textsearch-indexes.html",
+          "btree-gin.html",
+          "datatype-json.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m08",
+        "type": "multi",
+        "top_score": 0.031,
+        "top_urls": [
+          "sql-createtable.html",
+          "ddl-partitioning.html",
+          "ddl-partitioning.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "m09",
+        "type": "multi",
+        "top_score": 0.033,
+        "top_urls": [
+          "runtime-config-query.html",
+          "runtime-config-query.html",
+          "using-explain.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m10",
+        "type": "multi",
+        "top_score": 0.028,
+        "top_urls": [
+          "parallel-query.html",
+          "monitoring-stats.html",
+          "bug-reporting.html"
+        ],
+        "rank": 7
+      },
+      {
+        "id": "u03",
+        "type": "unanswerable",
+        "top_score": 0.029,
+        "top_urls": [
+          "upgrading.html",
+          "features.html",
+          "bug-reporting.html"
+        ]
+      },
+      {
+        "id": "u04",
+        "type": "unanswerable",
+        "top_score": 0.03,
+        "top_urls": [
+          "auth-pg-hba-conf.html",
+          "preface.html",
+          "reference-server.html"
+        ]
+      },
+      {
+        "id": "u05",
+        "type": "unanswerable",
+        "top_score": 0.016,
+        "top_urls": [
+          "install-requirements.html",
+          "sql-commands.html",
+          "plpython.html"
+        ]
+      },
+      {
+        "id": "u06",
+        "type": "unanswerable",
+        "top_score": 0.025,
+        "top_urls": [
+          "pgbench.html",
+          "pgbench.html",
+          "sql-set-transaction.html"
+        ]
+      },
+      {
+        "id": "u07",
+        "type": "unanswerable",
+        "top_score": 0.016,
+        "top_urls": [
+          "warm-standby-failover.html",
+          "multibyte.html",
+          "warm-standby-failover.html"
+        ]
+      },
+      {
+        "id": "u08",
+        "type": "unanswerable",
+        "top_score": 0.031,
+        "top_urls": [
+          "sql-createtable.html",
+          "sql-createtable.html",
+          "event-trigger-matrix.html"
+        ]
+      },
+      {
+        "id": "u09",
+        "type": "unanswerable",
+        "top_score": 0.032,
+        "top_urls": [
+          "earthdistance.html",
+          "functions-geometry.html",
+          "functions-geometry.html"
+        ]
+      },
+      {
+        "id": "u10",
+        "type": "unanswerable",
+        "top_score": 0.032,
+        "top_urls": [
+          "libpq-envars.html",
+          "view-pg-settings.html",
+          "gist-extensibility.html"
+        ]
+      },
+      {
+        "id": "u11",
+        "type": "unanswerable",
+        "top_score": 0.025,
+        "top_urls": [
+          "xindex.html",
+          "supported-platforms.html",
+          "brin-extensibility.html"
+        ]
+      },
+      {
+        "id": "u12",
+        "type": "unanswerable",
+        "top_score": 0.028,
+        "top_urls": [
+          "manage-ag-config.html",
+          "app-psql.html",
+          "app-psql.html"
+        ]
+      },
+      {
+        "id": "u13",
+        "type": "unanswerable",
+        "top_score": 0.027,
+        "top_urls": [
+          "postgres-fdw.html",
+          "server-start.html",
+          "libpq-connect.html"
+        ]
+      }
+    ],
+    "hybrid (vector 2x)": [
+      {
+        "id": "f01",
+        "type": "factual",
+        "top_score": 0.045,
+        "top_urls": [
+          "hash-intro.html",
+          "locking-indexes.html",
+          "indexam.html"
+        ],
+        "rank": 5
+      },
+      {
+        "id": "f02",
+        "type": "factual",
+        "top_score": 0.046,
+        "top_urls": [
+          "routine-vacuuming.html",
+          "sql-vacuum.html",
+          "sql-vacuum.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f03",
+        "type": "factual",
+        "top_score": 0.049,
+        "top_urls": [
+          "runtime-config-resource.html",
+          "runtime-config-resource.html",
+          "kernel-resources.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f04",
+        "type": "factual",
+        "top_score": 0.049,
+        "top_urls": [
+          "transaction-iso.html",
+          "mvcc.html",
+          "postgres-fdw.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f05",
+        "type": "factual",
+        "top_score": 0.044,
+        "top_urls": [
+          "pgstatstatements.html",
+          "sql-prepare.html",
+          "spi-spi-prepare.html"
+        ],
+        "rank": 5
+      },
+      {
+        "id": "f06",
+        "type": "factual",
+        "top_score": 0.047,
+        "top_urls": [
+          "sql-createtable.html",
+          "sql-createtable.html",
+          "sql-createindex.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f07",
+        "type": "factual",
+        "top_score": 0.048,
+        "top_urls": [
+          "parallel-query.html",
+          "geqo-intro.html",
+          "performance-tips.html"
+        ],
+        "rank": 3
+      },
+      {
+        "id": "m01",
+        "type": "multi",
+        "top_score": 0.046,
+        "top_urls": [
+          "runtime-config-autovacuum.html",
+          "routine-vacuuming.html",
+          "routine-vacuuming.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "u01",
+        "type": "unanswerable",
+        "top_score": 0.046,
+        "top_urls": [
+          "postgres-fdw.html",
+          "limits.html",
+          "postgres-fdw.html"
+        ]
+      },
+      {
+        "id": "u02",
+        "type": "unanswerable",
+        "top_score": 0.033,
+        "top_urls": [
+          "sql-comment.html",
+          "functions-aggregate.html",
+          "sql-createsequence.html"
+        ]
+      },
+      {
+        "id": "f08",
+        "type": "factual",
+        "top_score": 0.047,
+        "top_urls": [
+          "ddl-partitioning.html",
+          "sql-createtable.html",
+          "sql-createtable.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f09",
+        "type": "factual",
+        "top_score": 0.049,
+        "top_urls": [
+          "datatype-json.html",
+          "functions-json.html",
+          "datatype-json.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f10",
+        "type": "factual",
+        "top_score": 0.033,
+        "top_urls": [
+          "tutorial-populate.html",
+          "sql-selectinto.html",
+          "sql-copy.html"
+        ],
+        "rank": 3
+      },
+      {
+        "id": "f11",
+        "type": "factual",
+        "top_score": 0.042,
+        "top_urls": [
+          "app-pgdump.html",
+          "backup-file.html",
+          "app-pgbasebackup.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f12",
+        "type": "factual",
+        "top_score": 0.046,
+        "top_urls": [
+          "libpq-connect.html",
+          "libpq-connect.html",
+          "admin.html"
+        ],
+        "rank": 4
+      },
+      {
+        "id": "f13",
+        "type": "factual",
+        "top_score": 0.047,
+        "top_urls": [
+          "runtime-config-connection.html",
+          "kernel-resources.html",
+          "runtime-config-connection.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f14",
+        "type": "factual",
+        "top_score": 0.049,
+        "top_urls": [
+          "queries-with.html",
+          "queries-with.html",
+          "queries-with.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f15",
+        "type": "factual",
+        "top_score": 0.049,
+        "top_urls": [
+          "sql-createpolicy.html",
+          "logical-replication-row-filter.html",
+          "dml-update.html"
+        ],
+        "rank": 4
+      },
+      {
+        "id": "f16",
+        "type": "factual",
+        "top_score": 0.033,
+        "top_urls": [
+          "sql-createindex.html",
+          "indexes-intro.html",
+          "indexes-partial.html"
+        ],
+        "rank": 3
+      },
+      {
+        "id": "f17",
+        "type": "factual",
+        "top_score": 0.033,
+        "top_urls": [
+          "bug-reporting.html",
+          "rules-views.html",
+          "queries-limit.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "f18",
+        "type": "factual",
+        "top_score": 0.047,
+        "top_urls": [
+          "ddl-rowsecurity.html",
+          "ddl-rowsecurity.html",
+          "sql-altertable.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f19",
+        "type": "factual",
+        "top_score": 0.035,
+        "top_urls": [
+          "plpgsql-control-structures.html",
+          "protocol-flow.html",
+          "sql-values.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "f20",
+        "type": "factual",
+        "top_score": 0.048,
+        "top_urls": [
+          "kernel-resources.html",
+          "runtime-config-resource.html",
+          "kernel-resources.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "f21",
+        "type": "factual",
+        "top_score": 0.042,
+        "top_urls": [
+          "largeobjects.html",
+          "lo-interfaces.html",
+          "limits.html"
+        ],
+        "rank": 6
+      },
+      {
+        "id": "f22",
+        "type": "factual",
+        "top_score": 0.045,
+        "top_urls": [
+          "ddl-generated-columns.html",
+          "textsearch-features.html",
+          "ddl-generated-columns.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f23",
+        "type": "factual",
+        "top_score": 0.045,
+        "top_urls": [
+          "sql-createindex.html",
+          "indexes-multicolumn.html",
+          "indexes-index-only-scans.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "f24",
+        "type": "factual",
+        "top_score": 0.046,
+        "top_urls": [
+          "indexes-intro.html",
+          "indexes-index-only-scans.html",
+          "indexes-index-only-scans.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "f25",
+        "type": "factual",
+        "top_score": 0.048,
+        "top_urls": [
+          "textsearch-intro.html",
+          "sql-createtsconfig.html",
+          "sql-altertsconfig.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m02",
+        "type": "multi",
+        "top_score": 0.044,
+        "top_urls": [
+          "continuous-archiving.html",
+          "continuous-archiving.html",
+          "continuous-archiving.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m03",
+        "type": "multi",
+        "top_score": 0.047,
+        "top_urls": [
+          "different-replication-solutions.html",
+          "logical-replication.html",
+          "protocol-logical-replication.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "m04",
+        "type": "multi",
+        "top_score": 0.041,
+        "top_urls": [
+          "ddl-rowsecurity.html",
+          "reference.html",
+          "app-createuser.html"
+        ],
+        "rank": 10
+      },
+      {
+        "id": "m05",
+        "type": "multi",
+        "top_score": 0.046,
+        "top_urls": [
+          "functions-admin.html",
+          "functions-info.html",
+          "monitoring-locks.html"
+        ],
+        "rank": 4
+      },
+      {
+        "id": "m06",
+        "type": "multi",
+        "top_score": 0.044,
+        "top_urls": [
+          "sql-explain.html",
+          "app-pgamcheck.html",
+          "hot-standby.html"
+        ],
+        "rank": 6
+      },
+      {
+        "id": "m07",
+        "type": "multi",
+        "top_score": 0.045,
+        "top_urls": [
+          "textsearch-indexes.html",
+          "datatype-json.html",
+          "btree-gin.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m08",
+        "type": "multi",
+        "top_score": 0.047,
+        "top_urls": [
+          "sql-createtable.html",
+          "ddl-partitioning.html",
+          "ddl-partitioning.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "m09",
+        "type": "multi",
+        "top_score": 0.049,
+        "top_urls": [
+          "runtime-config-query.html",
+          "runtime-config-query.html",
+          "using-explain.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m10",
+        "type": "multi",
+        "top_score": 0.039,
+        "top_urls": [
+          "parallel-query.html",
+          "monitoring-stats.html",
+          "bug-reporting.html"
+        ],
+        "rank": 6
+      },
+      {
+        "id": "u03",
+        "type": "unanswerable",
+        "top_score": 0.045,
+        "top_urls": [
+          "features.html",
+          "bug-reporting.html",
+          "app-psql.html"
+        ]
+      },
+      {
+        "id": "u04",
+        "type": "unanswerable",
+        "top_score": 0.046,
+        "top_urls": [
+          "auth-pg-hba-conf.html",
+          "preface.html",
+          "reference-server.html"
+        ]
+      },
+      {
+        "id": "u05",
+        "type": "unanswerable",
+        "top_score": 0.033,
+        "top_urls": [
+          "install-requirements.html",
+          "plpython.html",
+          "sql-createlanguage.html"
+        ]
+      },
+      {
+        "id": "u06",
+        "type": "unanswerable",
+        "top_score": 0.036,
+        "top_urls": [
+          "pgbench.html",
+          "pgbench.html",
+          "pgbench.html"
+        ]
+      },
+      {
+        "id": "u07",
+        "type": "unanswerable",
+        "top_score": 0.033,
+        "top_urls": [
+          "warm-standby-failover.html",
+          "warm-standby-failover.html",
+          "warm-standby-failover.html"
+        ]
+      },
+      {
+        "id": "u08",
+        "type": "unanswerable",
+        "top_score": 0.047,
+        "top_urls": [
+          "sql-createtable.html",
+          "sql-createtable.html",
+          "event-trigger-matrix.html"
+        ]
+      },
+      {
+        "id": "u09",
+        "type": "unanswerable",
+        "top_score": 0.048,
+        "top_urls": [
+          "earthdistance.html",
+          "functions-geometry.html",
+          "xfunc-c.html"
+        ]
+      },
+      {
+        "id": "u10",
+        "type": "unanswerable",
+        "top_score": 0.048,
+        "top_urls": [
+          "libpq-envars.html",
+          "view-pg-settings.html",
+          "gist-extensibility.html"
+        ]
+      },
+      {
+        "id": "u11",
+        "type": "unanswerable",
+        "top_score": 0.038,
+        "top_urls": [
+          "xindex.html",
+          "supported-platforms.html",
+          "install-windows-full.html"
+        ]
+      },
+      {
+        "id": "u12",
+        "type": "unanswerable",
+        "top_score": 0.042,
+        "top_urls": [
+          "manage-ag-config.html",
+          "app-psql.html",
+          "app-psql.html"
+        ]
+      },
+      {
+        "id": "u13",
+        "type": "unanswerable",
+        "top_score": 0.042,
+        "top_urls": [
+          "postgres-fdw.html",
+          "libpq-connect.html",
+          "server-start.html"
+        ]
+      }
+    ],
+    "hybrid (vector 3x)": [
+      {
+        "id": "f01",
+        "type": "factual",
+        "top_score": 0.062,
+        "top_urls": [
+          "hash-intro.html",
+          "locking-indexes.html",
+          "indexam.html"
+        ],
+        "rank": 4
+      },
+      {
+        "id": "f02",
+        "type": "factual",
+        "top_score": 0.062,
+        "top_urls": [
+          "routine-vacuuming.html",
+          "sql-vacuum.html",
+          "sql-vacuum.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f03",
+        "type": "factual",
+        "top_score": 0.066,
+        "top_urls": [
+          "runtime-config-resource.html",
+          "runtime-config-resource.html",
+          "kernel-resources.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f04",
+        "type": "factual",
+        "top_score": 0.066,
+        "top_urls": [
+          "transaction-iso.html",
+          "mvcc.html",
+          "postgres-fdw.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f05",
+        "type": "factual",
+        "top_score": 0.059,
+        "top_urls": [
+          "pgstatstatements.html",
+          "sql-prepare.html",
+          "sql-explain.html"
+        ],
+        "rank": 3
+      },
+      {
+        "id": "f06",
+        "type": "factual",
+        "top_score": 0.063,
+        "top_urls": [
+          "sql-createtable.html",
+          "sql-createindex.html",
+          "sql-createtable.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f07",
+        "type": "factual",
+        "top_score": 0.064,
+        "top_urls": [
+          "parallel-query.html",
+          "performance-tips.html",
+          "populate.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "m01",
+        "type": "multi",
+        "top_score": 0.063,
+        "top_urls": [
+          "runtime-config-autovacuum.html",
+          "routine-vacuuming.html",
+          "routine-vacuuming.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "u01",
+        "type": "unanswerable",
+        "top_score": 0.062,
+        "top_urls": [
+          "postgres-fdw.html",
+          "limits.html",
+          "postgres-fdw.html"
+        ]
+      },
+      {
+        "id": "u02",
+        "type": "unanswerable",
+        "top_score": 0.049,
+        "top_urls": [
+          "sql-comment.html",
+          "functions-aggregate.html",
+          "sql-createsequence.html"
+        ]
+      },
+      {
+        "id": "f08",
+        "type": "factual",
+        "top_score": 0.063,
+        "top_urls": [
+          "ddl-partitioning.html",
+          "sql-createtable.html",
+          "ddl-partitioning.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f09",
+        "type": "factual",
+        "top_score": 0.065,
+        "top_urls": [
+          "datatype-json.html",
+          "functions-json.html",
+          "datatype-json.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f10",
+        "type": "factual",
+        "top_score": 0.049,
+        "top_urls": [
+          "tutorial-populate.html",
+          "sql-selectinto.html",
+          "sql-copy.html"
+        ],
+        "rank": 3
+      },
+      {
+        "id": "f11",
+        "type": "factual",
+        "top_score": 0.056,
+        "top_urls": [
+          "app-pgdump.html",
+          "backup-file.html",
+          "app-pgbasebackup.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f12",
+        "type": "factual",
+        "top_score": 0.062,
+        "top_urls": [
+          "libpq-connect.html",
+          "libpq-connect.html",
+          "admin.html"
+        ],
+        "rank": 4
+      },
+      {
+        "id": "f13",
+        "type": "factual",
+        "top_score": 0.062,
+        "top_urls": [
+          "kernel-resources.html",
+          "runtime-config-connection.html",
+          "runtime-config-connection.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "f14",
+        "type": "factual",
+        "top_score": 0.065,
+        "top_urls": [
+          "queries-with.html",
+          "queries-with.html",
+          "queries-with.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f15",
+        "type": "factual",
+        "top_score": 0.066,
+        "top_urls": [
+          "sql-createpolicy.html",
+          "logical-replication-row-filter.html",
+          "dml-update.html"
+        ],
+        "rank": 4
+      },
+      {
+        "id": "f16",
+        "type": "factual",
+        "top_score": 0.049,
+        "top_urls": [
+          "sql-createindex.html",
+          "indexes-intro.html",
+          "indexes-partial.html"
+        ],
+        "rank": 3
+      },
+      {
+        "id": "f17",
+        "type": "factual",
+        "top_score": 0.049,
+        "top_urls": [
+          "bug-reporting.html",
+          "rules-views.html",
+          "queries-limit.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "f18",
+        "type": "factual",
+        "top_score": 0.063,
+        "top_urls": [
+          "ddl-rowsecurity.html",
+          "ddl-rowsecurity.html",
+          "sql-altertable.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f19",
+        "type": "factual",
+        "top_score": 0.049,
+        "top_urls": [
+          "sql-values.html",
+          "sql-selectinto.html",
+          "sql-dropprocedure.html"
+        ],
+        "rank": null
+      },
+      {
+        "id": "f20",
+        "type": "factual",
+        "top_score": 0.065,
+        "top_urls": [
+          "kernel-resources.html",
+          "runtime-config-resource.html",
+          "kernel-resources.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "f21",
+        "type": "factual",
+        "top_score": 0.055,
+        "top_urls": [
+          "largeobjects.html",
+          "lo-interfaces.html",
+          "limits.html"
+        ],
+        "rank": 6
+      },
+      {
+        "id": "f22",
+        "type": "factual",
+        "top_score": 0.06,
+        "top_urls": [
+          "ddl-generated-columns.html",
+          "textsearch-features.html",
+          "ddl-generated-columns.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "f23",
+        "type": "factual",
+        "top_score": 0.06,
+        "top_urls": [
+          "indexes-index-only-scans.html",
+          "sql-createindex.html",
+          "indexes-index-only-scans.html"
+        ],
+        "rank": 4
+      },
+      {
+        "id": "f24",
+        "type": "factual",
+        "top_score": 0.061,
+        "top_urls": [
+          "indexes-intro.html",
+          "indexes-index-only-scans.html",
+          "indexes-index-only-scans.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "f25",
+        "type": "factual",
+        "top_score": 0.065,
+        "top_urls": [
+          "textsearch-intro.html",
+          "sql-createtsconfig.html",
+          "sql-altertsconfig.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m02",
+        "type": "multi",
+        "top_score": 0.06,
+        "top_urls": [
+          "continuous-archiving.html",
+          "continuous-archiving.html",
+          "continuous-archiving.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m03",
+        "type": "multi",
+        "top_score": 0.063,
+        "top_urls": [
+          "different-replication-solutions.html",
+          "logical-replication.html",
+          "protocol-logical-replication.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "m04",
+        "type": "multi",
+        "top_score": 0.055,
+        "top_urls": [
+          "ddl-rowsecurity.html",
+          "reference.html",
+          "app-createuser.html"
+        ],
+        "rank": 10
+      },
+      {
+        "id": "m05",
+        "type": "multi",
+        "top_score": 0.061,
+        "top_urls": [
+          "monitoring-locks.html",
+          "functions-admin.html",
+          "functions-info.html"
+        ],
+        "rank": 4
+      },
+      {
+        "id": "m06",
+        "type": "multi",
+        "top_score": 0.058,
+        "top_urls": [
+          "sql-explain.html",
+          "app-pgamcheck.html",
+          "runtime-config-resource.html"
+        ],
+        "rank": 5
+      },
+      {
+        "id": "m07",
+        "type": "multi",
+        "top_score": 0.061,
+        "top_urls": [
+          "datatype-json.html",
+          "textsearch-indexes.html",
+          "btree-gin.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m08",
+        "type": "multi",
+        "top_score": 0.062,
+        "top_urls": [
+          "sql-createtable.html",
+          "ddl-partitioning.html",
+          "ddl-partitioning.html"
+        ],
+        "rank": 2
+      },
+      {
+        "id": "m09",
+        "type": "multi",
+        "top_score": 0.065,
+        "top_urls": [
+          "runtime-config-query.html",
+          "runtime-config-query.html",
+          "runtime-config-query.html"
+        ],
+        "rank": 1
+      },
+      {
+        "id": "m10",
+        "type": "multi",
+        "top_score": 0.051,
+        "top_urls": [
+          "parallel-query.html",
+          "monitoring-stats.html",
+          "bug-reporting.html"
+        ],
+        "rank": 6
+      },
+      {
+        "id": "u03",
+        "type": "unanswerable",
+        "top_score": 0.061,
+        "top_urls": [
+          "features.html",
+          "bug-reporting.html",
+          "app-psql.html"
+        ]
+      },
+      {
+        "id": "u04",
+        "type": "unanswerable",
+        "top_score": 0.062,
+        "top_urls": [
+          "auth-pg-hba-conf.html",
+          "preface.html",
+          "reference-server.html"
+        ]
+      },
+      {
+        "id": "u05",
+        "type": "unanswerable",
+        "top_score": 0.049,
+        "top_urls": [
+          "install-requirements.html",
+          "plpython.html",
+          "sql-createlanguage.html"
+        ]
+      },
+      {
+        "id": "u06",
+        "type": "unanswerable",
+        "top_score": 0.049,
+        "top_urls": [
+          "pgbench.html",
+          "pgbench.html",
+          "pgbench.html"
+        ]
+      },
+      {
+        "id": "u07",
+        "type": "unanswerable",
+        "top_score": 0.049,
+        "top_urls": [
+          "warm-standby-failover.html",
+          "warm-standby-failover.html",
+          "warm-standby-failover.html"
+        ]
+      },
+      {
+        "id": "u08",
+        "type": "unanswerable",
+        "top_score": 0.064,
+        "top_urls": [
+          "sql-createtable.html",
+          "sql-createtable.html",
+          "event-trigger-matrix.html"
+        ]
+      },
+      {
+        "id": "u09",
+        "type": "unanswerable",
+        "top_score": 0.064,
+        "top_urls": [
+          "earthdistance.html",
+          "functions-geometry.html",
+          "xfunc-c.html"
+        ]
+      },
+      {
+        "id": "u10",
+        "type": "unanswerable",
+        "top_score": 0.064,
+        "top_urls": [
+          "libpq-envars.html",
+          "view-pg-settings.html",
+          "gist-extensibility.html"
+        ]
+      },
+      {
+        "id": "u11",
+        "type": "unanswerable",
+        "top_score": 0.051,
+        "top_urls": [
+          "xindex.html",
+          "supported-platforms.html",
+          "install-windows-full.html"
+        ]
+      },
+      {
+        "id": "u12",
+        "type": "unanswerable",
+        "top_score": 0.057,
+        "top_urls": [
+          "manage-ag-config.html",
+          "app-psql.html",
+          "app-psql.html"
+        ]
+      },
+      {
+        "id": "u13",
+        "type": "unanswerable",
+        "top_score": 0.057,
+        "top_urls": [
+          "postgres-fdw.html",
+          "libpq-connect.html",
+          "server-start.html"
+        ]
+      }
+    ],
     "vector + rerank": [
       {
         "id": "f01",

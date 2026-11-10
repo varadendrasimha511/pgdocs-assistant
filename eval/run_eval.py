@@ -11,7 +11,12 @@ OUT = Path("eval/results/retrieval.json")
 K = 10  # retrieve 10; hit@5 and MRR are computed from this list
 
 CONFIGS = {
-        "vector + rerank": {"mode": "vector", "rerank": True},
+    "vector": {"mode": "vector", "rerank": False},
+    "keyword": {"mode": "keyword", "rerank": False},
+    "hybrid": {"mode": "hybrid", "rerank": False},
+    "hybrid (vector 2x)": {"mode": "hybrid", "rerank": False, "vector_weight": 2.0},
+    "hybrid (vector 3x)": {"mode": "hybrid", "rerank": False, "vector_weight": 3.0},
+    "vector + rerank": {"mode": "vector", "rerank": True},
     "vector + rerank (10)": {"mode": "vector", "rerank": True, "candidates": 10},
     "vector + rerank (5)": {"mode": "vector", "rerank": True, "candidates": 5},
     "hybrid + rerank": {"mode": "hybrid", "rerank": True},

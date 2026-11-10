@@ -1,0 +1,293 @@
+{
+  "model": "gemini-3.5-flash-lite",
+  "records": [
+    {
+      "id": "f01",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nPostgreSQL supports the following index types:\n- B-tree [1][4]\n- Hash [1][2]\n- GiST [1]\n- SP-GiST [1]\n- GIN [1]\n- BRIN [1]\n- The extension `bloom` [1]"
+    },
+    {
+      "id": "f02",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nVACUUM reclaims storage occupied by dead tuples (rows that are deleted or obsoleted by an update) by physically removing them from their table [1][3]. Regular execution of VACUUM serves the following purposes:\n- Recovers or reuses disk space occupied by updated or deleted rows [3].\n-"
+    },
+    {
+      "id": "f03",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nThe `work_mem` setting specifies the base maximum amount of memory to be used by a query operation (such as a sort or hash table) before writing to temporary disk files [1]."
+    },
+    {
+      "id": "f04",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nIn PostgreSQL, you can request any of the four standard transaction isolation levels (Read Uncommitted, Read Committed, Repeatable Read, and Serializable), but internally only three distinct isolation levels are implemented because PostgreSQL's Read Uncommitted mode behaves like Read"
+    },
+    {
+      "id": "f05",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nTo display the execution plan that the PostgreSQL planner generates for a statement, use the `EXPLAIN` command [1]."
+    },
+    {
+      "id": "f06",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\n\nThe `fillfactor` storage parameter is a percentage that controls how full the indexing or table method will try to pack pages [1][2]:\n* **For indexes:** It determines the percentage to which index pages are packed [1]. For B-trees, leaf pages are filled to this percentage during ini"
+    },
+    {
+      "id": "f07",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nQuery performance can be improved in several ways depending on the scenario:\n* **Using Parallel Query:** PostgreSQL can use multiple CPUs to answer queries faster by leveraging parallel query plans (such as parallel scans, joins, aggregation, and appends), which can benefit queries t"
+    },
+    {
+      "id": "m01",
+      "type": "multi",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\n\nWhen enabled, autovacuum checks for tables that have had a large number of inserted, updated, or deleted tuples using the statistics collection facility (which requires `track_counts` to be true) [1][3]. \n\nThe settings that control when a `VACUUM` is triggered on a table include:\n* "
+    },
+    {
+      "id": "u01",
+      "type": "unanswerable",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "u02",
+      "type": "unanswerable",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "f08",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nPostgreSQL allows you to declare that a table is divided into partitions using a partitioning method along with a list of columns or expressions to be used as the partition key [4]. Supported partitioning methods and strategies mentioned include:\n- Range partitioning (which can also "
+    },
+    {
+      "id": "f09",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nThe main differences between the `json` and `jsonb` data types are:\n* **Storage and Processing Efficiency:** The `json` data type stores an exact copy of the input text, which processing functions must reparse on every execution [1]. In contrast, `jsonb` is stored in a decomposed bin"
+    },
+    {
+      "id": "f10",
+      "type": "factual",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "f11",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nTo dump a database called `mydb` into an SQL-script file, use `pg_dump`: [4]\n\n```bash\n$ pg_dump mydb > db.sql\n```\n\nAlternatively, to dump a database into a custom-format archive file: [4]\n\n```bash\n$ pg_dump -Fc mydb > db.dump\n```"
+    },
+    {
+      "id": "f12",
+      "type": "factual",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "f13",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nTo limit the number of simultaneous concurrent connections to the database server, you can set the `max_connections` configuration parameter (which defaults to 100) [4]. This parameter can only be set at server start [4]. \n\nIf you are running parallel regression tests on Cygwin, you "
+    },
+    {
+      "id": "f14",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nYou can write a recursive query using `WITH RECURSIVE` to deal with hierarchical or tree-structured data [4]. For example, to walk a tree table using a link field, you can write:\n\n```sql\nWITH RECURSIVE search_tree(id, link, data) AS (\n    SELECT t.id, t.link, t.data\n    FROM tree t\n "
+    },
+    {
+      "id": "f15",
+      "type": "factual",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "f16",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nYes, you can create a partial index that covers only some rows of a table by specifying a `WHERE` clause in the `CREATE INDEX` command [1]. For example:\n\n```sql\nCREATE INDEX orders_unbilled_index ON orders (order_nr)\n    WHERE billed is not true;\n``` [5]"
+    },
+    {
+      "id": "f17",
+      "type": "factual",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "f18",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nYou can restrict which rows each user can see by using row security policies (Row-Level Security) [2]. \n\nFirst, enable row security on the table [2]:\n```sql\nALTER TABLE table_name ENABLE ROW LEVEL SECURITY;\n```\n\nThen, create a policy that defines which rows are visible to users, for "
+    },
+    {
+      "id": "f19",
+      "type": "factual",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "f20",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nThe `shared_buffers` parameter sets the amount of memory the database server uses for shared memory buffers [3]."
+    },
+    {
+      "id": "f21",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nPostgreSQL uses TOAST (The Oversized-Attribute Storage Technique) to handle very large field values [4]. Because PostgreSQL does not allow tuples to span multiple pages, large field values are compressed and/or broken up into multiple physical rows transparently [4]. \n\nSpecifically, "
+    },
+    {
+      "id": "f22",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nFor a generated column, specifying DEFAULT permits it to be computed automatically from its generation expression."
+    },
+    {
+      "id": "f23",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\n\nYes, an index can be defined on more than one column of a table [2]. Currently, the B-tree, GiST, GIN, and BRIN index types support multiple-key-column indexes [2][3]. Indexes can have up to 32 columns, including INCLUDE columns (though this limit can be altered when building Postgr"
+    },
+    {
+      "id": "f24",
+      "type": "factual",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nA query can be answered from an index alone without heap access using an **index-only scan** when the following conditions are met:\n1. All the data values required by the query are available from the index (which can be achieved by using a covering index with an `INCLUDE` clause for "
+    },
+    {
+      "id": "f25",
+      "type": "factual",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "m02",
+      "type": "multi",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\n\nTo take a base backup, the easiest method is to use the `pg_basebackup` tool, which can create the backup as regular files or a tar archive [1]. (Alternatively, you can use the low-level API if you need more flexibility [1].)\n\nTo restore to a specific point in time:\n1. Stop the serv"
+    },
+    {
+      "id": "m03",
+      "type": "multi",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "m04",
+      "type": "multi",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "m05",
+      "type": "multi",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nTo see which sessions are holding locks and blocking others, you can use the `pg_blocking_pids()` function to identify which process(es) a waiting process is blocked behind [2]. Additionally, you can inspect the `pg_locks` system table/view to view outstanding locks and determine blo"
+    },
+    {
+      "id": "m06",
+      "type": "multi",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "m07",
+      "type": "multi",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "m08",
+      "type": "multi",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nTo partition a table so that queries can skip unneeded partitions (via partition pruning or constraint exclusion):\n\n1. **Choose the right partition key**: Select the column or set of columns that most commonly appear in the `WHERE` clauses of your queries [1].\n2. **Use compatible WHE"
+    },
+    {
+      "id": "m09",
+      "type": "multi",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\nBased on the provided sources:\n- `work_mem` restricts memory usage for nodes appearing in the final plan when partitionwise grouping or aggregation is enabled [5].\n- Cost estimation settings that affect the planner include `seq_page_cost`, `random_page_cost`, `cpu_tuple_cost`, `cpu_i"
+    },
+    {
+      "id": "m10",
+      "type": "multi",
+      "verdict": "yes",
+      "reply": "ANSWERABLE: YES\n\nTo find and understand slow queries, you can use the following methods and tools:\n\n* **Use the `auto_explain` module:** This module automatically logs execution plans of slow statements without requiring you to run `EXPLAIN` manually, which helps track down un-optimized queries [3]."
+    },
+    {
+      "id": "u03",
+      "type": "unanswerable",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "u04",
+      "type": "unanswerable",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "u05",
+      "type": "unanswerable",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "u06",
+      "type": "unanswerable",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "u07",
+      "type": "unanswerable",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "u08",
+      "type": "unanswerable",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "u09",
+      "type": "unanswerable",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "u10",
+      "type": "unanswerable",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "u11",
+      "type": "unanswerable",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "u12",
+      "type": "unanswerable",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    },
+    {
+      "id": "u13",
+      "type": "unanswerable",
+      "verdict": "no",
+      "reply": "ANSWERABLE: NO"
+    }
+  ]
+}
