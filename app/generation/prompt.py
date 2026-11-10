@@ -25,9 +25,15 @@ Rules:
 - Be concise. Use code blocks for SQL and config examples."""
 
 
+def _defang(text: str) -> str:
+    """Stop source text from closing or opening our <source> delimiters."""
+    return text.replace("</source", "<\\/source").replace("<source", "<\\source")
+
+
 def build_user_prompt(question: str, hits: list[Hit]) -> str:
     sources = "\n\n".join(
-        f'<source id="{i}" section="{h.section}" url="{h.url}">\n{h.content}\n</source>'
+        f'<source id="{i}" section="{_defang(h.section)}" url="{h.url}">\n'
+        f"{_defang(h.content)}\n</source>"
         for i, h in enumerate(hits, start=1)
     )
     return f"{sources}\n\nQuestion: {question}"
