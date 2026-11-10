@@ -1,0 +1,5 @@
+ragas==0.4.3
+langchain<1
+langchain-core<1
+langchain-community<0.4
+langchain-openai<1

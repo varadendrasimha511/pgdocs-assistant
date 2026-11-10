@@ -1,0 +1,107 @@
+{
+  "summary": {
+    "model": "gemini-3.5-flash-lite",
+    "questions": 15,
+    "scored": 12,
+    "refused": 3,
+    "errors": 0,
+    "mean_faithfulness": 0.93,
+    "lowest": [
+      0.5,
+      0.857,
+      0.9
+    ]
+  },
+  "records": [
+    {
+      "id": "f01",
+      "status": "scored",
+      "score": 1.0,
+      "answer": "PostgreSQL supports the following index types:\n- B-tree [1][4]\n- Hash [1][2]\n- GiST [1][5]\n- SP-GiST [1][5]\n- GIN [1][5]\n- BRIN [1]\n- The extension `bloom` [1]"
+    },
+    {
+      "id": "f03",
+      "status": "scored",
+      "score": 1.0,
+      "answer": "The `work_mem` parameter sets the base maximum amount of memory to be used by query operations like sorts and hash tables before writing data to temporary disk files [1]."
+    },
+    {
+      "id": "f05",
+      "status": "scored",
+      "score": 1.0,
+      "answer": "You can use the `EXPLAIN` command to display the execution plan that the PostgreSQL planner generates for a statement [1]."
+    },
+    {
+      "id": "f07",
+      "status": "scored",
+      "score": 0.909,
+      "answer": "Query performance can be improved in several ways, including:\n- Using `EXPLAIN` to understand and tune performance [1].\n- Leveraging parallel query to utilize multiple CPUs and answer queries faster [3].\n- Following population tips when loading large amounts of data, such as disabling autocommit, using `COPY`, removing indexes and foreign key constraints, increasing `maintenance_work_mem` and `max"
+    },
+    {
+      "id": "f08",
+      "status": "scored",
+      "score": 0.9,
+      "answer": "Based on the provided documentation, you can split a table into partitions using declarative partitioning, which involves declaring a table as partitioned, choosing a partitioning method, and specifying a list of columns or expressions to use as the partition key [4]. Supported methods and strategies mentioned include:\n- Range partitioning (including using multiple columns in the partition key) [5"
+    },
+    {
+      "id": "f10",
+      "status": "refused",
+      "score": null,
+      "answer": ""
+    },
+    {
+      "id": "f12",
+      "status": "refused",
+      "score": null,
+      "answer": ""
+    },
+    {
+      "id": "f14",
+      "status": "scored",
+      "score": 1.0,
+      "answer": "You can write a recursive query using `WITH RECURSIVE` to deal with hierarchical or tree-structured data [1][4]. For example, to search a tree using a link field, you can write:\n\n```sql\nWITH RECURSIVE search_tree(id, link, data) AS (\n    SELECT t.id, t.link, t.data\n    FROM tree t\n  UNION ALL\n    SELECT t.id, t.link, t.data\n    FROM tree t, search_tree st\n    WHERE t.id = st.link\n)\nSELECT * FROM s"
+    },
+    {
+      "id": "f16",
+      "status": "scored",
+      "score": 1.0,
+      "answer": "Yes, you can create a partial index that covers only some rows of a table by specifying a `WHERE` predicate in the `CREATE INDEX` command [1][3][5]. For example:\n\n```sql\nCREATE INDEX orders_unbilled_index ON orders (order_nr)\n    WHERE billed is not true;\n```"
+    },
+    {
+      "id": "f18",
+      "status": "scored",
+      "score": 0.857,
+      "answer": "You can restrict which rows each user can see by using row security policies (Row-Level Security) on a table [2]. \n\nTo enable row security and create a policy:\n1. Enable row security on the table using `ALTER TABLE ... ENABLE ROW LEVEL SECURITY` [2].\n2. Create a policy using `CREATE POLICY` with a `USING` clause that defines which rows are visible to the user [4]. For example, to allow users to vi"
+    },
+    {
+      "id": "f20",
+      "status": "scored",
+      "score": 0.5,
+      "answer": "The `shared_buffers` setting controls the amount of memory the database server uses for shared memory buffers (used for caching data pages) [3]."
+    },
+    {
+      "id": "f22",
+      "status": "scored",
+      "score": 1.0,
+      "answer": "For a generated column, the column's value is computed automatically from its generation expression [4]."
+    },
+    {
+      "id": "f24",
+      "status": "scored",
+      "score": 1.0,
+      "answer": "A query can be answered from an index alone (using an index-only scan) without any heap access when:\n1. All the data values required by the query are available from the index [2].\n2. The table scan can verify that each retrieved row is visible to the query's MVCC snapshot by checking the visibility map bit for the corresponding heap page [2]."
+    },
+    {
+      "id": "m02",
+      "status": "scored",
+      "score": 1.0,
+      "answer": "To take a base backup, the easiest method is to use the `pg_basebackup` tool, which can create a base backup as regular files or as a tar archive [1]. \n\nTo recover to a specific point in time using your continuous archive backup, follow these steps:\n1. Stop the server if it is running [3].\n2. Optionally copy the whole cluster data directory and tablespaces to a temporary location as a precaution, "
+    },
+    {
+      "id": "m04",
+      "status": "refused",
+      "score": null,
+      "answer": ""
+    }
+  ]
+}
