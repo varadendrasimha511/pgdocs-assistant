@@ -21,3 +21,7 @@ def test_dedupes_and_handles_empty_list():
     fused = reciprocal_rank_fusion([[h(1), h(1)], []])
     assert [x.id for x in fused].count(1) == 1
     assert reciprocal_rank_fusion([[], []]) == []
+
+def test_weights_shift_the_ranking():
+    fused = reciprocal_rank_fusion([[h(1), h(2)], [h(2), h(1)]], weights=[2.0, 1.0])
+    assert fused[0].id == 1  # the vector list counts double
