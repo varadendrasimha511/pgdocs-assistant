@@ -13,6 +13,7 @@ from .config import settings
 from .generation.guard import gate_tokens
 from .generation.llm import stream_answer
 from .generation.prompt import GUARDED_SYSTEM, build_user_prompt
+from .observability import RequestTrace, flush_traces
 from .retrieval.search import Mode, search
 
 STATIC = Path(__file__).parent / "static"
@@ -30,6 +31,7 @@ async def lifespan(app: FastAPI):
     db.open_pool()
     search("warm up", mode="vector", rerank=False, top_k=1)  # load the embedding model once
     yield
+    flush_traces()
     db.close_pool()
 
 
@@ -77,6 +79,9 @@ def ask(req: AskRequest):
     if not settings.llm_api_key and settings.llm_provider != "ollama":
         raise HTTPException(503, "LLM_API_KEY is not configured")
     start = time.perf_counter()
+    trace = RequestTrace(req.question)
+
+    retrieval = trace.start("retrieval", as_type="retriever", input=req.question)
     res = search(
         req.question,
         mode=req.mode,
@@ -85,11 +90,20 @@ def ask(req: AskRequest):
         top_k=req.top_k,
         rerank=False,
     )
+    trace.finish(
+        retrieval,
+        output=[{"section": h.section, "url": h.url, "score": round(h.score, 3)} for h in res.hits],
+        metadata=res.timings_ms,
+    )
     prompt = build_user_prompt(req.question, res.hits)
 
     def events():
         first = None
         verdict = None
+        answer: list[str] = []
+        generation = trace.start(
+            "llm", as_type="generation", model=settings.llm_model, input=prompt
+        )
         try:
             for kind, value in gate_tokens(stream_answer(GUARDED_SYSTEM, prompt)):
                 if kind == "verdict":
@@ -99,6 +113,7 @@ def ask(req: AskRequest):
                     continue
                 if first is None:
                     first = (time.perf_counter() - start) * 1000
+                answer.append(value)
                 yield sse("token", value)
         except Exception as e:
             logger.exception("LLM stream failed")
@@ -107,13 +122,16 @@ def ask(req: AskRequest):
             if verdict != "yes":
                 logger.info("refused (verdict=%s): %r", verdict, req.question[:80])
                 yield sse("refusal", REFUSAL)
+        finally:
+            ttft = round(first or 0, 1)
+            trace.finish(
+                generation,
+                output="".join(answer),
+                metadata={"verdict": verdict, "ttft_ms": ttft},
+            )
+            trace.close(output={"verdict": verdict, "answered": verdict == "yes"})
         yield sse(
-            "done",
-            {
-                "verdict": verdict,
-                "retrieval_ms": res.timings_ms,
-                "ttft_ms": round(first or 0, 1),
-            },
+            "done", {"verdict": verdict, "retrieval_ms": res.timings_ms, "ttft_ms": ttft}
         )
 
     return StreamingResponse(events(), media_type="text/event-stream")
