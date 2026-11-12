@@ -1,0 +1,58 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements*.txt
+      - run: pip install -r requirements-dev.txt
+      - run: ruff check .
+      - run: pytest -q
+
+  smoke:
+    needs: test
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: pgdocs
+          POSTGRES_PASSWORD: pgdocs
+          POSTGRES_DB: pgdocs
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U pgdocs"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the image
+        run: docker build -t pgdocs-assistant .
+      - name: Start the app against the pgvector service
+        run: |
+          docker run -d --name app --network host \
+            -e DATABASE_URL=postgresql://pgdocs:pgdocs@127.0.0.1:5432/pgdocs \
+            -e LLM_API_KEY=ci-dummy -e RERANK_ENABLED=0 pgdocs-assistant
+      - name: Wait for /health
+        run: |
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8000/health; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Retrieval endpoint answers on an empty database
+        run: curl -fsS "http://127.0.0.1:8000/search?q=vacuum&mode=vector&top_k=3"
+      - name: App logs (on failure)
+        if: failure()
+        run: docker logs app
